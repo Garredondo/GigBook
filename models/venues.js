@@ -27,10 +27,10 @@ module.exports = function( sequelize, DataTypes ) {
     //       onDelete: "cascade"
     //     });
     //   };
-    // // // Venue Table
-    // // Venue.associate = function( models ) {
-    // //     models.Venue.belongsToMany( models.Artist, { through: models.Gig })
-    // // };
+    // // Venue Table
+    // Venue.associate = function( models ) {
+    //     models.Venue.belongsToMany( models.Artist, { through: models.Gig })
+    // };
 
     return Venue;
 };
