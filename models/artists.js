@@ -12,10 +12,9 @@ module.exports = function( sequelize, DataTypes ) {
 
     // // Artist Table
     Artist.associate = function( models ) {
+        models.Artist.belongsToMany(models.Gig, {through: "Requests"})
         models.Artist.belongsTo(models.User);
-        models.Artist.hasMany(models.Gig, {
-            onDelete: "cascade"
-          });
+        models.Artist.hasMany(models.Gig);
     };
 
     return Artist;
