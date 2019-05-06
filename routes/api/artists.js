@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const router = require("express").Router();
 const db = require("../../models");
 
@@ -12,7 +11,8 @@ router.post("/", function(req, res) {
         phone: req.body.phone,
         profileImage: req.body.profileImg,
         website: req.body.website,
-        UserId: req.user.id
+        // This is commented out because req.user comes from passport
+        // UserId: req.user.id
     }).then(response => {
         res.json(response);
     }).catch(err => {
@@ -20,5 +20,3 @@ router.post("/", function(req, res) {
     });
 });
 module.exports = router;
-=======
->>>>>>> master

@@ -1,26 +1,23 @@
-var index = require("./routes/index");
+// var index = require("./routes/index");
 require("dotenv").config();
 var express = require("express");
 
-var session = require("express-session");
+// This is for Passport
+// var session = require("express-session");
+// var passport = require("./config/passport");
 
 var db = require("./models");
-var passport = require("./config/passport");
-
 const routes = require("./routes");
-
-
 var app = express();
-
 var PORT = process.env.PORT || 3000;
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use(session({ secret: "keyboard kitty", resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+// This is for Passport
+// app.use(session({ secret: "keyboard kitty", resave: true, saveUninitialized: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 app.use(routes);

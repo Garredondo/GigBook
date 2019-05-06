@@ -8,42 +8,51 @@
 // gigs will display for Artists depending on whether or not artist ID is null inside of the gigs table. There is a new query required for this
 
 //Also, not for this file we need to populate the artist ID, of the artist who made the request, whenever the Vender approves his/her book request 
-
-var db = require("../models");
+const router = require("express").Router();
+const db = require("../../models");
 // var isAuthenticated = require("../config/middleware/isAuthenticated");
-
-module.exports = function (app) {
-    // Get route for retrieving a single venue
-    app.get("/api/venues/", function (req, res) {
-        db.Venue.findOne({
-            where: {
-                UserId: req.user.id
-            }
-        }).then(function (dbVenue) {
-            db.Gig.findAll({
-                where:{
-                    VenueId: dbVenue.id
-                }
-            }).then(function(dbGig) {
-                var hbObject = {
-                    venue: dbVenue,
-                    gigs: dbGig
-                }
-                // console.log(dbVenue);
-                res.render("index-venue", hbObject);
-            })
-        });
+router.post("/", function(req, res) {
+    db.Venue.create({
+        venueName: req.body.venueName,
+        street_address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zip,
+        phone: req.body.phone,
+        email: req.body.venueEmail,
+        website: req.body.website,
+        image: req.body.venueProfileImg,
+        UserId: 3
+        // UserId: req.user.id
+    }).then(function(response) {
+        res.json(response);
+        // res.json({url:"api/venues"});
+    }).catch(function(err) {
+        console.log(err);
+        res.json(err);
     });
-
-    app.delete("/api/gigs/:id", function(req, res) {
-        console.log(req.params.id);
-        var id = req.params.id;
-        db.Gig.destroy({
-            where: {
-                id: id
+});
+// Get route for retrieving a single venue
+router.get("/", function (req, res) {
+    db.Venue.findOne({
+        where: {
+            UserId: 1
+            // UserId: req.user.id
+        }
+    }).then(function (dbVenue) {
+        db.Gig.findAll({
+            where:{
+                VenueId: dbVenue.id
             }
-        }).then(function() {
-            res.send(200);
-        });
+        }).then(function(dbGig) {
+            var hbObject = {
+                venue: dbVenue,
+                gigs: dbGig
+            }
+            res.json(dbGig);
+            // res.render("index-venue", hbObject);
+        })
     });
-}
+});
+
+module.exports = router;
