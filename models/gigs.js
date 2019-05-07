@@ -10,18 +10,6 @@ module.exports = function (sequelize, DataTypes) {
         phone: DataTypes.STRING,
         description: DataTypes.STRING,
         image: DataTypes.STRING,
-        //these booleans are no longer needed. our queries will rely on whether or not the artist ID field is null
-        // date: DataTypes.STRING,
-        // artist_booked: {
-        //     type: DataTypes.BOOLEAN,
-        //     defaultValue: false,
-        //     allowNull: false
-        // },
-        // venu_verified: {
-        //     type: DataTypes.BOOLEAN,
-        //     defaultValue: false,
-        //     allowNull: false
-        // }
     });
 
     // create an association thing e.g.  Artist.associate = function( models ) {
