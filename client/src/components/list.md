@@ -31,7 +31,7 @@ Note: This is pseudo-coded in HTML to get the general idea of the layout across.
     <filter style = "position: FIXED, at Top Left of Section, width~300/400px / width~30-45%">
     </filter>
     <div class = " Individual Result Box / GigBox™ ">
-        Venue Image
+        Venue Image 
         Venue Name
         Gig Description (Chill, outdoors)
         Genre
