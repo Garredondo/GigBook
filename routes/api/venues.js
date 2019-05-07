@@ -14,14 +14,14 @@ const db = require("../../models");
 router.post("/", function(req, res) {
     db.Venue.create({
         venueName: req.body.venueName,
-        street_address: req.body.address,
+        street_address: req.body.street_address,
         city: req.body.city,
         state: req.body.state,
-        zipcode: req.body.zip,
+        zipcode: req.body.zipcode,
         phone: req.body.phone,
-        email: req.body.venueEmail,
+        email: req.body.email,
         website: req.body.website,
-        image: req.body.venueProfileImg,
+        image: req.body.image,
         UserId: 3
         // UserId: req.user.id
     }).then(function(response) {
