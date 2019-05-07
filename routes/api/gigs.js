@@ -1,33 +1,7 @@
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 var db = require("../models");
 module.exports = function(app) {
-
-
-//     CREATE TABLE gigs
-// (
-//   id int NOT NULL AUTO_INCREMENT,
-//   venue_id int NOT NULL,
-//   artist_id int NOT NULL,
-//   date DATETIME,
-//   PRIMARY KEY (id),
-//   FOREIGN KEY (venue_id) REFERENCES venues(id),
-//   FOREIGN KEY (artist_id) REFERENCES artists(id)
-// );
-
-    // Get one specific gig
-    app.get("/api/gigs/:id", function (req, res) {
-        var gigId = req.params.id
-        db.Gig.findOne({
-            where: {
-                GigId?: gigId
-            }
-        }).then(function(results) {
-            var hbObject = {
-                gigs: results
-            }
-            res.render("index-gig", hbObject);
-        });
-    });
-
     //  Posts to gigs table from venue view
     app.post("/api/gigs", function(req, res) {
         db.Venue.findAll({
@@ -53,7 +27,21 @@ module.exports = function(app) {
         });
         });
     });
-    
+    // Get one specific gig
+    app.get("/api/gigs/:id", function (req, res) {
+        var gigId = req.params.id
+        db.Gig.findOne({
+            where: {
+                VenueId: gigId
+            }
+        }).then(function(results) {
+            var hbsObject = {
+                gigs: results
+            }
+            res.send(hbsObject);
+        });
+    });
+
     app.put("/api/gigs/:id", function (req, res) {
         var id = req.params.id
         console.log(id);
@@ -66,3 +54,4 @@ module.exports = function(app) {
             res.send(results);
         });
     });
+}
