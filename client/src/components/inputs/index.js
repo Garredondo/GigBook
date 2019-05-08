@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, Component} from 'react';
 
 function Input(props) {
     return (
