@@ -12,10 +12,6 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^1.18.7"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Garredondo/GigBook.git"
@@ -29,6 +25,7 @@
   "homepage": "https://github.com/Garredondo/GigBook#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "concurrently": "^4.1.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
@@ -37,5 +34,10 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "sequelize": "^5.8.5"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "http-server": "^0.11.1",
+    "nodemon": "^1.18.7"
   }
 }
