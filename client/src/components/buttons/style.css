@@ -98,10 +98,14 @@
 }
 
 .card-button {
-    width: 120px;
+
+    /* Hunter: "Made changes to this so that it
+    doesn't cover up content beneath it." */
+    width:90%;
     position: absolute;
-    margin-bottom: 20px;
-    bottom: 0; 
+    bottom: 5px; 
+    left:50%;
+    transform: translateX(-50%);
 }
 
 @media screen and (max-width: 640px) {
