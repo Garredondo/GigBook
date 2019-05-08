@@ -54,9 +54,10 @@ router.get("/", function (req, res) {
         }).then(function ( dbRequest ) {
             db.Request.findAll({
                 where:{
+                    // how do i call incorperate the gig's id into this search?
                     GigId: req.user.id
-                    //where do i get the gig's id from
-                }
+                },
+                include: [db.Gig]
             });
 
         }).then(function(dbGig) {
