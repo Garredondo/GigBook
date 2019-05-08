@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Garredondo/GigBook#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "concurrently": "^4.1.0",
     "dotenv": "^8.0.0",
