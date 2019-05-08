@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {TextLabel, InputBox, Radio} from "../components/inputs";
 import {ModalButton, FormButton} from "../components/buttons";
+import API from "../utils/index";
 
 class Home extends Component {
   state = {
@@ -17,18 +18,19 @@ class Home extends Component {
     }, () => console.log(this.state.role));
   };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   if (this.state.username && this.state.password) {
-  //     API.userLogin({
-  //       username: this.state.username,
-  //       password: this.state.password,
-  //       role: this.state.role
-  //     })
-  //       .then(res => this.loadProfile())
-  //       .catch(err => console.log(err));
-  //   }
-  // };
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(this.state.name);
+    if (this.state.name && this.state.password) {
+      API.Users.signUp({
+        name: this.state.name,
+        password: this.state.password,
+        role: this.state.role
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+  };
 
 
 
@@ -46,9 +48,6 @@ class Home extends Component {
             <ModalButton className={"sign-up-main"} 
             data-target={"#form-modal"}
             label={"Sign Up"}/>
-            <FormButton id={"login-submit"} value={"Submit"} 
-            className={"log-in"}
-            label={"Log In"}/>
             <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
             className={"sign-up-main"} 
             label={"Sign Up"}/>
@@ -85,6 +84,9 @@ class Home extends Component {
           <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
           <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist
   
+          <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
+          className={"sign-up-main"} 
+          label={"Sign Up"} onClick={this.handleFormSubmit}/>
       </div>
     );
   }

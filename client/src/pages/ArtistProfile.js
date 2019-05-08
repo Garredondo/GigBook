@@ -1,9 +1,14 @@
 import React from "react";
+<<<<<<< HEAD
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRight from "../components/containers/ProfileRight";
 
 import { LogoutButton, FilterButton, BookGigButton } from "../components/buttons";
 import { createDecipher } from "crypto";
+=======
+import {LogoutButton, FilterButton, BookGigButton} from "../components/buttons";
+// import { createDecipher } from "crypto";
+>>>>>>> 1d5274a5ef4845670b49bc794cab608debde15cb
 
 function ArtistProfile() {
 
