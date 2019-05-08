@@ -20,8 +20,9 @@ class Home extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.username && this.state.password) {
-      API.Users.login({
+    console.log(this.state.name);
+    if (this.state.name && this.state.password) {
+      API.Users.signUp({
         name: this.state.name,
         password: this.state.password,
         role: this.state.role
@@ -83,13 +84,9 @@ class Home extends Component {
           <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
           <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist
   
-          <FormButton 
-          id={"login-submit"} 
-          value={"Submit"} 
-          className={"log-in"}
-          label={"Log In"}
-          onClick={this.handleFormSubmit}
-          />
+          <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
+          className={"sign-up-main"} 
+          label={"Sign Up"} onClick={this.handleFormSubmit}/>
       </div>
     );
   }
