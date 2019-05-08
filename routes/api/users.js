@@ -1,5 +1,5 @@
 const router = require("express").Router();
-var db = require("../../models");
+const db = require("../../models");
 
 router.post("/", function (req, res) {
 
