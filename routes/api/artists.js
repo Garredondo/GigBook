@@ -23,13 +23,21 @@ router.post("/", function(req, res) {
 
 // findAll gigs that have not yet been verified
 router.get("/", function(req,res){
-    db.Gig.findAll({
-        where:{
-            ArtistId: null
-        }
-    }).then(function( dbGigs ){
-       db.Request
-    })
+    // db.Gig.findAll({
+    //     where:{
+    //         ArtistId: null
+    //     }
+    // }).then(function( dbUnbookedGigs ){
+       db.Artist.findOne({
+           where: {
+            //    id: req.user.id
+                UserId: 3
+           },
+           include: [db.Gig]
+       }).then(dbRequest => {
+           res.json(dbRequest);
+       })
+    // })
 })
 
 module.exports = router;
