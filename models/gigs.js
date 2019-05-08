@@ -10,8 +10,9 @@ module.exports = function (sequelize, DataTypes) {
         phone: DataTypes.STRING,
         description: DataTypes.STRING,
         image: DataTypes.STRING,
+        date: DataTypes.STRING,
         //these booleans are no longer needed. our queries will rely on whether or not the artist ID field is null
-        // date: DataTypes.STRING,
+        
         // artist_booked: {
         //     type: DataTypes.BOOLEAN,
         //     defaultValue: false,
