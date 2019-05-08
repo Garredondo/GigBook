@@ -22,14 +22,8 @@ class Home extends Component {
 
   handleLoginFormSubmit = event => {
     event.preventDefault();
-<<<<<<< HEAD
     if (this.state.name && this.state.password) {
       API.Users.login({
-=======
-    console.log(this.state.name);
-    if (this.state.name && this.state.password) {
-      API.Users.signUp({
->>>>>>> master
         name: this.state.name,
         password: this.state.password,
         role: this.state.role
