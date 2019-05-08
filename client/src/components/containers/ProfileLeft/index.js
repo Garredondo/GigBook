@@ -11,14 +11,14 @@ function ProfileLeft(props) {
             </div>
 
             <div className = "profile-content">
-                <h1 className = "name"> {props.name} </h1>
+                <h1 className = "name"> {props.artistName || props.venueName} </h1>
 
 
                 {/* For Artist */}
                 <p className="band-genres"> {props.genre} </p>
                 <br></br>
-                <p>Memebers: <strong>{props.members}</strong> </p>
-                <p className = "instruments"> {props.instruments} </p>
+                <p>Memebers: <strong>{props.numberOfMembers}</strong> </p>
+                <p className = "instruments"> {props.instrumentation} </p>
 
 
                 {/* For Venue */}
