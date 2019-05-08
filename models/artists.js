@@ -14,7 +14,6 @@ module.exports = function( sequelize, DataTypes ) {
     Artist.associate = function( models ) {
         models.Artist.belongsToMany(models.Gig, {through: "Requests"})
         models.Artist.belongsTo(models.User);
-        models.Artist.hasMany(models.Gig);
     };
 
     return Artist;

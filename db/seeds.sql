@@ -6,34 +6,41 @@ VALUES ("Eric", "hello123", "Artist" ), ("Ken", "hello123", "Artist" ), ("Wes", 
 
 
 
-INSERT INTO Venues (venueName, street_address, city, state, zipcode, phone, email, website) 
+INSERT INTO Venues (venueName, street_address, city, state, zipcode, phone, email, website, image) 
             VALUES ( "Hole in the Wall",
                      "2538 Guadalupe St.", "Austin", "TX", "78705", "(555) 555-5555", "HoleInTheWall@UTBootCamp.edu",
-                     "https://www.holeinthewallaustin.com/"),
+                     "https://www.holeinthewallaustin.com/",
+                    --  not the proper image
+                     "http://cdn.shopify.com/s/files/1/0251/1873/products/image_f44839ee-1354-4139-91de-c66f293217dc_grande.jpg?v=1468874014"),
 
                    ( "Emo's",
                      "2015 E Riverside Dr.", "Austin", "TX", "78741", 
                      "(555) 555-5555",
                      "Emos@UTBootCamp.edu",
-                     "https://www.emosaustin.com/"),
+                     "https://www.emosaustin.com/",
+                     "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"),
 
                    ( "Antone's Nightclub",
                      "305 E 5th St.", "Austin", "TX", "78701", 
                      "(555) 555-5555", 
                      "Antones@UTBootCamp.edu",
-                     "https://www.antonesnightclub.com/"),
+                     "https://www.antonesnightclub.com/",
+                    --  not the proper image
+                     "http://cdn.shopify.com/s/files/1/0251/1873/products/image_f44839ee-1354-4139-91de-c66f293217dc_grande.jpg?v=1468874014"),
 
                    ( "B.D. Riley's Irish Pub",
                      "204 E 6th St.", "Austin", "TX", "78701", 
                      "(555) 555-5555",
                      "BDRileys@UTBootCamp.edu",
-                     "https://bdrileys.com/"),
+                     "https://bdrileys.com/",
+                    "http://cdn.shopify.com/s/files/1/0251/1873/products/image_f44839ee-1354-4139-91de-c66f293217dc_grande.jpg?v=1468874014"),
                      
                    ( "Central Market North",
                      "401 N. Lamar blvd. 78756", "Austin", "TX", "78701", 
                      "(555) 555-5555",
                      "CentrlMarketNorth@UTBootCamp.edu",
-                     "https://centralmarket.com/");
+                     "https://centralmarket.com/",
+                     "http://cdn.shopify.com/s/files/1/0251/1873/products/image_f44839ee-1354-4139-91de-c66f293217dc_grande.jpg?v=1468874014");
 
 
 INSERT INTO Artists (artistName, genre, instrumentation, numberOfMembers, email, phone, profileImage, website )
@@ -74,7 +81,7 @@ INSERT INTO Artists (artistName, genre, instrumentation, numberOfMembers, email,
                         "bootcampspot.com");
 
 
-INSERT INTO Gigs (gigName, genre, street_address, city, state, zipcode, phone, discription, image, date) 
+INSERT INTO Gigs (gigName, genre, street_address, city, state, zipcode, phone, description, image, date) 
             VALUES ( "Hole in the Wall",
             		"classical",
                      "2538 Guadalupe St.", "Austin", "TX", "78705", 
