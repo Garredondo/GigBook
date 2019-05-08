@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {TextLabel, InputBox, Radio} from "../components/inputs";
 import {ModalButton, FormButton} from "../components/buttons";
+import API from "../utils/index";
 
 class Home extends Component {
   state = {
