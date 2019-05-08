@@ -1,0 +1,150 @@
+html, body {
+    font-family: 'Lato', sans-serif;
+    color: #ffffff;
+    background-image: url(./img/splash-bkg-cc.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+#topbar {
+    height: 80px;
+    width: 100%;
+    background: #000;
+}
+
+.wrapper {
+    max-width: 95%;
+    margin: auto;
+}
+
+#logo {
+    float: left;
+    font-size: 32px;
+    font-weight: 700;
+    padding: 15px;
+    cursor: pointer;
+}
+
+#nav-right {
+    float: right;
+    padding: 15px;
+}
+
+    #main {
+        margin-top: 180px;
+        text-align: center;
+        text-shadow: 1px 1px 5px #555;
+    }
+
+h1 {
+    font-weight: 900;
+    font-size: 48px;
+}
+
+#log-in {
+    font-size: 20px;
+}
+
+.log-in {
+    background: #000;
+    color: #ffffff;
+    border: none;
+}
+
+.log-in:hover {
+    background: #000;
+    color: #ffffff;
+    border: none;
+}
+
+.log-in:active {
+    background: #000 !important; 
+}
+
+.sign-up {
+    color: #000;
+    background: #ffffff;
+    border: none;
+    margin-left: 30px;
+}
+
+.sign-up:hover {
+    background: #af4ca3;
+}
+
+.sign-up:active {
+    background: #af4ca3 !important;
+}
+
+.sign-up-main {
+    margin-top: 30px;
+    color: #ffffff;
+    background: #af4ca3;
+    border: none;
+    width: 180px;
+}
+
+.sign-up-main:hover {
+    background: #af4ca3;
+}
+
+.sign-up-main:active {
+    background: #af4ca3 !important;
+}
+
+#text-desc {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+footer {
+    background: #000;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+#footer-text {
+    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.modal {
+    color: #000;
+}
+
+.modal-title {
+    font-size: 24px;
+}
+
+.btn:focus {
+    outline: none;
+
+  }
+
+@media screen and (max-width: 640px) {
+    
+    .sign-up {
+        display: none;
+    }
+
+    .log-in {
+        background: #000;
+        border: solid 2px #ffffff;
+    }
+
+}
+/* FONT BANK 
+
+font-family: 'Lato', sans-serif;
+
+*/

@@ -4,12 +4,14 @@ import Home from "./pages/Home";
 import VenueProfile from "./pages/VenueProfile";
 import ArtistProfile from "./pages/ArtistProfile";
 import NoMatch from "./pages/NoMatch";
+import Nav from "./components/Nav";
 
 function App() {
   return (
     <Router>
       <div>
         <Switch>
+          <Nav />
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/venue/profile/:id" component={VenueProfile} />
