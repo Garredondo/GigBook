@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import {LogoutButton} from "../../buttons";
 
 function ProfileLeft(props) {
     console.log(props);
@@ -23,7 +24,7 @@ function ProfileLeft(props) {
 
                 {/* For Venue */}
                 <p className = "venue-address"> {props.street_address} </p>
-                <p className = "venue-address"> {props.city} {props.state} {props.zipcode}</p>
+                <p className = "venue-address"> {props.city && props.state && props.zipcode ? `${props.city}, ${props.state} ${props.zipcode}` : ""}</p>
 
                 
             </div>
@@ -34,6 +35,8 @@ function ProfileLeft(props) {
                     {props.website}
                 </a>
                 <p> {props.phone} </p>
+
+                <LogoutButton/>
             </div>
         </div>
     )

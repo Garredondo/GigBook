@@ -1,5 +1,6 @@
 import React from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
+import ProfileRight from "../components/containers/ProfileRight";
 
 import { LogoutButton, FilterButton, BookGigButton } from "../components/buttons";
 import { createDecipher } from "crypto";
@@ -22,8 +23,9 @@ function ArtistProfile() {
         website="https://www.facebook.com/pg/StonesATX/about/?ref=page_internal"
         phone="(555) 555-5555"
       />
-      <LogoutButton />
-      <FilterButton />
+      <ProfileRight />
+      {/* <LogoutButton />
+      <FilterButton /> */}
 
       {/* When we map out each gig, 
       BookGigButton will have dataID={gig.Id} */}
