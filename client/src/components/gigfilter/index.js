@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 
-function gigFilter(props) {
+function GigFilter(props) {
     return (
         <form className="input-group mb-3 venue-filter">
         <div className="input-group-prepend">
@@ -10,13 +10,16 @@ function gigFilter(props) {
         </div>
         <select name="id" className="custom-select" id="inputGroupSelect03">
           <option selected>All Venues</option>
-          <option value="{props.venueName}">{props.venueName}</option>
+          <option value>1</option>
+          <option value>2</option>
+          <option value>3</option>
+          {/* <option value="{props.venueName}">{props.venueName}</option> */}
         </select>
       </form>
     );
 }
 
-export default gigFilter;
+export default GigFilter;
 
 
     // $("#filter").on("click",function(event){
