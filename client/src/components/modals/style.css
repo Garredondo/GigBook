@@ -14,7 +14,7 @@
     top:250px;
     left:50%;
     transform: translate(-50%, -50%);
-    background:linear-gradient(to bottom right, rgb(102, 77, 105), rgb(70, 72, 101));
+    background:linear-gradient(to bottom right, rgb(100, 64, 103), rgb(62, 65, 101));
     color:rgb(255, 255, 255);
     padding:15px;
     border: rgb(15, 8, 32) solid 2px;
@@ -30,7 +30,7 @@ hr{
     border-right:none;
     border-left:none;
     border-width:1px;
-    border-color:rgb;
+    border-color:rgb(15, 8, 32);
     width:90%;
 }
 
