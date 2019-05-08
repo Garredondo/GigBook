@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
-import API from "../utils/API";
+import API from "../utils/artists";
 
 // import { createDecipher } from "crypto";
 
@@ -13,19 +13,24 @@ class ArtistProfile extends Component {
   }
 
   componentDidMount() {
-    this.loadBooks();
+    this.loadGigs();
   }
 
   loadGigs = () => {
     API.getGigs()
-      .then(res => this.setState({ gigs: res.data }))
+      .then(res => {
+        console.log(res)
+        this.setState({ gigs: res.data })})
+      
       .catch(err => console.log(err));
   };
 
 
 
   render(){
+    // console.log(state);
       return (
+        
         <div>
             <LogoutButton />
             <GigFilter />
