@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {TextLabel, InputBox, Radio} from "../components/inputs";
 import {ModalButton, FormButton} from "../components/buttons";
+// import API from "./utils/index";
+
 
 class Home extends Component {
   state = {
@@ -20,7 +22,7 @@ class Home extends Component {
   // handleFormSubmit = event => {
   //   event.preventDefault();
   //   if (this.state.username && this.state.password) {
-  //     API.userLogin({
+  //     API.login({
   //       username: this.state.username,
   //       password: this.state.password,
   //       role: this.state.role
@@ -31,27 +33,31 @@ class Home extends Component {
   // };
 
 
+  // handFormSubmit = event = > {
+  //   event.preventDefault();
+
+  // }
+
+
 
   render(){
     return (
       <div>
           <h1>Home Page</h1>
           <div>
-            <ModalButton className={"log-in"} 
-            data-target={"#login-modal"}
-            label={"Log In"}/>
             <ModalButton className={"sign-up"} 
             data-target={"#form-modal"}
             label={"Sign Up"}/>
             <ModalButton className={"sign-up-main"} 
             data-target={"#form-modal"}
             label={"Sign Up"}/>
-            <FormButton id={"login-submit"} value={"Submit"} 
-            className={"log-in"}
-            label={"Log In"}/>
+            
             <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
             className={"sign-up-main"} 
             label={"Sign Up"}/>
+            <ModalButton className={"log-in"} 
+            data-target={"#login-modal"}
+            label={"Log In"}/>
           </div>
 
 
@@ -83,8 +89,15 @@ class Home extends Component {
 
           <TextLabel>Are you a Venue or Artist?</TextLabel>
           <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
-          <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist
-  
+          <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist<br></br>
+
+          <FormButton 
+          id={"login-submit"} 
+          value={"Submit"} 
+          className={"log-in"}
+          label={"Log In"}
+          onClick={this.handFormSubmit}/>
+          
       </div>
     );
   }
