@@ -56,7 +56,9 @@ router.get("/", function (req, res) {
                 where:{
                     GigId: req.user.id
                     //where do i get the gig's id from
-                }
+                },
+                include: [db.Gig]
+                
             });
 
         }).then(function(dbGig) {
