@@ -1,9 +1,11 @@
 import {React, Component} from 'react';
-import "./modal.style.css";
+import "./style.css";
 function Modal(props) {
     
     {/* If/Else Statement to show either the Login or Sign Up modal. 
         Might make more intuitive in future.                     */}
+
+    {/* Subject to change. If we have enough time, we can DRY this up a bit.*/}
 
     if (props.type = "login"){
         return (
@@ -43,9 +45,8 @@ function Modal(props) {
                 <button>Get Bookin'!</button>
             </form>
         </div>
-        )
+        );
     }
-    
 }
 
 export default Modal;
