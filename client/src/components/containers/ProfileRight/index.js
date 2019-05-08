@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import InputBox from "../../inputs";
+import {InputBox, TextLabel} from "../../inputs";
 import {FormButton, StartButton} from "../../buttons";
 
 
@@ -17,9 +17,17 @@ function ProfileRight(props) {
                 <br></br>
                 <div className = "createGigForm">
                     <form>
-                        <InputBox></InputBox>
-                        <InputBox></InputBox>
-                        <InputBox></InputBox>
+                        <TextLabel for = "gig-des">Gig Description:</TextLabel>
+                        <InputBox type = "text" id = "gig-des" />
+
+                        <TextLabel for = "gig-genre">Genre(s): </TextLabel>
+                        <InputBox type = "text" id = "gig-genre" />  
+
+                        
+                        <TextLabel for = "gig-date">Date: </TextLabel>
+                        <InputBox type="text" id = "gig-date" name = "date" placeholder = "MM/DD/YYYY"/>
+                                                
+
                         <FormButton id = "gig-create"
                         value = "Post-Gig"
                         className = "btn btn-primary btn-lg btn-main"
