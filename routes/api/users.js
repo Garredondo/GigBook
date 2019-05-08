@@ -8,16 +8,16 @@ router.post("/", function (req, res) {
             password: req.body.password,
             role: req.body.role
         }).then(function(response) {
-                db.Artist.create({
-                    UserId: response.id,
-                    artistName: "",
-                    genre: "",
-                    instrumentation: "",
-                    numberOfMembers: 0,
-                    email: "",
-                    phone: "",
-                    profileImage: "",
-                    website: ""
+            db.Artist.create({
+                UserId: response.id,
+                artistName: "",
+                genre: "",
+                instrumentation: "",
+                numberOfMembers: 0,
+                email: "",
+                phone: "",
+                profileImage: "",
+                website: ""
             }).then(function (response) {
                 res.json(response);
             }).catch(function (err) {
@@ -30,17 +30,17 @@ router.post("/", function (req, res) {
             password: req.body.password,
             role: req.body.role
         }).then(function(response) {
-                db.Venue.create({
-                    UserId: response.id,
-                    venueName: "",
-                    street_address: "",
-                    city: "",
-                    state: "",
-                    zipcode: "",
-                    phone: "",
-                    email: "",
-                    website: "",
-                    image: ""
+            db.Venue.create({
+                UserId: response.id,
+                venueName: "",
+                street_address: "",
+                city: "",
+                state: "",
+                zipcode: "",
+                phone: "",
+                email: "",
+                website: "",
+                image: ""
             }).then(function (response) {
                 res.json(response);
             }).catch(function (err) {
@@ -49,4 +49,5 @@ router.post("/", function (req, res) {
         });
     }
 });
+
 module.exports = router;
