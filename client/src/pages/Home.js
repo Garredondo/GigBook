@@ -1,17 +1,92 @@
-import React, {Component} from "react";
-import ResultBox from "../components/cards/index.js";
+import React, { Component } from "react";
+import {TextLabel, InputBox, Radio} from "../components/inputs";
+import {ModalButton, FormButton} from "../components/buttons";
+import API from "../utils/index";
 
 class Home extends Component {
+  state = {
+    name: "",
+    password: "",
+    confirmPassword: "",
+    role: ""
+  };
 
-  render() { 
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    }, () => console.log(this.state.role));
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(this.state.name);
+    if (this.state.name && this.state.password) {
+      API.Users.signUp({
+        name: this.state.name,
+        password: this.state.password,
+        role: this.state.role
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+  };
+
+
+
+  render(){
     return (
       <div>
-        <ResultBox 
-        src = "https://cdn.shopify.com/s/files/1/1365/2497/products/12676-BananaSlugMask-Sky_900x.jpg?v=1520535633"
-        name = "Logan's Snack Shack" 
-        description = "A funky little venue where people come together to honor a man named 'Loggy', who, unfortunately, to his and everyone's dismay, tripped over a log and died." 
-        genre = "alternative" 
-        date = "Nov 5th"/>
+          <h1>Home Page</h1>
+          <div>
+            <ModalButton className={"log-in"} 
+            data-target={"#login-modal"}
+            label={"Log In"}/>
+            <ModalButton className={"sign-up"} 
+            data-target={"#form-modal"}
+            label={"Sign Up"}/>
+            <ModalButton className={"sign-up-main"} 
+            data-target={"#form-modal"}
+            label={"Sign Up"}/>
+            <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
+            className={"sign-up-main"} 
+            label={"Sign Up"}/>
+          </div>
+
+
+
+
+
+          <TextLabel>Username</TextLabel>
+          <InputBox 
+          placeholder="Username"
+          name="name" 
+          value={this.state.name}
+          onChange={this.handleInputChange}/>
+          <TextLabel>Password</TextLabel>
+          <InputBox 
+          placeholder="Password" 
+          name="password"
+          type="password"
+          value={this.state.password}
+          onChange={this.handleInputChange}
+          />
+          <TextLabel>Confirm Password</TextLabel>
+          <InputBox 
+          placeholder="Confirm Password" 
+          name="confirmPassword"
+          type="password"
+          value={this.state.confirmPassword}
+          onChange={this.handleInputChange}/>
+
+
+          <TextLabel>Are you a Venue or Artist?</TextLabel>
+          <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
+          <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist
+  
+          <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
+          className={"sign-up-main"} 
+          label={"Sign Up"} onClick={this.handleFormSubmit}/>
       </div>
     );
   }

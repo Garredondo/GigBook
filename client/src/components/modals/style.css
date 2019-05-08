@@ -1,0 +1,47 @@
+.modal-background{
+    width:100%;
+    height:100%;
+    background:rgba(0, 0, 0, 0.68);
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:4;
+}
+
+.modal{
+    width:500px;
+    position:absolute;
+    top:250px;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background:linear-gradient(to bottom right, rgb(100, 64, 103), rgb(62, 65, 101));
+    color:rgb(255, 255, 255);
+    padding:15px;
+    border: rgb(15, 8, 32) solid 2px;
+    border-radius:4px;
+    
+    box-shadow:0 0px 50px 5px rgba(13, 10, 57, 0.775) inset;
+    text-shadow: 0 4px 2px rgba(0, 0, 0, 0.503);
+    z-index: 5;
+}
+
+hr{
+    border-bottom:none;
+    border-right:none;
+    border-left:none;
+    border-width:1px;
+    border-color:rgb(15, 8, 32);
+    width:90%;
+}
+
+
+/* Sign Up Modal Specifics */
+#input-centering{
+    text-align:center;
+}
+
+@media screen and (max-width: 549px){
+    .modal{
+        width:90%;
+    }
+}
