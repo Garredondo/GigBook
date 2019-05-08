@@ -8,7 +8,7 @@ function ArtistProfile() {
         <h1>Artist Profile Page</h1>
 
         <ProfileLeft image="https://scontent-sjc3-1.xx.fbcdn.net/v/t31.0-8/921376_1654683351451821_2260836721501491794_o.jpg?_nc_cat=102&_nc_ht=scontent-sjc3-1.xx&oh=672d9bcebdf79dcde7119017abdbe144&oe=5D32B9DB"
-        venueName = "Stones ATX"
+        artistName = "Stones ATX"
         genre = "Classic Rock"
         numberOfMembers = "5"
         instrumentation = "Full Set"
