@@ -19,4 +19,17 @@ router.post("/", function(req, res) {
         res.json(err);
     });
 });
+
+
+// findAll gigs that have not yet been verified
+router.get("/", function(req,res){
+    db.Gig.findAll({
+        where:{
+            ArtistId: null
+        }
+    }).then(function( dbGigs ){
+       db.Request
+    })
+})
+
 module.exports = router;
