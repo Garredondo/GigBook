@@ -44,29 +44,18 @@ router.get("/", function (req, res) {
     db.Venue.findOne({
         where: {
             // UserId: 1
-            UserId: req.user.id
+            UserId: 1
+            // UserId: req.user.id
         }
     }).then(function ( dbVenue ) {
         db.Gig.findAll({
             where:{
                 VenueId: dbVenue.id
-            }
+            },
+            include: [db.Artist]
         }).then(function ( dbRequest ) {
-            db.Request.findAll({
-                where:{
-                    GigId: req.user.id
-                    //where do i get the gig's id from
-                }
-            });
-
-        }).then(function(dbGig) {
-            // var hbObject = {
-            //     venue: dbVenue,
-            //     gigs: dbGig
-            // }
-            res.json(dbGig);
-            // res.render("index-venue", hbObject);
-        })
+            res.json(dbRequest);
+        });
     });
 });
 

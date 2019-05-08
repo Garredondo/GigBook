@@ -1,10 +1,15 @@
 import React from "react";
+import {LogoutButton, PostGigButton, StartButton} from "../components/buttons";
+
 
 
 function VenueProfile() {
   return (
     <div>
-        <h1>Venue Profile Page</h1>
+      <LogoutButton/>
+      <PostGigButton />
+      <StartButton label="View Gigs" id="dis-gigs-btn"/>
+      <StartButton label="Make a Gig" id="dis-make-gig-form-btn"/>
     </div>
   );
 }

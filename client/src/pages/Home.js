@@ -1,14 +1,34 @@
-import React from "react";
-import Modal from "../components/modals";
+import React, {Component} from "react";
+import {ModalButton, FormButton} from "../components/buttons";
 
 
-function Home() {
-  return (
-    <div>
-        <h1>Home Page</h1>
-        <Modal type = "smash"/>
-    </div>
-  );
+class Home extends Component {
+
+
+
+
+  render() { 
+    return (
+      <div>
+          <ModalButton className={"log-in"} 
+          data-target={"#login-modal"}
+          label={"Log In"}/>
+          <ModalButton className={"sign-up"} 
+          data-target={"#form-modal"}
+          label={"Sign Up"}/>
+          <ModalButton className={"sign-up-main"} 
+          data-target={"#form-modal"}
+          label={"Sign Up"}/>
+          <FormButton id={"login-submit"} value={"Submit"} 
+          className={"log-in"}
+          label={"Log In"}/>
+          <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
+          className={"sign-up-main"} 
+          label={"Sign Up"}/>
+      </div>
+      
+    );
+  };
 }
 
 export default Home;
