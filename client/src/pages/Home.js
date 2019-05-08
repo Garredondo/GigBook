@@ -18,9 +18,8 @@ class Home extends Component {
     }, () => console.log(this.state.role));
   };
 
-  handleFormSubmit = event => {
+  handleSignUp = event => {
     event.preventDefault();
-    console.log(this.state.name);
     if (this.state.name && this.state.password) {
       API.Users.signUp({
         name: this.state.name,
@@ -32,7 +31,20 @@ class Home extends Component {
     }
   };
 
-
+  handleLogin = event => {
+    event.preventDefault();
+    if (this.state.name && this.state.password) {
+      API.Users.login({
+        name: this.state.name,
+        password: this.state.password,
+        role: this.state.role
+      })
+        .then(res => {
+          this.props.history.push("/venue/profile/" + res.data.id);
+        })
+        .catch(err => console.log(err));
+    }
+  };
 
   render(){
     return (
@@ -52,9 +64,6 @@ class Home extends Component {
             className={"sign-up-main"} 
             label={"Sign Up"}/>
           </div>
-
-
-
 
 
           <TextLabel>Username</TextLabel>
@@ -86,7 +95,10 @@ class Home extends Component {
   
           <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
           className={"sign-up-main"} 
-          label={"Sign Up"} onClick={this.handleFormSubmit}/>
+          label={"Sign Up"} onClick={this.handleSignUp}/>
+          <FormButton id={"login-submit"} value={"Submit"} 
+          className={"log-in"}
+          label={"Log In"} onClick={this.handleLogin}/>
       </div>
     );
   }
