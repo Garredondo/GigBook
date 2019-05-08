@@ -4,7 +4,7 @@ import "./style.css";
 export function ModalButton({
     className,
     dataEventTarget,
-    label
+    label,
     }) {
     return (
         <button className={`${className} btn btn-primary btn-lg`} data-toggle="modal"
