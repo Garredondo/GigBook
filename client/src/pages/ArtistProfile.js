@@ -1,10 +1,20 @@
 import React from "react";
-
+import {LogoutButton, FilterButton, BookGigButton} from "../components/buttons";
+import { createDecipher } from "crypto";
 
 function ArtistProfile() {
+
+
+
+
   return (
     <div>
-        <h1>Artist Profile Page</h1>
+        <LogoutButton />
+        <FilterButton />
+
+      {/* When we map out each gig, 
+      BookGigButton will have dataID={gig.Id} */}
+        <BookGigButton dataId={1}/>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {TextLabel, InputBox, Radio} from "../components/inputs";
+import {ModalButton, FormButton} from "../components/buttons";
 
 class Home extends Component {
   state = {
@@ -35,6 +36,28 @@ class Home extends Component {
     return (
       <div>
           <h1>Home Page</h1>
+          <div>
+            <ModalButton className={"log-in"} 
+            data-target={"#login-modal"}
+            label={"Log In"}/>
+            <ModalButton className={"sign-up"} 
+            data-target={"#form-modal"}
+            label={"Sign Up"}/>
+            <ModalButton className={"sign-up-main"} 
+            data-target={"#form-modal"}
+            label={"Sign Up"}/>
+            <FormButton id={"login-submit"} value={"Submit"} 
+            className={"log-in"}
+            label={"Log In"}/>
+            <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
+            className={"sign-up-main"} 
+            label={"Sign Up"}/>
+          </div>
+
+
+
+
+
           <TextLabel>Username</TextLabel>
           <InputBox 
           placeholder="Username"
@@ -66,26 +89,5 @@ class Home extends Component {
     );
   }
 }
-
-
-
-
-// function Home() {
-//   return (
-//     <div>
-//         <h1>Home Page</h1>
-//         <TextLabel>Username</TextLabel>
-//         <InputBox placeholder="Username" />
-//         <TextLabel>Password</TextLabel>
-//         <InputBox placeholder="Password" type="password"/>
-//         <TextLabel>Confirm Password</TextLabel>
-//         <InputBox placeholder="Confirm Password" type="password"/>
-//         <TextLabel>Are you a Venue or Artist?</TextLabel>
-//         <Radio value="venue" name="role-signup"/>Venue
-//         <Radio value="artist" name="role-signup"/>Artist
-
-//     </div>
-//   );
-// }
 
 export default Home;
