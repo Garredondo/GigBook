@@ -12,7 +12,7 @@ var app = express();
 var PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("public"));
+
 
 // This is for Passport
 app.use(session({ secret: "keyboard kitty", resave: true, saveUninitialized: true }));
@@ -23,6 +23,7 @@ app.use(passport.session());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+app.use(express.static("public"));
 
 app.use(routes);
 
