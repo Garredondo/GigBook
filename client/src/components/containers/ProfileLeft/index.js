@@ -4,7 +4,6 @@ import {LogoutButton,FormButton} from "../../buttons";
 import {InputBox} from "../../inputs";
 
 function ProfileLeft(props) {
-    console.log(props);
 
     if (props.editing === false){
         return(

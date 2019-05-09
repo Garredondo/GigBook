@@ -5,5 +5,4 @@ export default {
     getGigs: function() {
       return axios.get("/api/artists");
     },
-
 };
