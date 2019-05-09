@@ -33,8 +33,8 @@ router.get("/", function (req, res) {
                 .then(function (dbVenueAll) {
                     db.Artist.findOne({
                         where: {
-                            //    id: req.user.id
-                            UserId: 3
+                            id: req.user.id
+                            // UserId: 2
                         },
                         include: [db.Gig]
                     }).then(dbRequest => {
@@ -47,6 +47,24 @@ router.get("/", function (req, res) {
                     })
                 })
         })
-})
+});
+
+router.put("/", function(req, res) {
+    db.Artist.update({
+        artistName: req.body.artistName,
+        genre: req.body.genre,
+        instrumentation: req.body.instrumentation,
+        numberOfMembers: req.body.numberOfMembers,
+        phone: req.body.phone,
+        email: req.body.email,
+        website: req.body.website,
+        profileImage: req.body.profileImage
+    }, {
+        where: {
+            UserId: req.user.id
+        }
+    }).then(response => res.json(response))
+    .catch(err => res.json(err));
+});
 
 module.exports = router;
