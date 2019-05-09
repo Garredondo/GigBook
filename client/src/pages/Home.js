@@ -11,8 +11,6 @@ const styles = {
   }
 }
 
-
-
 class Home extends Component {
   state = {
     name: "",
@@ -39,7 +37,7 @@ class Home extends Component {
         password: this.state.password,
         role: this.state.roleSignUp
       })     
-    .then(res => this.props.history.push("/venue/profile/" + res.data.id))
+    .then()
     .catch(err => console.log(err));
     }
 
@@ -136,6 +134,7 @@ class Home extends Component {
               className={"log-in"}
               label={"Log In"}
               onClick={this.handleLogin}
+              dataDismiss="modal"
               />  
           </div>
         </div>
@@ -188,7 +187,9 @@ class Home extends Component {
             value={"Submit"}
             className={"sign-up-main"} 
             label={"Sign Up"}
-            onClick={this.handleSignUp}/>
+            onClick={this.handleSignUp}
+            dataDismiss="modal"
+            />
             
           </div>
         </div>
