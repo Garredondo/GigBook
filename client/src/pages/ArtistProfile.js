@@ -3,7 +3,7 @@ import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
-import ProfileRight from "../components/containers/ProfileRight";
+import ProfileRightArtist from "../components/containers/ProfileRightArtist";
 
 // import { createDecipher } from "crypto";
 
@@ -65,12 +65,12 @@ class ArtistProfile extends Component {
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft>
 
-        <ProfileRight>
+        <ProfileRightArtist>
         <GigFilter 
             filter={this.filterButton}
             venues={this.state.venues}
           />
-        </ProfileRight>
+        </ProfileRightArtist>
         
         {/* <LogoutButton />
         <FilterButton /> */}

@@ -1,4 +1,5 @@
 import {React, Component} from 'react';
+import {BookGigButton} from "../buttons";
 
 function ResultBox(props) {
     return (
@@ -12,7 +13,7 @@ function ResultBox(props) {
             {/*===========================================================*/}
 
             <p>{props.date}</p>
-            <button>Book it!</button>
+            <BookGigButton />
         </div>
     );
 }
