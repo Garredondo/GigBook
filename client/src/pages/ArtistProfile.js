@@ -7,14 +7,13 @@ import ProfileRight from "../components/containers/ProfileRight";
 
 // import { createDecipher } from "crypto";
 
-
 class ArtistProfile extends Component {
 
   state = {
     gigs:[],
     requests:[],
     venues:[]
-  }
+  };
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
@@ -23,7 +22,7 @@ class ArtistProfile extends Component {
       }
     }).catch(err => console.log(err));
     this.loadGigs();
-  }
+  };
 
   loadGigs = () => {
     API.Artists.getGigs()

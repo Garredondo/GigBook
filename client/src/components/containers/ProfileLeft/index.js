@@ -3,7 +3,6 @@ import "./style.css";
 import {LogoutButton} from "../../buttons";
 
 function ProfileLeft(props) {
-    console.log(props);
 
     return(
         <div className = "profile-left">
