@@ -61,7 +61,8 @@ class VenueProfile extends Component {
   render() {
     return (
       <div>
-        <ProfileLeft image={this.state.venue.image}
+        {this.state.venue.image ? 
+          <ProfileLeft image={this.state.venue.image}
           venueName={this.state.venue.venueName}
           email={this.state.venue.email}
           website={this.state.venue.website}
@@ -72,6 +73,20 @@ class VenueProfile extends Component {
           phone={this.state.venue.phone}>
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft>
+        :
+        <ProfileLeft image={"https://via.placeholder.com/150"}
+          venueName={this.state.venue.venueName}
+          email={this.state.venue.email}
+          website={this.state.venue.website}
+          street_address = {this.state.venue.street_address}
+          city = {this.state.venue.city}
+          state = {this.state.venue.state}
+          zipcode = {this.state.venue.zipcode}
+          phone={this.state.venue.phone}>
+          <LogoutButton onClick={this.handleLogout}/>
+        </ProfileLeft>
+        }
+
 
         <ProfileRightVenue >
         <StartButton id = "dis-gigs-btn" label = "View Gigs"/>
