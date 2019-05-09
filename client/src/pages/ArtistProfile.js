@@ -1,11 +1,44 @@
-import React, { Component } from "react";
+import {LogoutButton, BookGigButton} from "../components/buttons";
+import GigFilter from "../components/gigfilter";
+import API from "../utils/index";
+import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRight from "../components/containers/ProfileRight";
-import API from "../utils/index";
-import { LogoutButton, FilterButton, BookGigButton } from "../components/buttons";
+
 // import { createDecipher } from "crypto";
 
+
 class ArtistProfile extends Component {
+
+  state = {
+    gigs:[],
+    requests:[],
+    venues:[]
+  }
+
+  componentDidMount() {
+    API.Users.isAuthed().then(res => {
+      if(res.data === "false") {
+        this.props.history.push("/");
+      }
+    }).catch(err => console.log(err));
+    this.loadGigs();
+  }
+
+  loadGigs = () => {
+    API.Artists.getGigs()
+      .then(res => {
+        // console.log("loadGigs res: ")
+        // console.log(res);
+        this.setState({ gigs: res.data.availableGigs, venues: res.data.allVenues, requests: res.data.artistRequests })})
+      .catch(err => console.log(err));
+  };
+
+  filterButton = (event) => {
+    event.preventDefault();
+    console.log("filter button was clicked.");
+
+  }
 
   handleLogout = event => {
     event.preventDefault();
@@ -31,8 +64,16 @@ class ArtistProfile extends Component {
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft>
+       
+          <GigFilter 
+            filter={this.filterButton}
+            venues={this.state.venues}
+          />
+
         <ProfileRight />
-        {/* <FilterButton /> */}
+        
+        {/* <LogoutButton />
+        <FilterButton /> */}
 
         {/* When we map out each gig, 
         BookGigButton will have dataID={gig.Id} */}
@@ -41,5 +82,4 @@ class ArtistProfile extends Component {
     );
   }
 }
-
 export default ArtistProfile;

@@ -4,10 +4,10 @@ import "./style.css";
 export function ModalButton({
     className,
     dataEventTarget,
-    label,
+    label
     }) {
     return (
-        <button className={`${className} btn btn-primary btn-lg`} data-toggle="modal"
+        <button type="button" className={`${className} btn btn-primary btn-lg`} data-toggle="modal"
         data-target={dataEventTarget}>{label}</button>
     );
 }
@@ -17,11 +17,12 @@ export function FormButton({
     value,
     className,
     label,
-    onClick
+    onClick,
+    dataDismiss
     }) {
     return (
         <button id={id} type="submit" value={value} onClick={onClick}
-        className={`${className} btn btn-primary btn-lg`}>{label}</button>
+        className={`${className} btn btn-primary btn-lg`} data-dismiss={dataDismiss}>{label}</button>
     );
 }
 
@@ -38,13 +39,6 @@ export function PostGigButton() {
     return (
         <button className="btn btn-primary btn-lg btn-main" 
         id="gig-create" type="submit" value="Post-Gig">Post Gig</button>
-    );
-}
-
-export function FilterButton() {
-    return (
-        <button className="btn btn-outline-secondary"
-        type="submit" id="filter">Filter</button>
     );
 }
 
