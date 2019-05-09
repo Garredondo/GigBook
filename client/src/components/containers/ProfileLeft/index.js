@@ -5,6 +5,11 @@ import {LogoutButton} from "../../buttons";
 function ProfileLeft(props) {
     console.log(props);
 
+    let toggleEdit = (event) => {
+        event.stopPropagation();
+        alert(event.target + " was clicked");
+    }
+
     return(
         <div className = "profile-left">
             <div className = "profile-picture">
@@ -12,7 +17,7 @@ function ProfileLeft(props) {
             </div>
 
             <div className = "profile-content">
-                <h1 className = "name"> {props.artistName || props.venueName} </h1>
+                <h1 className = "name" onClick = {() => toggleEdit()}> {props.artistName || props.venueName} </h1>
 
 
                 {/* For Artist */}

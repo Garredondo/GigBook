@@ -18,9 +18,9 @@ class ArtistProfile extends Component {
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      if(res.data === "false") {
-        this.props.history.push("/");
-      }
+      // if(res.data === "false") {
+      //   this.props.history.push("/");
+      // }
     }).catch(err => console.log(err));
     this.loadGigs();
   }
