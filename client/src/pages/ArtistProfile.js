@@ -64,13 +64,13 @@ class ArtistProfile extends Component {
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft>
-       
-          <GigFilter 
+
+        <ProfileRight>
+        <GigFilter 
             filter={this.filterButton}
             venues={this.state.venues}
           />
-
-        <ProfileRight />
+        </ProfileRight>
         
         {/* <LogoutButton />
         <FilterButton /> */}
