@@ -5,7 +5,6 @@ import {FormButton, StartButton} from "../../buttons";
 
 
 function ProfileRight(props) {
-    console.log(props)
 
     return(
         <div className = "profile-right">

@@ -7,14 +7,13 @@ import ProfileRight from "../components/containers/ProfileRight";
 
 // import { createDecipher } from "crypto";
 
-
 class ArtistProfile extends Component {
 
   state = {
     gigs:[],
     requests:[],
     venues:[]
-  }
+  };
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
@@ -23,13 +22,13 @@ class ArtistProfile extends Component {
       }
     }).catch(err => console.log(err));
     this.loadGigs();
-  }
+  };
 
   loadGigs = () => {
     API.Artists.getGigs()
       .then(res => {
         // console.log("loadGigs res: ")
-        // console.log(res);
+        // console.log(res.data);
         this.setState({ gigs: res.data.availableGigs, venues: res.data.allVenues, requests: res.data.artistRequests })})
       .catch(err => console.log(err));
   };
@@ -53,14 +52,15 @@ class ArtistProfile extends Component {
       <div>
         <h1>Artist Profile Page</h1>
 
-        <ProfileLeft image="https://scontent-sjc3-1.xx.fbcdn.net/v/t31.0-8/921376_1654683351451821_2260836721501491794_o.jpg?_nc_cat=102&_nc_ht=scontent-sjc3-1.xx&oh=672d9bcebdf79dcde7119017abdbe144&oe=5D32B9DB"
-          artistName="Stones ATX"
-          genre="Classic Rock"
-          numberOfMembers="5"
-          instrumentation="Full Set"
-          email="devildog66@austin.rr.com"
-          website="https://www.facebook.com/pg/StonesATX/about/?ref=page_internal"
-          phone="(555) 555-5555"
+        <ProfileLeft 
+          image={this.state.requests.profileImage}
+          artistName={this.state.requests.artistName}
+          genre={this.state.requests.genre}
+          numberOfMembers={this.state.requests.numberOfMembers}
+          instrumentation={this.state.requests.instrumentation}
+          email={this.state.requests.email}
+          website={this.state.requests.website}
+          phone={this.state.requests.phone}
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft>

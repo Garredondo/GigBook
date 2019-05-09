@@ -19,6 +19,10 @@ app.use(session({ secret: "keyboard kitty", resave: true, saveUninitialized: tru
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Code to run React Build
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 app.use(routes);
 
