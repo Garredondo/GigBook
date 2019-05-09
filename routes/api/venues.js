@@ -1,7 +1,5 @@
 // Eric's notes for project 3
 
-
-
 // gigs will display for Artists depending on whether or not artist ID is null inside of the gigs table. There is a new query required for this
 
 //Also, not for this file, we need to populate the artist ID, of the artist who made the request, whenever the Vender approves his/her book request 
