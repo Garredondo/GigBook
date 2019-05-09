@@ -1,0 +1,24 @@
+.profile-right {
+    margin: auto;
+    margin-left: 350px;
+    padding: 40px;
+    overflow: hidden;
+    background-color: #232426;
+    height: 100vh;
+}
+
+#gig-create {
+    background-color: #af4ca3;
+}
+
+.main-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-top: 40px;
+    color: #ffffff;
+}
+
+label {
+    color: #ffffff;
+    margin-bottom: 0px;
+}

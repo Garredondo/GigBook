@@ -1,0 +1,69 @@
+.profile-left {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #333437;
+    width: 350px;
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+    color: #ffffff;
+}
+
+.profile-picture {
+    position: relative;
+    width: 100%;
+}
+
+.image-profile {
+    object-fit: cover;
+    width: 100%;
+    height: 150px;
+}
+
+.profile-content {
+    padding: 20px;
+}
+
+.name {
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.profile-bottom {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    margin-bottom: 2    0px;
+    width: 100%;
+}
+
+.website-link {
+    color: #ffffff;
+}
+
+.website-link:hover {
+    color:  purple;
+    text-decoration: none;
+}
+
+.band-genres {
+    font-style: italic;
+}
+
+.instruments {
+    font-style: italic;
+    margin-left: 30px;
+}
+
+.venue-address {
+    margin-bottom: 0px;
+}
+
+.venue-address {
+    margin-bottom: 0px;
+}
+
+

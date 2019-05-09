@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../../models");
 
-router.post("/", function(req, res) {
+router.post("/", function (req, res) {
     db.Artist.create({
         artistName: req.body.artistName,
         genre: req.body.genre,
@@ -22,22 +22,31 @@ router.post("/", function(req, res) {
 
 
 // findAll gigs that have not yet been verified
-router.get("/", function(req,res){
+router.get("/", function (req, res) {
     db.Gig.findAll({
-        where:{
-            ArtistId: null
-        }
-    }).then(function( dbUnbookedGigs ){
-       db.Artist.findOne({
-           where: {
-            //    id: req.user.id
-                UserId: 3
-           },
-           include: [db.Gig]
-       }).then(dbRequest => {
-           res.json(dbRequest);
-       })
-    })
+            where: {
+                ArtistId: null
+            }
+        })
+        .then(function (dbUnbookedGigs) {
+            db.Venue.findAll({})
+                .then(function (dbVenueAll) {
+                    db.Artist.findOne({
+                        where: {
+                            //    id: req.user.id
+                            UserId: 3
+                        },
+                        include: [db.Gig]
+                    }).then(dbRequest => {
+                        var resultsObj = {
+                            allVenues: dbVenueAll,
+                            availableGigs: dbUnbookedGigs,
+                            artistRequests: dbRequest
+                        }
+                        res.json(resultsObj);
+                    })
+                })
+        })
 })
 
 module.exports = router;
