@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import {TextLabel, InputBox, Radio} from "../components/inputs";
 import {ModalButton, FormButton} from "../components/buttons";
 import API from "../utils/index";
-// import HomePage from "../components/containers/HomePage";
 import TopBar from "../components/topbar";
 
 const styles = {
