@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
+  "homepage": "https://gigbook-p3.herokuapp.com/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "react": "^16.8.6",
