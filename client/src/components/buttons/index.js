@@ -53,10 +53,11 @@ export function BookGigButton({
 
 export function StartButton({
     id,
-    label
+    label,
+    style
     }) {
     return (
         <button className="btn btn-primary btn-lg btn-scnd"
-        id={id}>{label}</button>
+        id={id} style = {`${style || ''}`} >{label}</button>
     );
 }
