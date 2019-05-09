@@ -18,7 +18,7 @@ function ProfileLeft(props) {
                 {/* For Artist */}
                 <p className="band-genres"> {props.genre} </p>
                 <br></br>
-                <p>Memebers: <strong>{props.numberOfMembers}</strong> </p>
+                <p>Members: <strong>{props.numberOfMembers}</strong> </p>
                 <p className = "instruments"> {props.instrumentation} </p>
 
 
@@ -36,7 +36,7 @@ function ProfileLeft(props) {
                 </a>
                 <p> {props.phone} </p>
 
-                <LogoutButton/>
+                {props.children}
             </div>
         </div>
     )
