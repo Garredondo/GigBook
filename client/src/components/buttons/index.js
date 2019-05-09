@@ -41,13 +41,6 @@ export function PostGigButton() {
     );
 }
 
-export function FilterButton() {
-    return (
-        <button className="btn btn-outline-secondary"
-        type="submit" id="filter">Filter</button>
-    );
-}
-
 export function BookGigButton({
     dataId
     }) {
