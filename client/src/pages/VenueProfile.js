@@ -8,13 +8,26 @@ import ProfileLeft from "../components/containers/ProfileLeft";
 
 class VenueProfile extends Component {
 
+  state = {
+    venue: []
+  };
+
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      if(res.data === "false") {
-        this.props.history.push("/");
-      }
+      // if(res.data === "false") {
+      //   this.props.history.push("/");
+      // }
     }).catch(err => console.log(err));
-  }
+    this.loadVenueInfo();
+  };
+
+  loadVenueInfo() {
+    API.Venues.getVenueInfo().then(res => {
+      this.setState({
+        venue: res.data
+      })
+    }).catch(err => console.log(err));
+  };
 
   handleLogout = event => {
     event.preventDefault();
@@ -26,15 +39,15 @@ class VenueProfile extends Component {
   render() {
     return (
       <div>
-        <ProfileLeft image="https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-          venueName="Emo's Austin" 
-          email="email@email.com"
-          website="https://www.emosaustin.com/"
-          street_address = "2015 E Riverside Drive"
-          city = "Austin"
-          state = "Texas"
-          zipcode = "78741"
-          phone="(000)-000-0000">
+        <ProfileLeft image={this.state.venue.image}
+          venueName={this.state.venue.venueName}
+          email={this.state.venue.email}
+          website={this.state.venue.website}
+          street_address = {this.state.venue.street_address}
+          city = {this.state.venue.city}
+          state = {this.state.venue.state}
+          zipcode = {this.state.venue.zipcode}
+          phone={this.state.venue.phone}>
           <LogoutButton onClick={this.handleLogout}/>
           </ProfileLeft>
         <ProfileRightVenue />
