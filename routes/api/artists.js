@@ -33,8 +33,8 @@ router.get("/", function (req, res) {
                 .then(function (dbVenueAll) {
                     db.Artist.findOne({
                         where: {
-                            id: req.user.id
-                            // UserId: 2
+                            // id: req.user.id
+                            UserId: 2
                         },
                         include: [db.Gig]
                     }).then(dbRequest => {

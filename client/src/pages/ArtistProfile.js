@@ -11,7 +11,7 @@ class ArtistProfile extends Component {
 
   state = {
     gigs:[],
-    requests:[],
+    requests:{},
     venues:[]
   };
 
@@ -29,7 +29,12 @@ class ArtistProfile extends Component {
       .then(res => {
         // console.log("loadGigs res: ")
         // console.log(res.data);
-        this.setState({ gigs: res.data.availableGigs, venues: res.data.allVenues, requests: res.data.artistRequests })})
+        this.setState({ 
+          gigs: res.data.availableGigs, 
+          venues: res.data.allVenues, 
+          requests: res.data.artistRequests 
+        })
+      })
       .catch(err => console.log(err));
   };
 
