@@ -29,7 +29,7 @@ class ArtistProfile extends Component {
     API.Artists.getGigs()
       .then(res => {
         // console.log("loadGigs res: ")
-        // console.log(res);
+        // console.log(res.data);
         this.setState({ gigs: res.data.availableGigs, venues: res.data.allVenues, requests: res.data.artistRequests })})
       .catch(err => console.log(err));
   };
@@ -55,7 +55,8 @@ class ArtistProfile extends Component {
       <div>
         <h1>Artist Profile Page</h1>
 
-        <ProfileLeft image={this.state.requests.profileImage}
+        <ProfileLeft 
+          image={this.state.requests.profileImage}
           artistName={this.state.requests.artistName}
           genre={this.state.requests.genre}
           numberOfMembers={this.state.requests.numberOfMembers}

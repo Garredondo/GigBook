@@ -8,8 +8,8 @@ var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+if (env === "production") {
+  var sequelize = new Sequelize(process.env["JAWSDB_URL"]);
 } else if (env === "development"){
   var sequelize = new Sequelize(
     process.env.db_database,
