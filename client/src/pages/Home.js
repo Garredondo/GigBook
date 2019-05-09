@@ -4,8 +4,13 @@ import {TextLabel, InputBox, Radio} from "../components/inputs";
 import {ModalButton, FormButton} from "../components/buttons";
 import API from "../utils/index";
 // import HomePage from "../components/containers/HomePage";
+import TopBar from "../components/topbar";
 
-
+const styles = {
+  text: {
+    color: "black"
+  }
+}
 
 
 
@@ -14,7 +19,8 @@ class Home extends Component {
     name: "",
     password: "",
     confirmPassword: "",
-    role: ""
+    roleSignUp: "",
+    roleLogin: ""
   };
 
 
@@ -32,7 +38,7 @@ class Home extends Component {
       API.Users.signUp({
         name: this.state.name,
         password: this.state.password,
-        role: this.state.role
+        role: this.state.roleSignUp
       })     
     .then(res => this.props.history.push("/venue/profile/" + res.data.id))
     .catch(err => console.log(err));
@@ -42,7 +48,7 @@ class Home extends Component {
     this.setState({
       name: "",
       password: "",
-      role: ""
+      roleSignUp: ""
     });
   };
 
@@ -52,7 +58,7 @@ class Home extends Component {
       API.Users.login({
         name: this.state.name,
         password: this.state.password,
-        role: this.state.role
+        role: this.state.roleLogin
       })
         .then(res => {
           if (res.data.role === "venue") {
@@ -67,7 +73,7 @@ class Home extends Component {
     this.setState({
       name: "",
       password: "",
-      role: ""
+      roleLogin: ""
     });
   };
 
@@ -75,116 +81,24 @@ class Home extends Component {
   render(){
     return (
       <div>
-
-        
-        
-
-          
-          <div>
-
-            {/* Buttons */}
-
-            {/* <ModalButton className={"log-in"} 
-            data-target={"#login-modal"}
+        <TopBar>
+            <ModalButton className={"log-in"} 
+            dataEventTarget={"#login-modal"}
             label={"Log In"}
-            /> */}
+            />
             
-            {/* <ModalButton className={"sign-up"} 
-            data-target={"#form-modal"}
+            <ModalButton className={"sign-up"} 
+            dataEventTarget={"#form-modal"}
             label={"Sign Up"}/>
-            <ModalButton className={"sign-up-main"} 
-            data-target={"#form-modal"}
-            label={"Sign Up"}/> */}
-
-            {/* <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
-            className={"sign-up-main"} 
-            label={"Sign Up"} onClick={this.handleSignUp}/>
-            <FormButton id={"login-submit"} value={"Submit"} 
-            className={"log-in"}
-            label={"Log In"} onClick={this.handleLogin}/> */}
-          </div>
-
-
-
-
-          {/* LOGIN */}
-          
-          {/* <TextLabel>Username</TextLabel>
-          <InputBox 
-          placeholder="Username"
-          name="name" 
-          value={this.state.name}
-          onChange={this.handleInputChange}/>
-          <TextLabel>Password</TextLabel>
-          <InputBox 
-          placeholder="Password" 
-          name="password"
-          type="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-          /> */}
-          
-
-          {/* <TextLabel>Are you a Venue or Artist?</TextLabel>
-          <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
-          <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist */}
-  
-          {/* <FormButton 
-          id={"login-submit"} 
-          value={"Submit"} 
-          className={"log-in"}
-          label={"Log In"}
-          onClick={this.handleLogin}
-          /> */}
-
-
-          {/* SIGNUP */}
-         
-          {/* <TextLabel>Username</TextLabel>
-          <InputBox 
-          placeholder="Username"
-          name="name" 
-          value={this.state.name}
-          onChange={this.handleInputChange}/>
-          <TextLabel>Password</TextLabel>
-          <InputBox 
-          placeholder="Password" 
-          name="password"
-          type="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-          />
-          <TextLabel>Confirm Password</TextLabel>
-          <InputBox 
-          placeholder="Confirm Password" 
-          name="confirmPassword"
-          type="password"
-          value={this.state.confirmPassword}
-          onChange={this.handleInputChange}/>
-
-
-          <TextLabel>Are you a Venue or Artist?</TextLabel>
-          <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
-          <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist */}
-
-          {/* <FormButton 
-          id={"signup-submit"} 
-          type={"submit"} 
-          value={"Submit"}
-          className={"sign-up-main"} 
-          label={"Sign Up"}
-          onClick={this.handleSignUp}/> */}
-
-
-
-
+        </TopBar>
         
-          
-  
-    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#login-modal">
-      Log In
-    </button>
-    
+
+        <ModalButton className={"sign-up-main"} 
+        dataEventTarget={"#form-modal"}
+        label={"Sign Up"}/>
+
+
+      {/* Login Modal */}
 
     <div className="modal fade" id="login-modal" tabindex="-1" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
@@ -196,13 +110,13 @@ class Home extends Component {
             </button>
           </div>
           <div className="modal-body">
-              <TextLabel>Username</TextLabel>
+              <TextLabel style={styles.text}>Username</TextLabel>
               <InputBox 
               placeholder="Username"
               name="name" 
               value={this.state.name}
               onChange={this.handleInputChange}/>
-              <TextLabel>Password</TextLabel>
+              <TextLabel style={styles.text}>Password</TextLabel>
               <InputBox 
               placeholder="Password" 
               name="password"
@@ -211,9 +125,9 @@ class Home extends Component {
               onChange={this.handleInputChange}
               />
 
-              <TextLabel>Are you a Venue or Artist?</TextLabel>
-              <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
-              <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist
+              <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
+              <Radio value="venue" name="roleLogin" checked={this.state.roleLogin === "venue"} onChange={this.handleInputChange} />Venue
+              <Radio value="artist" name="roleLogin" checked={this.state.roleLogin === "artist"} onChange={this.handleInputChange} />Artist
             
           </div>
           <div className="modal-footer">
@@ -223,23 +137,15 @@ class Home extends Component {
               className={"log-in"}
               label={"Log In"}
               onClick={this.handleLogin}
-              />
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            
+              />  
           </div>
         </div>
       </div>
     </div>
 
 
-
-
-   
-    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#signup">
-      Sign Up
-    </button>
-
-    <div className="modal fade" id="signup" tabindex="-1" role="dialog" aria-hidden="true">
+      {/* SignUp Modal */}
+    <div className="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
@@ -248,13 +154,13 @@ class Home extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <TextLabel>Username</TextLabel>
+          <TextLabel style={styles.text}>Username</TextLabel>
           <InputBox 
           placeholder="Username"
           name="name" 
           value={this.state.name}
           onChange={this.handleInputChange}/>
-          <TextLabel>Password</TextLabel>
+          <TextLabel style={styles.text}>Password</TextLabel>
           <InputBox 
           placeholder="Password" 
           name="password"
@@ -262,7 +168,7 @@ class Home extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
           />
-          <TextLabel>Confirm Password</TextLabel>
+          <TextLabel style={styles.text}>Confirm Password</TextLabel>
           <InputBox 
           placeholder="Confirm Password" 
           name="confirmPassword"
@@ -271,9 +177,9 @@ class Home extends Component {
           onChange={this.handleInputChange}/>
 
 
-          <TextLabel>Are you a Venue or Artist?</TextLabel>
-          <Radio value="venue" name="role" checked={this.state.role === "venue"} onChange={this.handleInputChange} />Venue
-          <Radio value="artist" name="role" checked={this.state.role === "artist"} onChange={this.handleInputChange} />Artist
+          <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
+          <Radio value="venue" name="roleSignUp" checked={this.state.roleSignUp === "venue"} onChange={this.handleInputChange} />Venue
+          <Radio value="artist" name="roleSignUp" checked={this.state.roleSignUp === "artist"} onChange={this.handleInputChange} />Artist
       
           <div className="modal-footer">
 
@@ -284,27 +190,13 @@ class Home extends Component {
             className={"sign-up-main"} 
             label={"Sign Up"}
             onClick={this.handleSignUp}/>
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             
           </div>
         </div>
       </div>
     </div>
-
-    
-       
-
-    
-
-
-
-
-
-
-
-  
           
-      </div>
+    </div>
     );
   }
 }

@@ -7,7 +7,7 @@ export function ModalButton({
     label
     }) {
     return (
-        <button className={`${className} btn btn-primary btn-lg`} data-toggle="modal"
+        <button type="button" className={`${className} btn btn-primary btn-lg`} data-toggle="modal"
         data-target={dataEventTarget}>{label}</button>
     );
 }
