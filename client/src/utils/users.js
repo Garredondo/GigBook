@@ -9,5 +9,8 @@ export default {
     },
     logout: () => {
         return axios.get("/logout");
+    },
+    isAuthed: () => {
+        return axios.get("");
     }
 }
