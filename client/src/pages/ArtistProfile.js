@@ -36,9 +36,15 @@ class ArtistProfile extends Component {
 
   }
 
-  render(){
-    console.log("ArtistProfile.js state.venues is: ")
-    console.log(this.state.venues);
+  handleLogout = event => {
+    event.preventDefault();
+    API.Users.logout()
+      .then(res => this.props.history.push("/"))
+      .catch(err => console.log(err));
+  };
+
+
+  render() {
     return (
       <div>
         <h1>Artist Profile Page</h1>
@@ -51,7 +57,9 @@ class ArtistProfile extends Component {
           email="devildog66@austin.rr.com"
           website="https://www.facebook.com/pg/StonesATX/about/?ref=page_internal"
           phone="(555) 555-5555"
-        />
+        >
+          <LogoutButton onClick={this.handleLogout}/>
+        </ProfileLeft>
        
           <GigFilter 
             filter={this.filterButton}
