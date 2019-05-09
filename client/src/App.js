@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import VenueProfile from "./pages/VenueProfile";
 import ArtistProfile from "./pages/ArtistProfile";
 import NoMatch from "./pages/NoMatch";
-import PrivateRoute from "./components/auth/auth";
 
 function App() {
   return (

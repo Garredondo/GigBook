@@ -1,6 +1,6 @@
 import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
-import API from "../utils/artists";
+import API from "../utils/index";
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRight from "../components/containers/ProfileRight";
@@ -17,12 +17,16 @@ class ArtistProfile extends Component {
   }
 
   componentDidMount() {
-    API.Users.isAuthed();
+    API.Users.isAuthed().then(res => {
+      if(res.data === "false") {
+        this.props.history.push("/");
+      }
+    }).catch(err => console.log(err));
     this.loadGigs();
   }
 
   loadGigs = () => {
-    API.getGigs()
+    API.Artists.getGigs()
       .then(res => {
         // console.log("loadGigs res: ")
         // console.log(res);

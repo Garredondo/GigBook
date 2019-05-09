@@ -11,6 +11,6 @@ export default {
         return axios.get("/logout");
     },
     isAuthed: () => {
-        return axios.get("");
+        return axios.get("/isAuthed");
     }
 }
