@@ -53,6 +53,9 @@ class ArtistProfile extends Component {
 
 
   render() {
+    console.log("artistprofile state.requests")
+    console.log(this.state.requests);
+
     return (
       <div>
         <h1>Artist Profile Page</h1>
