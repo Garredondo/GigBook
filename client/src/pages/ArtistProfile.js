@@ -7,6 +7,10 @@ import { LogoutButton, FilterButton, BookGigButton } from "../components/buttons
 
 class ArtistProfile extends Component {
 
+  componentDidMount() {
+    
+  };
+
   handleLogout = event => {
     event.preventDefault();
     API.Users.logout()
