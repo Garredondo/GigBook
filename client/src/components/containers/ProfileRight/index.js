@@ -25,7 +25,7 @@ function ProfileRight(props) {
 
                         
                         <TextLabel for = "gig-date">Date: </TextLabel>
-                        <InputBox type="text" id = "gig-date" name = "date" placeholder = "MM/DD/YYYY"/>
+                        <InputBox type="text" id = "gig-date" name = "date" placeholder = "MM/DD/YYYY" />
                                                 
 
                         <FormButton id = "gig-create"

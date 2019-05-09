@@ -136,7 +136,8 @@ class Home extends Component {
               className={"log-in"}
               label={"Log In"}
               onClick={this.handleLogin}
-              />  
+              dataDismiss="modal"
+            />  
           </div>
         </div>
       </div>
@@ -188,7 +189,8 @@ class Home extends Component {
             value={"Submit"}
             className={"sign-up-main"} 
             label={"Sign Up"}
-            onClick={this.handleSignUp}/>
+            onClick={this.handleSignUp}
+            dataDismiss="modal"/>
             
           </div>
         </div>
