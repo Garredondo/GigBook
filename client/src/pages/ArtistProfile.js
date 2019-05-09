@@ -12,7 +12,9 @@ class ArtistProfile extends Component {
 
 
   state = {
-    gigs:[]
+    gigs:[],
+    requests:[],
+    venues:[]
   }
 
   componentDidMount() {
@@ -22,15 +24,21 @@ class ArtistProfile extends Component {
   loadGigs = () => {
     API.getGigs()
       .then(res => {
-        console.log("loadGigs res: ")
-        console.log(res);
-        this.setState({ gigs: res.data })})
+        // console.log("loadGigs res: ")
+        // console.log(res);
+        this.setState({ gigs: res.data.availableGigs, venues: res.data.allVenues, requests: res.data.artistRequests })})
       .catch(err => console.log(err));
   };
 
+  filterButton = (event) => {
+    event.preventDefault();
+    console.log("filter button was clicked.");
+
+  }
+
   render(){
-    // console.log("ArtistProfile.js state is: ")
-    // console.log(this.state);
+    console.log("ArtistProfile.js state.venues is: ")
+    console.log(this.state.venues);
     return (
       <div>
         <h1>Artist Profile Page</h1>
@@ -44,7 +52,12 @@ class ArtistProfile extends Component {
           website="https://www.facebook.com/pg/StonesATX/about/?ref=page_internal"
           phone="(555) 555-5555"
         />
-        <GigFilter />
+       
+          <GigFilter 
+            filter={this.filterButton}
+            venues={this.state.venues}
+          />
+
         <ProfileRight />
         
         {/* <LogoutButton />
