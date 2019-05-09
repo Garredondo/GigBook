@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import {LogoutButton, BookGigButton} from "../components/buttons";
+import {LogoutButton, BookGigButton, StartButton, FormButton} from "../components/buttons";
 import API from "../utils/index";
+import {InputBox, TextLabel} from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
-
-
 
 class VenueProfile extends Component {
 
@@ -50,7 +49,33 @@ class VenueProfile extends Component {
           phone={this.state.venue.phone}>
           <LogoutButton onClick={this.handleLogout}/>
           </ProfileLeft>
-        <ProfileRightVenue />
+        <ProfileRightVenue >
+        <StartButton id = "dis-gigs-btn" label = "View Gigs"/>
+
+<div className="div" id = "display-make-gig-form">
+    <div className = "main-title">Post A Gig</div>
+    <br></br>
+    <div className = "createGigForm">
+        <form>
+            <TextLabel for = "gig-des">Gig Description:</TextLabel>
+            <InputBox type = "text" id = "gig-des" />
+
+            <TextLabel for = "gig-genre">Genre(s): </TextLabel>
+            <InputBox type = "text" id = "gig-genre" />  
+
+            
+            <TextLabel for = "gig-date">Date: </TextLabel>
+            <InputBox type="text" id = "gig-date" name = "date" placeholder = "MM/DD/YYYY"/>
+                                    
+
+            <FormButton id = "gig-create"
+            value = "Post-Gig"
+            className = "btn btn-primary btn-lg btn-main"
+            label = "Post Gig" />
+        </form>
+    </div>
+</div>
+        </ProfileRightVenue>
       </div>
     );
   }
