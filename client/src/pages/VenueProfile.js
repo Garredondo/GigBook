@@ -1,15 +1,22 @@
 import React from "react";
-import {LogoutButton, PostGigButton, StartButton} from "../components/buttons";
+import ProfileRight from "../components/containers/ProfileRight";
+import ProfileLeft from "../components/containers/ProfileLeft";
 
 
 
 function VenueProfile() {
   return (
     <div>
-      <LogoutButton/>
-      <PostGigButton />
-      <StartButton label="View Gigs" id="dis-gigs-btn"/>
-      <StartButton label="Make a Gig" id="dis-make-gig-form-btn"/>
+      <ProfileLeft image="https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+        venueName="Emo's Austin" 
+        email="email@email.com"
+        website="https://www.emosaustin.com/"
+        street_address = "2015 E Riverside Drive"
+        city = "Austin"
+        state = "Texas"
+        zipcode = "78741"
+        phone="(000)-000-0000" />
+      <ProfileRight />
     </div>
   );
 }
