@@ -72,7 +72,7 @@ function ProfileLeft(props) {
                     <p>Phone</p>
                     <InputBox defaultValue = {props.phone} />
 
-                    <FormButton label = "Submit Changes" onClick = {props.toggleEdit}/>
+                    <FormButton label = "Submit Changes" onClick = {props.submitChanges}/>
                     {/* {props.children} */}
                 </div>
     

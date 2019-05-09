@@ -1,6 +1,8 @@
 import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
+import { log } from "util";
+
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRight from "../components/containers/ProfileRight";
@@ -63,6 +65,11 @@ class ArtistProfile extends Component {
     }
   }
 
+  submitChanges = () => {
+    API.Artists.update().then().catch(err => console.log(err));
+    this.setState({editing:false});
+  }
+
   render() {
     return (
       <div>
@@ -79,6 +86,7 @@ class ArtistProfile extends Component {
           email={this.state.requests.email}
           website={this.state.requests.website}
           phone={this.state.requests.phone}
+          submitChanges = {this.submitChanges}
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft>
