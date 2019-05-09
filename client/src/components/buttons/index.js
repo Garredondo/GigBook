@@ -25,9 +25,11 @@ export function FormButton({
     );
 }
 
-export function LogoutButton() {
+export function LogoutButton({
+    onClick
+}) {
     return (
-        <button className="btn btn-primary btn-lg logout">
+        <button className="btn btn-primary btn-lg logout" onClick={onClick}>
         Logout</button>
     );
 }
@@ -51,7 +53,7 @@ export function BookGigButton({
     }) {
     return (
         <button className="btn btn-primary btn-lg btn-main book card-button" 
-        dataId={dataId}>Book</button>
+        data-id={dataId}>Book</button>
     );
 }
 

@@ -26,28 +26,7 @@ class Home extends Component {
     }, () => console.log(this.state.role));
   };
 
-  handleLoginFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.name && this.state.password) {
-      API.Users.login({
-        name: this.state.name,
-        password: this.state.password,
-        role: this.state.role
-      })     
-    .then(res => this.props.history.push("/venue/profile/" + res.data.id))
-    .catch(err => console.log(err));
-    }
-
-
-    this.setState({
-      name: "",
-      password: "",
-      role: ""
-    });
-  };
-
-
-  handleSignUpFormSubmit = event => {
+  handleSignUp = event => {
     event.preventDefault();
     if (this.state.name && this.state.password) {
       API.Users.signUp({
@@ -67,7 +46,30 @@ class Home extends Component {
     });
   };
 
+  handleLogin = event => {
+    event.preventDefault();
+    if (this.state.name && this.state.password) {
+      API.Users.login({
+        name: this.state.name,
+        password: this.state.password,
+        role: this.state.role
+      })
+        .then(res => {
+          if (res.data.role === "venue") {
+            this.props.history.push("/venue/profile/" + res.data.id);
+          } else if (res.data.role === "artist") {
+            this.props.history.push("/artist/profile/" + res.data.id);
+          }
+        })
+        .catch(err => console.log(err));
+    }
 
+    this.setState({
+      name: "",
+      password: "",
+      role: ""
+    });
+  };
 
 
   render(){
@@ -79,6 +81,9 @@ class Home extends Component {
 
           
           <div>
+
+            {/* Buttons */}
+
             {/* <ModalButton className={"log-in"} 
             data-target={"#login-modal"}
             label={"Log In"}
@@ -90,6 +95,13 @@ class Home extends Component {
             <ModalButton className={"sign-up-main"} 
             data-target={"#form-modal"}
             label={"Sign Up"}/> */}
+
+            {/* <FormButton id={"signup-submit"} type={"submit"} value={"Submit"}
+            className={"sign-up-main"} 
+            label={"Sign Up"} onClick={this.handleSignUp}/>
+            <FormButton id={"login-submit"} value={"Submit"} 
+            className={"log-in"}
+            label={"Log In"} onClick={this.handleLogin}/> */}
           </div>
 
 
@@ -122,7 +134,7 @@ class Home extends Component {
           value={"Submit"} 
           className={"log-in"}
           label={"Log In"}
-          onClick={this.handleLoginFormSubmit}
+          onClick={this.handleLogin}
           /> */}
 
 
@@ -161,7 +173,7 @@ class Home extends Component {
           value={"Submit"}
           className={"sign-up-main"} 
           label={"Sign Up"}
-          onClick={this.handleSignUpFormSubmit}/> */}
+          onClick={this.handleSignUp}/> */}
 
 
 
@@ -210,7 +222,7 @@ class Home extends Component {
               value={"Submit"} 
               className={"log-in"}
               label={"Log In"}
-              onClick={this.handleLoginFormSubmit}
+              onClick={this.handleLogin}
               />
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             
@@ -271,7 +283,7 @@ class Home extends Component {
             value={"Submit"}
             className={"sign-up-main"} 
             label={"Sign Up"}
-            onClick={this.handleSignUpFormSubmit}/>
+            onClick={this.handleSignUp}/>
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             
           </div>
@@ -290,6 +302,8 @@ class Home extends Component {
 
 
 
+  
+          
       </div>
     );
   }
