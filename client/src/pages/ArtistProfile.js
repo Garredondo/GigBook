@@ -12,7 +12,7 @@ class ArtistProfile extends Component {
 
   state = {
     gigs:[],
-    requests:[],
+    requests:{},
     venues:[]
   };
 
@@ -29,7 +29,7 @@ class ArtistProfile extends Component {
     API.Artists.getGigs()
       .then(res => {
         // console.log("loadGigs res: ")
-        // console.log(res.data);
+        console.log(res.data);
         this.setState({ gigs: res.data.availableGigs, venues: res.data.allVenues, requests: res.data.artistRequests })})
       .catch(err => console.log(err));
   };
@@ -54,7 +54,6 @@ class ArtistProfile extends Component {
     return (
       <div>
         <h1>Artist Profile Page</h1>
-
         <ProfileLeft 
           image={this.state.requests.profileImage}
           artistName={this.state.requests.artistName}
@@ -67,6 +66,7 @@ class ArtistProfile extends Component {
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft>
+        
 
         <ProfileRightArtist>
         <GigFilter filter = {this.filterButton} venues = {this.state.venues} ></GigFilter>
