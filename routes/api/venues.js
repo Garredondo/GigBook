@@ -17,15 +17,10 @@ router.post("/", function(req, res) {
         email: req.body.email,
         website: req.body.website,
         image: req.body.image,
-        UserId: 3
-        // UserId: req.user.id
+        UserId: req.user.id
     }).then(function(response) {
-        // res.json(response);
-        console.log(response);
         res.json(response)
-        // res.json({url:"api/venues"});
     }).catch(function(err) {
-        console.log(err);
         res.json(err);
     });
 });
@@ -38,23 +33,51 @@ router.post("/", function(req, res) {
 
 
 // Get route for retrieving a single venue
+// router.get("/", function (req, res) {
+//     db.Venue.findOne({
+//         where: {
+//             UserId: req.user.id
+//         }
+//     }).then(function ( dbVenue ) {
+//         db.Gig.findAll({
+//             where:{
+//                 VenueId: dbVenue.id
+//             },
+//             include: [db.Artist]
+//         }).then(function ( dbRequest ) {
+//             res.json(dbRequest);
+//         });
+//     });
+// });
+
 router.get("/", function (req, res) {
     db.Venue.findOne({
         where: {
-            // UserId: 1
-            UserId: 1
-            // UserId: req.user.id
+            UserId: req.user.id
         }
-    }).then(function ( dbVenue ) {
-        db.Gig.findAll({
-            where:{
-                VenueId: dbVenue.id
-            },
-            include: [db.Artist]
-        }).then(function ( dbRequest ) {
-            res.json(dbRequest);
-        });
-    });
+    }).then(response => {
+        res.json(response);
+    })
+    .catch(err => res.json(err));
+});
+
+router.put("/", function(req, res) {
+    db.Venue.update({
+        venueName: req.body.venueName,
+        street_address: req.body.street_address,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode,
+        phone: req.body.phone,
+        email: req.body.email,
+        website: req.body.website,
+        image: req.body.image
+    }, {
+        where: {
+            UserId: req.user.id
+        }
+    }).then(response => res.json(response))
+    .catch(err => res.json(err));
 });
 
 module.exports = router;
