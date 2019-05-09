@@ -17,11 +17,12 @@ export function FormButton({
     value,
     className,
     label,
-    onClick
+    onClick,
+    dataDismiss
     }) {
     return (
         <button id={id} type="submit" value={value} onClick={onClick}
-        className={`${className} btn btn-primary btn-lg`}>{label}</button>
+        className={`${className} btn btn-primary btn-lg`} data-dismiss={dataDismiss}>{label}</button>
     );
 }
 
