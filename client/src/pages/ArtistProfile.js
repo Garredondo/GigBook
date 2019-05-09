@@ -13,7 +13,9 @@ class ArtistProfile extends Component {
   state = {
     gigs:[],
     requests:[],
-    venues:[]
+    venues:[],
+    // This is for the Profile Left Component
+    editing:false
   }
 
   componentDidMount() {
@@ -48,12 +50,29 @@ class ArtistProfile extends Component {
   };
 
 
+  // This function is for editing the profile (it's executed in ProfileLeft/index.js)
+  toggleEdit = () => {
+    if (this.state.editing === false){
+      this.setState({
+        editing: true
+      });
+    }
+    else if (this.state.editing === true){
+      this.setState({
+        editing:false
+      });
+    }
+  }
+
   render() {
     return (
       <div>
         <h1>Artist Profile Page</h1>
 
-        <ProfileLeft image="https://scontent-sjc3-1.xx.fbcdn.net/v/t31.0-8/921376_1654683351451821_2260836721501491794_o.jpg?_nc_cat=102&_nc_ht=scontent-sjc3-1.xx&oh=672d9bcebdf79dcde7119017abdbe144&oe=5D32B9DB"
+        <ProfileLeft
+          editing = {this.state.editing}
+          toggleEdit = {this.toggleEdit}
+          image="https://scontent-sjc3-1.xx.fbcdn.net/v/t31.0-8/921376_1654683351451821_2260836721501491794_o.jpg?_nc_cat=102&_nc_ht=scontent-sjc3-1.xx&oh=672d9bcebdf79dcde7119017abdbe144&oe=5D32B9DB"
           artistName="Stones ATX"
           genre="Classic Rock"
           numberOfMembers="5"
