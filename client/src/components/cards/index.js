@@ -1,18 +1,24 @@
-import {React, Component} from 'react';
+import React from 'react';
+import {BookGigButton} from "../buttons";
+import "./style.css";
 
 function ResultBox(props) {
     return (
         <div className = "result-box">
-            <img src = {props.src} alt = "result image"/>
+            <div className = "gig-card">
+                <img src = {props.src} alt = "result image" className= "image"/>
 
-            {/* either the artist's name/description/genre or the venue's */}
-            <h3>{props.name}</h3>
-            <p>{props.description}</p>
-            <p>{props.genre}</p>
-            {/*===========================================================*/}
+                <div className = "card-text">
+                    {/* either the artist's name/description/genre or the venue's */}
+                    <h3 className = "card-title">{props.name}</h3>
+                    <p className = "card-desc">{props.description}</p>
+                    <p className = "card-genre">{props.genre}</p>
+                    {/*===========================================================*/}
 
-            <p>{props.date}</p>
-            <button>Book it!</button>
+                    <p className = "card-date"> {props.date}</p>
+                    <BookGigButton />
+                </div>
+            </div>
         </div>
     );
 }

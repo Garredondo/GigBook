@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {LogoutButton, BookGigButton} from "../components/buttons";
 import API from "../utils/index";
-import ProfileRight from "../components/containers/ProfileRight";
+import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 
 
@@ -50,7 +50,7 @@ class VenueProfile extends Component {
           phone={this.state.venue.phone}>
           <LogoutButton onClick={this.handleLogout}/>
           </ProfileLeft>
-        <ProfileRight />
+        <ProfileRightVenue />
       </div>
     );
   }
