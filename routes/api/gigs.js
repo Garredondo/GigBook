@@ -12,9 +12,9 @@ router.post("/", function(req, res) {
         console.log(venueInfo[0].venueName);
         console.log(venueInfo[0].id);
             db.Gig.create({
-                date: req.body.gigDate,
-                description: req.body.gigDes,
-                genre: req.body.gigGenre,
+                date: req.body.date,
+                description: req.body.description,
+                genre: req.body.genre,
                 VenueId: venueInfo[0].id,
                 gigName: venueInfo[0].venueName,
                 image: venueInfo[0].image
