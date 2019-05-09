@@ -40,7 +40,11 @@ class Home extends Component {
         role: this.state.role
       })
         .then(res => {
-          this.props.history.push("/venue/profile/" + res.data.id);
+          if (res.data.role === "venue") {
+            this.props.history.push("/venue/profile/" + res.data.id);
+          } else if (res.data.role === "artist") {
+            this.props.history.push("/artist/profile/" + res.data.id);
+          }
         })
         .catch(err => console.log(err));
     }
