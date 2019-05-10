@@ -4,15 +4,15 @@ import "./style.css";
 
 
 
-var divStyle = {
-    color: 'white',
-  };
+// var divStyle = {
+//     color: 'white',
+//   };
   
 
 function BookedGigs(props) {
     return (
         <div className = "new-result-box">
-            <h1 style={divStyle}>these are booked gigs</h1>
+            {/* <h1 style={divStyle}>these are booked gigs</h1> */}
             <div className = "booked-gig-card">
                 <img src = {props.src} alt = "result image" className= "image"/>
 
