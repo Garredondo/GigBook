@@ -5,6 +5,7 @@ import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
+import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
 
@@ -13,14 +14,15 @@ class VenueProfile extends Component {
     genre: "",
     date: "",
     venue: [],
-    display: true
+    display: true,
+    gigs: []
   };
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      if(res.data === "false") {
-        this.props.history.push("/");
-      }
+      // if(res.data === "false") {
+      //   this.props.history.push("/");
+      // }
     }).catch(err => console.log(err));
     this.loadVenueInfo();
   };
@@ -43,17 +45,23 @@ class VenueProfile extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
-    this.setState({
-      description: "",
-      genre: "",
-      date: ""
-    });
   };
+
+  // loadGigs() {
+  //   API.Venues.getVenueGigs().then(res => {
+  //     this.setState({
+  //       gigs: res.data 
+  //     })
+  //   }).catch(err => console.log(err));
+  // };
 
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(res => {
+      console.log(res.data);
+      
       this.setState({
-        venue: res.data
+        venue: res.data.venue,
+        gigs: res.data.gigs
       })
     }).catch(err => console.log(err));
   };
@@ -70,6 +78,10 @@ class VenueProfile extends Component {
       display: !this.state.display
     });
   };
+
+  // deleteGig = () =>{
+    
+  // }
 
   render1 = () => {
     return (
@@ -114,12 +126,13 @@ class VenueProfile extends Component {
         <StartButton id="dis-make-gig-form-btn" label="Make A Gig" onClick={this.toggleView} />
         <div className = "main-title">Live Listings</div>
         <hr className = "divider"></hr>
-        <ResultBox 
+        {/* <ResultBox 
         src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
         name = "Emo's Austin"
         description = "Jesse's Jam Sesh"
         genre = "Funk"
-        date = "05/16/2019" />
+        date = "05/16/2019"
+        /> */}
         <div className = "main-title">Booked Gigs</div>
         <hr className = "divider"></hr>
         <ResultBox 

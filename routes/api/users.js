@@ -50,4 +50,14 @@ router.post("/", function (req, res) {
     }
 });
 
+
+router.delete("/:id", function(req, res){
+    db.User.delete({
+        where: {
+            UserId: req.params.id
+        }
+    }).then(window.location.replace("/"))
+    .cath(err => res.json(err));
+})
+
 module.exports = router;
