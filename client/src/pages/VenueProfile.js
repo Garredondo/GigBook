@@ -11,7 +11,8 @@ class VenueProfile extends Component {
     description: "",
     genre: "",
     date: "",
-    venue: []
+    venue: [],
+    display: true
   };
 
   componentDidMount() {
@@ -58,6 +59,13 @@ class VenueProfile extends Component {
       .catch(err => console.log(err));
   };
 
+  toggleView = () => {
+    this.setState({
+      display: !this.state.display
+    });
+  };
+
+
   render() {
     return (
       <div>
@@ -75,7 +83,11 @@ class VenueProfile extends Component {
         </ProfileLeft>
 
         <ProfileRightVenue >
-        <StartButton id = "dis-gigs-btn" label = "View Gigs"/>
+        {this.state.display ? <StartButton id = "dis-gigs-btn" label = "View Gigs" onClick = {this.toggleView} /> : <StartButton id = "dis-make-gig-form-btn" label = "Make A Gig" onClick = {this.toggleView}/>
+}
+        
+
+        
           <div className="div" id = "display-make-gig-form">
               <div className = "main-title">Post A Gig</div>
               <br></br>

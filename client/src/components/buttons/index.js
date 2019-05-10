@@ -51,13 +51,12 @@ export function BookGigButton({
     );
 }
 
-export function StartButton({
-    id,
-    label,
-    style
-    }) {
+export function StartButton(props){
+    console.log(props);
+    console.log(props.display)
     return (
         <button className="btn btn-primary btn-lg btn-scnd"
-        id={id} style = {`${style || ''}`} >{label}</button>
+        id={props.id} onClick = {props.onClick}>{props.label}</button>
+        
     );
 }
