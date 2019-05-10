@@ -43,11 +43,12 @@ export function PostGigButton() {
 }
 
 export function BookGigButton({
-    dataId
+    dataId,
+    onClick
     }) {
     return (
         <button className="btn btn-primary btn-lg btn-main book card-button" 
-        data-id={dataId}>Book</button>
+        data-id={dataId} onClick={onClick}>Book</button>
     );
 }
 

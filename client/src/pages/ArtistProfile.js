@@ -67,6 +67,15 @@ class ArtistProfile extends Component {
       .then(res => this.props.history.push("/"))
       .catch(err => console.log(err));
   }
+  bookGigAsArtist = (event,id) => {
+    const ArtistId = this.state.requests.id;
+    const GigId = event;
+    API.Requests.bookGigAsArtist({
+      ArtistId,
+      GigId
+    }).then(res => console.log(res))
+    .catch(err => console.log(err));
+  };
 
 
   render() {
@@ -116,7 +125,9 @@ class ArtistProfile extends Component {
             name = {gig.gigName}
             description = {gig.description}
             genre = {gig.genre}
-            date = {gig.date} />
+            date = {gig.date}>
+              <BookGigButton dataId={gig.id} onClick={() => this.bookGigAsArtist(gig.id)}/>
+            </ResultBox>
             ))
             
             // src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
@@ -134,7 +145,7 @@ class ArtistProfile extends Component {
             <hr />
             <h2>Pending Gigs</h2>
             
-            { this.state.booked.map( gig => (
+            {/* { this.state.booked.map( gig => (
               <BookedGigs
                 src = {gig.image}
                 name = {gig.gigName}
@@ -142,16 +153,13 @@ class ArtistProfile extends Component {
                 genre = {gig.genre}
                 date = {gig.date} 
               />
-            ))}
+            ))} */}
         </div>
         </ProfileRightArtist>
         
-        {/* <LogoutButton />
-        <FilterButton /> */}
+       
 
-        {/* When we map out each gig, 
-        BookGigButton will have dataID={gig.Id} */}
-        <BookGigButton dataId={1} />
+        
 
         <DeleteProfileButton onClick={()=> {this.handleDeleteProfile(this.state.requests.id)}}/>
         {/* <DeleteProfileButton onClick={this.handleDeleteProfile}/> */}

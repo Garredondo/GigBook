@@ -3,6 +3,7 @@ import { BookGigButton } from "../buttons";
 import "./style.css";
 
 function ResultBox(props) {
+    console.log(props);
     return (
         
             <div className = "gig-card">
@@ -15,7 +16,7 @@ function ResultBox(props) {
                     <p className = "card-genre">{props.genre}</p>
                     {/*===========================================================*/}
                     <p className = "card-date"> {props.date}</p>
-                    <BookGigButton />
+                    {props.children}
                 </div>
             </div>
         

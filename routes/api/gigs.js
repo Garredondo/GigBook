@@ -70,6 +70,6 @@ router.delete("/api/gigs/:id", function(req, res) {
     });
 });
 
-// Get All Gigs ==========
+
 
 module.exports = router;
