@@ -61,6 +61,7 @@ router.put("/", function(req, res) {
         profileImage: req.body.profileImage
     }, {
         where: {
+            // UserId: 2
             UserId: req.user.id
         }
     }).then(response => res.json(response))
