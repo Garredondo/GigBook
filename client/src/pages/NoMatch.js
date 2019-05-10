@@ -24,7 +24,7 @@ class NoMatch extends Component {
       <div className="bodyClass"> 
           <div className="container">
             <div className="row">
-              <div id="main" className="col-12">
+              <div id="main-404" className="col-12">
                 <h1>404 Page Not Found</h1>
   
                 {this.renderRedirect()}

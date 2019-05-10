@@ -1,4 +1,4 @@
-import {LogoutButton, BookGigButton, DeleteProfileButton} from "../components/buttons";
+import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
 import { log } from "util";
