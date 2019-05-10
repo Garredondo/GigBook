@@ -96,7 +96,7 @@ class Home extends Component {
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Log In</h5>
+            <h5 className="modal-title" style={styles.text}>Log In</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -118,8 +118,8 @@ class Home extends Component {
               />
 
               <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
-              <Radio value="venue" name="roleLogin" checked={this.state.roleLogin === "venue"} onChange={this.handleInputChange} />Venue
-              <Radio value="artist" name="roleLogin" checked={this.state.roleLogin === "artist"} onChange={this.handleInputChange} />Artist
+              <Radio value="venue" name="roleLogin" checked={this.state.roleLogin === "venue"} onChange={this.handleInputChange} /><p style={styles.text}>Venue</p>
+              <Radio value="artist" name="roleLogin" checked={this.state.roleLogin === "artist"} onChange={this.handleInputChange} /><p style={styles.text}>Artist</p>
             
           </div>
           <div className="modal-footer">
@@ -142,7 +142,7 @@ class Home extends Component {
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Sign Up</h5>
+            <h5 className="modal-title" style={styles.text}>Sign Up</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -172,12 +172,8 @@ class Home extends Component {
           />
 
           <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
-          <Radio value="venue" name="roleSignUp" checked={this.state.roleSignUp === "venue"} 
-            onChange={this.handleInputChange} 
-          />Venue
-          <Radio value="artist" name="roleSignUp" checked={this.state.roleSignUp === "artist"} 
-            onChange={this.handleInputChange} 
-          />Artist
+          <Radio value="venue" name="roleSignUp" checked={this.state.roleSignUp === "venue"} onChange={this.handleInputChange}/><p style={styles.text}>Venue</p>
+          <Radio value="artist" name="roleSignUp" checked={this.state.roleSignUp === "artist"} onChange={this.handleInputChange}/><p style={styles.text}>Artist</p>
       
           <div className="modal-footer">
 
