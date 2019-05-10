@@ -36,15 +36,16 @@ router.get("/", function (req, res) {
                             UserId: req.user.id
                             // id: 3
                         },
-                        include: [db.Gig]
+                        include: [{model: db.Gig, as: "PotentialGig"}]
                     }).then(dbRequest => {
+                        console.log(dbRequest);
                         var resultsObj = {
                             allVenues: dbVenueAll,
                             availableGigs: dbUnbookedGigs,
                             artistRequests: dbRequest
                         }
                         res.json(resultsObj);
-                    })
+                    }).catch(err => console.log(err))
                 })
         })
 });
