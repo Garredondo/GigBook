@@ -60,3 +60,12 @@ export function StartButton({
         id={id}>{label}</button>
     );
 }
+
+export function DeleteProfileButton({
+    onClick
+}) {
+    return (
+        <button className="btn btn-primary btn-lg logout" onClick={onClick}>
+        Delete Profile</button>
+    );
+}

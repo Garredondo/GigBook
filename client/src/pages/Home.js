@@ -118,8 +118,8 @@ class Home extends Component {
               />
 
               <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
-              <Radio value="venue" name="roleLogin" checked={this.state.roleLogin === "venue"} onChange={this.handleInputChange} style={styles.text}/>Venue
-              <Radio value="artist" name="roleLogin" checked={this.state.roleLogin === "artist"} onChange={this.handleInputChange} style={styles.text}/>Artist
+              <Radio value="venue" name="roleLogin" checked={this.state.roleLogin === "venue"} onChange={this.handleInputChange} /><p style={styles.text}>Venue</p>
+              <Radio value="artist" name="roleLogin" checked={this.state.roleLogin === "artist"} onChange={this.handleInputChange} /><p style={styles.text}>Artist</p>
             
           </div>
           <div className="modal-footer">
@@ -172,8 +172,8 @@ class Home extends Component {
           />
 
           <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
-          <Radio value="venue" name="roleSignUp" checked={this.state.roleSignUp === "venue"} onChange={this.handleInputChange} style={styles.text}/>Venue
-          <Radio value="artist" name="roleSignUp" checked={this.state.roleSignUp === "artist"} onChange={this.handleInputChange} style={styles.text}/>Artist
+          <Radio value="venue" name="roleSignUp" checked={this.state.roleSignUp === "venue"} onChange={this.handleInputChange}/><p style={styles.text}>Venue</p>
+          <Radio value="artist" name="roleSignUp" checked={this.state.roleSignUp === "artist"} onChange={this.handleInputChange}/><p style={styles.text}>Artist</p>
       
           <div className="modal-footer">
 

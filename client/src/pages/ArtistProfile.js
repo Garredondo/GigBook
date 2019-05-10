@@ -1,10 +1,11 @@
-import {LogoutButton, BookGigButton} from "../components/buttons";
+import {LogoutButton, BookGigButton, DeleteProfileButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRightArtist from "../components/containers/ProfileRightArtist";
 import ResultBox from "../components/cards";
+
 
 // import { createDecipher } from "crypto";
 
@@ -13,7 +14,8 @@ class ArtistProfile extends Component {
   state = {
     gigs:[],
     requests:{},
-    venues:[]
+    venues:[],
+    id: ""
   };
 
   componentDidMount() {
@@ -23,6 +25,7 @@ class ArtistProfile extends Component {
     //   }
     // }).catch(err => console.log(err));
     this.loadGigs();
+    
   };
 
   loadGigs = () => {
@@ -51,6 +54,12 @@ class ArtistProfile extends Component {
       .then(res => this.props.history.push("/"))
       .catch(err => console.log(err));
   };
+
+  handleDeleteProfile = id => {
+    API.Users.deleteProfile(id)
+      .then(res => this.props.history.push("/"))
+      .catch(err => console.log(err));
+  }
 
 
   render() {
@@ -104,6 +113,10 @@ class ArtistProfile extends Component {
         {/* When we map out each gig, 
         BookGigButton will have dataID={gig.Id} */}
         <BookGigButton dataId={1} />
+
+        <DeleteProfileButton onClick={()=> {this.handleDeleteProfile(this.state.requests.id)}}/>
+        {/* <DeleteProfileButton onClick={this.handleDeleteProfile}/> */}
+        
       </div>
     );
   }
