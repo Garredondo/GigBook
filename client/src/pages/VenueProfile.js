@@ -18,9 +18,9 @@ class VenueProfile extends Component {
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      // if(res.data === "false") {
-      //   this.props.history.push("/");
-      // }
+      if(res.data === "false") {
+        this.props.history.push("/");
+      }
     }).catch(err => console.log(err));
     this.loadVenueInfo();
   };
@@ -43,6 +43,11 @@ class VenueProfile extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
+    this.setState({
+      description: "",
+      genre: "",
+      date: ""
+    });
   };
 
   loadVenueInfo() {
