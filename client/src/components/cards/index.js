@@ -1,5 +1,5 @@
 import React from 'react';
-import {BookGigButton} from "../buttons";
+import {BookGigButton, DeleteGigButton} from "../buttons";
 import "./style.css";
 
 function ResultBox(props) {
@@ -15,7 +15,7 @@ function ResultBox(props) {
                     <p className = "card-genre">{props.genre}</p>
                     {/*===========================================================*/}
                     <p className = "card-date"> {props.date}</p>
-                    <BookGigButton />
+                    <DeleteGigButton />
                 </div>
             </div>
         

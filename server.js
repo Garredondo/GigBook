@@ -1,6 +1,7 @@
 // var index = require("./routes/index");
 require("dotenv").config();
 var express = require("express");
+const path = require("path");
 
 // This is for Passport
 const session = require("express-session");

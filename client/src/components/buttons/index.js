@@ -69,3 +69,13 @@ export function DeleteProfileButton({
         Delete Profile</button>
     );
 }
+
+export function DeleteGigButton({
+    dataId,
+    onClick
+    }) {
+    return (
+        <button className="btn btn-primary btn-lg btn-main book card-button" 
+        data-id={dataId} onClick={onClick}>Delete</button>
+    );
+}
