@@ -117,11 +117,6 @@ class ArtistProfile extends Component {
   };
 
 
-  render() {
-    // console.log("ArtistProfile state")
-    // // console.log(this.state.);
-
-    // console.log(this.state);
 
   submitChanges = (event) => {
     console.log(this.state);
