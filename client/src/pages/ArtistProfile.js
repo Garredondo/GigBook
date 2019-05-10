@@ -107,6 +107,8 @@ class ArtistProfile extends Component {
             description = "boogaloo"
             genre = "Funk"
             date = "05/17/2019" /> */}
+            <hr />
+            <h2>Pending Gigs</h2>
             
             { this.state.booked.map( gig => (
               <BookedGigs
