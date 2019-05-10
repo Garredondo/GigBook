@@ -72,8 +72,8 @@ class ArtistProfile extends Component {
   }
 
   submitChanges = () => {
-    API.Artists.update().then().catch(err => console.log(err));
-    this.setState({editing:false});
+    API.Artists.update().then(this.setState({editing:false})).catch(err => console.log(err));
+    
   }
 
   render() {
