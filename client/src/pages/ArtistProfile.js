@@ -1,6 +1,8 @@
 import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
+import { log } from "util";
+
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRightArtist from "../components/containers/ProfileRightArtist";
@@ -13,14 +15,16 @@ class ArtistProfile extends Component {
   state = {
     gigs:[],
     requests:{},
-    venues:[]
-  };
+    venues:[],
+    // This is for the Profile Left Component
+    editing:false
+  }
 
   componentDidMount() {
     // API.Users.isAuthed().then(res => {
-    //   if(res.data === "false") {
-    //     this.props.history.push("/");
-    //   }
+    //   // if(res.data === "false") {
+    //   //   this.props.history.push("/");
+    //   // }
     // }).catch(err => console.log(err));
     this.loadGigs();
   };
@@ -53,13 +57,34 @@ class ArtistProfile extends Component {
   };
 
 
+  // This function is for editing the profile (it's executed in ProfileLeft/index.js)
+  toggleEdit = () => {
+    if (this.state.editing === false){
+      this.setState({
+        editing: true
+      });
+    }
+    else if (this.state.editing === true){
+      this.setState({
+        editing:false
+      });
+    }
+  }
+
+  submitChanges = () => {
+    API.Artists.update().then(this.setState({editing:false})).catch(err => console.log(err));
+    
+  }
+
   render() {
     // this.loadGigs()
     console.log(this.state.requests)
     return (
       <div>
-        {this.state.requests.profileImage ? 
-          <ProfileLeft 
+        <h1>Artist Profile Page</h1>
+        <ProfileLeft 
+          toggleEdit = {this.toggleEdit}
+          editing = {this.state.editing}
           image={this.state.requests.profileImage}
           artistName={this.state.requests.artistName}
           genre={this.state.requests.genre}
@@ -68,6 +93,7 @@ class ArtistProfile extends Component {
           email={this.state.requests.email}
           website={this.state.requests.website}
           phone={this.state.requests.phone}
+          submitChanges = {this.submitChanges}
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft> 

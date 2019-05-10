@@ -66,4 +66,10 @@
     margin-bottom: 0px;
 }
 
+#edit-profile-button {
+    float:right;
+}
 
+.editing {
+   overflow-y:scroll;
+}
