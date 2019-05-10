@@ -161,7 +161,7 @@ class ArtistProfile extends Component {
 
         
 
-        <DeleteProfileButton onClick={()=> {this.handleDeleteProfile(this.state.requests.id)}}/>
+        {/* <DeleteProfileButton onClick={()=> {this.handleDeleteProfile(this.state.requests.id)}}/> */}
         {/* <DeleteProfileButton onClick={this.handleDeleteProfile}/> */}
         
       </div>

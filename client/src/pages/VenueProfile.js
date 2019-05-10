@@ -57,8 +57,8 @@ class VenueProfile extends Component {
 
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(res => {
-      console.log(res.data.venue);
-      console.log(res.data.gigs);
+      console.log(res.data);
+      
       this.setState({
         venue: res.data.venue,
         gigs: res.data.gigs

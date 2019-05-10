@@ -63,9 +63,11 @@ router.get("/", function (req, res) {
             }
         }).then(function ( dbRequest ) {
             console.log(dbRequest);
-            console.log(dbVenue);
-            res.json(dbRequest);
-            res.json(dbVenue);
+            console.log(dbVenue.id);
+            res.json({
+                venue: dbVenue,
+                gigs: dbRequest
+            });
         })
         .catch(err => res.json(err));
     });
