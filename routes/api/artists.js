@@ -33,8 +33,8 @@ router.get("/", function (req, res) {
                 .then(function (dbVenueAll) {
                     db.Artist.findOne({
                         where: {
-                            // UserId: req.user.id
-                            id: 3
+                            UserId: req.user.id
+                            // id: 3
                         },
                         include: [db.Gig]
                     }).then(dbRequest => {
@@ -63,6 +63,15 @@ router.put("/", function(req, res) {
         where: {
             UserId: req.user.id
         }
+    }).then(response => res.json(response))
+    .catch(err => res.json(err));
+});
+
+// get the id of the gig and the id of the artist and post it to the requests table
+router.put("/", function(req, res) {
+    db.Requests.update({
+        gigId:1,
+        ArtistId:6
     }).then(response => res.json(response))
     .catch(err => res.json(err));
 });
