@@ -1,4 +1,4 @@
-import {LogoutButton, BookGigButton} from "../components/buttons";
+import {LogoutButton, BookGigButton, DeleteProfileButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
 import { log } from "util";
@@ -40,6 +40,7 @@ class ArtistProfile extends Component {
     
     this.loadArtistInfo();
     this.loadGigs();
+    
   };
 
   loadGigs = () => {
@@ -105,7 +106,14 @@ class ArtistProfile extends Component {
         editing:false
       });
     }
-  }
+  };
+
+  // handleDeleteProfile = id => {
+  //   API.Users.deleteProfile(id)
+  //     .then(res => this.props.history.push("/"))
+  //     .catch(err => console.log(err));
+  // }
+
   bookGigAsArtist = (event,id) => {
     const ArtistId = this.state.requests.id;
     const GigId = event;
@@ -117,11 +125,6 @@ class ArtistProfile extends Component {
   };
 
 
-  render() {
-    // console.log("ArtistProfile state")
-    // // console.log(this.state.);
-
-    // console.log(this.state);
 
   submitChanges = (event) => {
     console.log(this.state);
@@ -234,8 +237,21 @@ class ArtistProfile extends Component {
 
         {/* When we map out each gig, 
         BookGigButton will have dataID={gig.Id} */}
+
+
+
+
+
+        {/* <DeleteProfileButton onClick={()=> {this.handleDeleteProfile(this.state.requests.id)}}/> */}
+        {/* <DeleteProfileButton onClick={this.handleDeleteProfile}/> */}
       </div>
     );
   }
 }
 export default ArtistProfile;
+
+
+
+
+
+
