@@ -12,7 +12,10 @@ class VenueProfile extends Component {
     description: "",
     genre: "",
     date: "",
-    venue: [],
+    venue: {},
+    unbookedGigs: [],
+    requestedGigs: [],
+    bookedGigs: [],
     display: true
   };
 
@@ -23,6 +26,7 @@ class VenueProfile extends Component {
       }
     }).catch(err => console.log(err));
     this.loadVenueInfo();
+    // this.loadRequestedGigs();
   };
 
   handleInputChange = event => {
@@ -55,8 +59,23 @@ class VenueProfile extends Component {
       this.setState({
         venue: res.data
       })
+      API.Requests.getRequestedGigs().then(res => {
+        this.setState({
+          requestedGigs: res.data
+        })
+      }).catch(err => console.log(err));
     }).catch(err => console.log(err));
   };
+
+  // loadRequestedGigs() {
+    // console.log("venue id-------------------")
+    // console.log(this.state.venue);
+  //   API.Requests.getRequestedGigs().then(res => {
+  //     this.setState({
+  //       requestedGigs: res.data
+  //     })
+  //   }).catch(err => console.log(err));
+  // };
 
   handleLogout = event => {
     event.preventDefault();

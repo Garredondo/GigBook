@@ -56,6 +56,7 @@ router.get("/", function (req, res) {
             UserId: req.user.id
         }
     }).then(response => {
+        console.log(response);
         res.json(response);
     })
     .catch(err => res.json(err));
