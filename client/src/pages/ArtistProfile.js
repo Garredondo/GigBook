@@ -14,7 +14,7 @@ class ArtistProfile extends Component {
     gigs:[],
     requests:{},
     venues:[],
-    booked:{}
+    booked:[]
   };
 
   componentDidMount() {
@@ -56,7 +56,9 @@ class ArtistProfile extends Component {
 
 
   render() {
-    console.log("artistprofile state.requests")
+    console.log("ArtistProfile state.requests")
+    // console.log(this.state.);
+
     console.log(this.state.booked);
 
     return (
@@ -99,14 +101,14 @@ class ArtistProfile extends Component {
             description = "Jesse's Jam Sesh"
             genre = "Funk"
             date = "05/16/2019" />
-            <BookedGigs 
+            {/* <BookedGigs 
             src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
             name = "Central Market"
             description = "boogaloo"
             genre = "Funk"
-            date = "05/17/2019" />
+            date = "05/17/2019" /> */}
             
-            {/* { this.state.booked.map( gig => (
+            { this.state.booked.map( gig => (
               <BookedGigs
                 src = {gig.image}
                 name = {gig.gigName}
@@ -114,7 +116,7 @@ class ArtistProfile extends Component {
                 genre = {gig.genre}
                 date = {gig.date} 
               />
-            ))} */}
+            ))}
         </div>
         </ProfileRightArtist>
         
