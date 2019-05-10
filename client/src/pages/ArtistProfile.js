@@ -29,8 +29,8 @@ class ArtistProfile extends Component {
   loadGigs = () => {
     API.Artists.getGigs()
       .then(res => {
-        // console.log("loadGigs res: ")
-        // console.log(res.data);
+        console.log("loadGigs res: ")
+        console.log(res.data);
         this.setState({ 
           gigs: res.data.availableGigs, 
           venues: res.data.allVenues, 

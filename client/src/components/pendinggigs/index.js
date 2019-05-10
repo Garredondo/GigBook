@@ -9,7 +9,7 @@ import "./style.css";
 
 function BookedGigs(props) {
     return (
-            <div className = "booked-gig-card">
+            <div id={props.id} className = "booked-gig-card">
     
                 <img src = {props.src} alt = "result image" className= "image"/>
 
