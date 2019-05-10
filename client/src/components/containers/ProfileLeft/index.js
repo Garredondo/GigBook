@@ -46,18 +46,18 @@ function ProfileLeft(props) {
             <div className = "profile-left editing">
                 <div className = "profile-content">
                     <h3>Image Url</h3>
-                    <InputBox defaultValue = {`${props.image || props.profileImage}`}/>
+                    <InputBox name = "profileImage" onChange = {props.handleInputChange} defaultValue = {`${props.image || props.profileImage}`}/>
                     <h3>Name</h3>
-                    <InputBox defaultValue = {props.artistName || props.venueName}/>
+                    <InputBox name = "artistName" defaultValue = {props.artistName || props.venueName} onChange = {props.handleInputChange}/>
 
                     {/* For Artist */}
                     <h3>Genre</h3>
-                    <InputBox defaultValue = {props.genre}/>
+                    <InputBox name = "genre" defaultValue = {props.genre} onChange = {props.handleInputChange}/>
                     <hr />
                     <h3># of Members</h3>
-                    <InputBox defaultValue = {props.numberOfMembers} />
+                    <InputBox name = "numberOfMembers" onChange = {props.handleInputChange} defaultValue = {props.numberOfMembers} />
                     <h3># of Instruments</h3>
-                    <InputBox defaultValue = {props.instrumentation} />
+                    <InputBox name = "instrumentation" onChange = {props.handleInputChange} defaultValue = {props.instrumentation} />
     
     
                     {/* For Venue */}
@@ -66,11 +66,11 @@ function ProfileLeft(props) {
                 
                 
                     <p>Email Address</p>
-                    <InputBox defaultValue = {props.email} />
+                    <InputBox name = "email" onChange = {props.handleInputChange} defaultValue = {props.email} />
                     <p>Website</p>
-                    <InputBox defaultValue = {props.website} />
+                    <InputBox name = "website" onChange = {props.handleInputChange} defaultValue = {props.website} />
                     <p>Phone</p>
-                    <InputBox defaultValue = {props.phone} />
+                    <InputBox name = "phone" onChange = {props.handleInputChange} defaultValue = {props.phone} />
 
                     <FormButton label = "Submit Changes" onClick = {props.submitChanges}/>
                     {/* {props.children} */}

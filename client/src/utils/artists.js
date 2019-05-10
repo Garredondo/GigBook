@@ -2,15 +2,15 @@ import axios from "axios";
 
 export default {
     // Gets all gigs
-    getGigs: function() {
+    getGigs: function(data) {
       return axios.get("/api/artists");
     },
 
-    getArtistInfo: data => {
-      return axios.get("api/artists", data);
+    getArtistInfo: () => {
+      return axios.get("/api/artists");
     },
 
-    update: function() {
-      return axios.put("/api/artists");
+    update: function(data) {
+      return axios.put("/api/artists", data);
     }
 };
