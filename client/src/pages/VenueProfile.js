@@ -4,6 +4,7 @@ import API from "../utils/index";
 import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
+import ResultBox from "../components/cards";
 
 class VenueProfile extends Component {
 
@@ -33,14 +34,14 @@ class VenueProfile extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if(this.state.description && this.state.genre && this.state.date) {
+    if (this.state.description && this.state.genre && this.state.date) {
       API.Gigs.postGig({
         description: this.state.description,
         genre: this.state.genre,
         date: this.state.date
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }
   };
 
@@ -65,6 +66,68 @@ class VenueProfile extends Component {
     });
   };
 
+  render1 = () => {
+    return (
+      <div>
+        <StartButton id="dis-gigs-btn" label="View Gigs" onClick={this.toggleView} />
+        <div className="div" id="display-make-gig-form">
+          <div className="main-title">Post A Gig</div>
+          <br></br>
+          <div className="createGigForm">
+            <form>
+              <TextLabel for="gig-des">Gig Description:</TextLabel>
+              <InputBox type="text" id="gig-des" name="description"
+                onChange={this.handleInputChange}
+                value={this.state.description}
+              />
+              <TextLabel for="gig-genre">Genre(s): </TextLabel>
+              <InputBox type="text" id="gig-genre" name="genre"
+                onChange={this.handleInputChange}
+                value={this.state.genre}
+              />
+              <TextLabel for="gig-date">Date: </TextLabel>
+              <InputBox type="text" id="gig-date" name="date" placeholder="MM/DD/YYYY"
+                onChange={this.handleInputChange}
+                value={this.state.date}
+              />
+              <FormButton id="gig-create"
+                value="Post-Gig"
+                className="btn btn-primary btn-lg btn-main"
+                label="Post Gig"
+                onClick={this.handleFormSubmit}
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  render2 = () => {
+    return(
+      <div id = "display-venue-gigs">
+        <StartButton id="dis-make-gig-form-btn" label="Make A Gig" onClick={this.toggleView} />
+        <div className = "main-title">Live Listings</div>
+        <hr className = "divider"></hr>
+        <ResultBox 
+        src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+        name = "Emo's Austin"
+        description = "Jesse's Jam Sesh"
+        genre = "Funk"
+        date = "05/16/2019" />
+        <div className = "main-title">Booked Gigs</div>
+        <hr className = "divider"></hr>
+        <ResultBox 
+        src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+        name = "Emo's Austin"
+        description = "Jesse's Jam Sesh"
+        genre = "Funk"
+        date = "05/16/2019" />
+
+      </div>
+    )
+  }
+
 
   render() {
     return (
@@ -79,16 +142,13 @@ class VenueProfile extends Component {
           state={this.state.venue.state}
           zipcode={this.state.venue.zipcode}
           phone={this.state.venue.phone}>
-          <LogoutButton onClick={this.handleLogout}/>
+          <LogoutButton onClick={this.handleLogout} />
         </ProfileLeft>
 
         <ProfileRightVenue >
-        {this.state.display ? <StartButton id = "dis-gigs-btn" label = "View Gigs" onClick = {this.toggleView} /> : <StartButton id = "dis-make-gig-form-btn" label = "Make A Gig" onClick = {this.toggleView}/>
-}
-        
-
-        
-          <div className="div" id = "display-make-gig-form">
+          {this.state.display ? this.render1() : this.render2()}
+  
+          {/* <div className="div" id = "display-make-gig-form">
               <div className = "main-title">Post A Gig</div>
               <br></br>
               <div className = "createGigForm">
@@ -116,7 +176,7 @@ class VenueProfile extends Component {
                       />
                   </form>
               </div>
-          </div>
+          </div> */}
         </ProfileRightVenue>
       </div>
     );
