@@ -2,7 +2,6 @@ import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
 import { log } from "util";
-
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRightArtist from "../components/containers/ProfileRightArtist";
@@ -16,7 +15,6 @@ class ArtistProfile extends Component {
     requests:{},
     venues:[],
     booked:[],
-    filter:"",
     // This is for the Profile Left Component =/=/=/=/=/=/=/=/=/=/=/
     editing:false,
     profileImage: "",
@@ -57,18 +55,36 @@ class ArtistProfile extends Component {
       .catch(err => console.log(err));
   };
 
-  // filterButton = (event) => {
-  //   event.preventDefault();
+  filterButton = (event) => {
+    event.preventDefault();
 
-  //   this.state.gigs.filter(gig => {
-  //     //compare gigName to state.filter. only render those which gigName === this.state.filter
-  //     if(gigName===)
+    API.Artists.getGigs()
+    .then(res => {
+      // console.log("loadGigs res: ")
+      // console.log(res.data.booked);
+      const option = document.getElementById('inputGroupSelect03').value;
+      console.log("what is option", option);
+      const filteredGigs = res.data.availableGigs.filter(gig => { 
+        //compare gigName to state.filter. only render those which gigName === this.state.filter
+        if(option=== "All Venues"){
+          return gig;
+        }
+        if(gig.gigName === option) {
+          return gig
+        }
+  
+      })
 
-  //   })
+      this.setState({ 
+        gigs: filteredGigs, 
+        venues: res.data.allVenues, 
+      })
+    })
+    .catch(err => console.log(err));
 
-  //   console.log("filter button was clicked.");
+    console.log(this.state.filter);
 
-  // }
+  }
 
   handleLogout = event => {
     event.preventDefault();
@@ -141,11 +157,12 @@ class ArtistProfile extends Component {
   }
 
   render() {
+
     return (
       <div>
         <h1>Artist Profile Page</h1>
 
-        {this.state.requests.profileImage ? 
+        {/* {(this.state.requests.profileImage) ? 
           <ProfileLeft 
           editing = {this.state.editing}
           toggleEdit = {this.toggleEdit}
@@ -162,7 +179,7 @@ class ArtistProfile extends Component {
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft> 
-        : 
+        :  */}
         <ProfileLeft 
         editing = {this.state.editing}
         image={"https://via.placeholder.com/150"}
