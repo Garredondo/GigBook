@@ -17,7 +17,8 @@ class ArtistProfile extends Component {
     requests:{},
     venues:[],
     // This is for the Profile Left Component
-    editing:false
+    editing:false,
+    artistInfo: []
   }
 
   componentDidMount() {
@@ -26,6 +27,8 @@ class ArtistProfile extends Component {
     //   //   this.props.history.push("/");
     //   // }
     // }).catch(err => console.log(err));
+    
+    this.loadArtistInfo();
     this.loadGigs();
   };
 
@@ -38,7 +41,8 @@ class ArtistProfile extends Component {
           gigs: res.data.availableGigs, 
           venues: res.data.allVenues, 
           requests: res.data.artistRequests 
-        })
+        });
+        
       })
       .catch(err => console.log(err));
   };
@@ -56,6 +60,21 @@ class ArtistProfile extends Component {
       .catch(err => console.log(err));
   };
 
+  
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  loadArtistInfo() {
+    API.Artists.getArtistInfo().then(res => {
+      this.setState({
+        artistInfo: res.data
+      })
+    }).catch(err => console.log(err));
+  };
 
   // This function is for editing the profile (it's executed in ProfileLeft/index.js)
   toggleEdit = () => {
@@ -94,8 +113,38 @@ class ArtistProfile extends Component {
           website={this.state.requests.website}
           phone={this.state.requests.phone}
           submitChanges = {this.submitChanges}
-        >
+        >{/*~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/E/X/P/E/R/I/M/E/N/T/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/*/}
+          {/*Hunter: "Possible Beginning of Profile Left Content" */}
+          <div className = "profile-left">
+                <div className = "profile-picture">
+                    <img className = "image-profile" alt = "profile-pic" src = {`${this.state.requests.image || this.state.requests.profileImage}`} />
+                </div>
+    
+                <div className = "profile-content">
+                    <button id = "edit-profile-button" onClick = {this.toggleEdit}>Edit</button>
+                    <h1 className = "name"> {this.state.requests.artistName || this.state.requests.venueName} </h1>
+    
+                    {/* For Artist */}
+                    <p className="band-genres"> {this.state.requests.genre} </p>
+                    <br></br>
+                    <p>Members: <strong>{this.state.requests.numberOfMembers}</strong> </p>
+                    <p className = "instruments"> {this.state.requests.instrumentation} </p>
+                </div>
+    
+                <div className = "profile-bottom">
+                    <p> {this.state.requests.email} </p>
+                    <a className = "website-link" href = {`${this.state.requests.website}`} target="_blank">
+                        {this.state.requests.website}
+                    </a>
+                    <p> {this.state.requests.phone} </p>
+                </div>
+            </div>
+        )
+         {/*~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/*/}
+
           <LogoutButton onClick={this.handleLogout}/>
+
+
         </ProfileLeft>
         
 

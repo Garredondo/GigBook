@@ -6,6 +6,10 @@ export default {
       return axios.get("/api/artists");
     },
 
+    getArtistInfo: data => {
+      return axios.get("api/artists", data);
+    },
+
     update: function() {
       return axios.put("/api/artists");
     }
