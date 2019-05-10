@@ -57,30 +57,22 @@ router.get("/", function (req, res) {
             UserId: req.user.id
         }
     }).then(function ( dbVenue ) {
-        db.Venue.findOne({
+        db.Gig.findAll({
             where:{
-                VenueId: dbVenue.id
-            },
-            include: [db.Gig]
+                id: dbVenue.id
+            }
         }).then(function ( dbRequest ) {
             console.log(dbRequest);
+            console.log(dbVenue);
             res.json(dbRequest);
-        });
+            res.json(dbVenue);
+        })
+        .catch(err => res.json(err));
     });
 });
 
 
 
-// router.get("/", function (req, res) {
-//     db.Venue.findOne({
-//         where: {
-//             UserId: req.user.id
-//         }
-//     }).then(response => {
-//         res.json(response);
-//     })
-//     .catch(err => res.json(err));
-// });
 
 router.put("/", function(req, res) {
     db.Venue.update({
