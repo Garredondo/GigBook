@@ -96,7 +96,21 @@ class ArtistProfile extends Component {
           submitChanges = {this.submitChanges}
         >
           <LogoutButton onClick={this.handleLogout}/>
-        </ProfileLeft>
+        </ProfileLeft> 
+        : 
+        <ProfileLeft 
+        image={"https://via.placeholder.com/150"}
+        artistName={this.state.requests.artistName}
+        genre={this.state.requests.genre}
+        numberOfMembers={this.state.requests.numberOfMembers}
+        instrumentation={this.state.requests.instrumentation}
+        email={this.state.requests.email}
+        website={this.state.requests.website}
+        phone={this.state.requests.phone}
+      >
+        <LogoutButton onClick={this.handleLogout}/>
+      </ProfileLeft>}
+
         
 
         <ProfileRightArtist>
