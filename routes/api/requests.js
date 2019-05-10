@@ -4,19 +4,15 @@ const db = require("../../models");
 router.post("/", (req, res) => {
     var ArtistId=req.body.ArtistId;
     var GigId=req.body.GigId;
-    db.Artist.findAll({ 
+    db.Artist.findOne({ 
         where: {
             id: ArtistId
     }}).then(artist => {
-        db.Gig.findAll({ 
+        db.Gig.findOne({ 
             where: {
                 id: GigId
         }}).then(gig => {
-            artist.setGigs([gig])
-            // db.Requests.create({
-            //     ArtistId: ArtistId,
-            //     GigId: GigId
-            // })
+            artist.addPotentialGig(gig)
             .then(response => res.json(response))
             .catch(err => res.json(err));
         })
