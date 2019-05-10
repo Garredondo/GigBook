@@ -61,8 +61,8 @@ class ArtistProfile extends Component {
 
     return (
       <div>
-        <h1>Artist Profile Page</h1>
-        <ProfileLeft 
+        {this.state.requests.profileImage ? 
+          <ProfileLeft 
           image={this.state.requests.profileImage}
           artistName={this.state.requests.artistName}
           genre={this.state.requests.genre}
@@ -73,7 +73,21 @@ class ArtistProfile extends Component {
           phone={this.state.requests.phone}
         >
           <LogoutButton onClick={this.handleLogout}/>
-        </ProfileLeft>
+        </ProfileLeft> 
+        : 
+        <ProfileLeft 
+        image={"https://via.placeholder.com/150"}
+        artistName={this.state.requests.artistName}
+        genre={this.state.requests.genre}
+        numberOfMembers={this.state.requests.numberOfMembers}
+        instrumentation={this.state.requests.instrumentation}
+        email={this.state.requests.email}
+        website={this.state.requests.website}
+        phone={this.state.requests.phone}
+      >
+        <LogoutButton onClick={this.handleLogout}/>
+      </ProfileLeft>}
+
         
 
         <ProfileRightArtist>
