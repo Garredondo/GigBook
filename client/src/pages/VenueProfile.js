@@ -20,9 +20,9 @@ class VenueProfile extends Component {
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      if(res.data === "false") {
-        this.props.history.push("/");
-      }
+      // if(res.data === "false") {
+      //   this.props.history.push("/");
+      // }
     }).catch(err => console.log(err));
     this.loadVenueInfo();
   };
@@ -45,29 +45,23 @@ class VenueProfile extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
-    this.setState({
-      description: "",
-      genre: "",
-      date: ""
-    });
   };
 
-  loadGigs() {
-    API.Venues.getVenueGigs().then(res => {
-      this.setState({
-        gigs: res.data 
-      })
-    }).catch(err => console.log(err));
-  };
+  // loadGigs() {
+  //   API.Venues.getVenueGigs().then(res => {
+  //     this.setState({
+  //       gigs: res.data 
+  //     })
+  //   }).catch(err => console.log(err));
+  // };
 
   loadVenueInfo() {
-    
     API.Venues.getVenueInfo().then(res => {
-      console.log("Geoge CL");
-      console.log(res.data);
+      console.log(res.data.venue);
+      console.log(res.data.gigs);
       this.setState({
-        // venue: res.data.venue,
-        // gigs: res.data.gigs
+        venue: res.data.venue,
+        gigs: res.data.gigs
       })
     }).catch(err => console.log(err));
   };
@@ -154,7 +148,6 @@ class VenueProfile extends Component {
 
 
   render() {
-    // console.log("ga cl:", this.state);
     return (
       <div>
         {this.state.venue.image ? 
