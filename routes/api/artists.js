@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../../models");
 
-router.post("/", function (req, res) {
+router.route("/").post(function (req, res) {
     db.Artist.create({
         artistName: req.body.artistName,
         genre: req.body.genre,
@@ -22,7 +22,7 @@ router.post("/", function (req, res) {
 
 
 // findAll gigs that have not yet been verified
-router.get("/", function (req, res) {
+router.route("/").get(function (req, res) {
     db.Gig.findAll({
             where: {
                 ArtistId: null
@@ -52,7 +52,11 @@ router.get("/", function (req, res) {
         })
 });
 
-router.put("/", function(req, res) {
+
+router.route("/").put(function(req, res) {
+    console.log(req.body.profileImage);
+    console.log(req.user);
+
     db.Artist.update({
         artistName: req.body.artistName,
         genre: req.body.genre,
@@ -72,12 +76,12 @@ router.put("/", function(req, res) {
 });
 
 // get the id of the gig and the id of the artist and post it to the requests table
-router.put("/", function(req, res) {
-    db.Requests.update({
-        gigId:1,
-        ArtistId:6
-    }).then(response => res.json(response))
-    .catch(err => res.json(err));
-});
+// router.put("/", function(req, res) {
+//     db.Requests.update({
+//         gigId:1,
+//         ArtistId:6
+//     }).then(response => res.json(response))
+//     .catch(err => res.json(err));
+// });
 
 module.exports = router;

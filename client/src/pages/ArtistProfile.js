@@ -1,6 +1,8 @@
 import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
+import { log } from "util";
+
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRightArtist from "../components/containers/ProfileRightArtist";
@@ -15,14 +17,28 @@ class ArtistProfile extends Component {
     venues:[],
     booked:[],
     filter:"",
+    // This is for the Profile Left Component =/=/=/=/=/=/=/=/=/=/=/
+    editing:false,
+    profileImage: "",
+    artistName: "",
+    genre: "",
+    numberOfMembers: 0,
+    instrumentation: "",
+    phone: 0,
+    website: "",
+    email: "",
+    //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
   };
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      if(res.data === "false") {
-        this.props.history.push("/");
-      }
+      // if(res.data === "false") {
+      //   this.props.history.push("/");
+      // }
     }).catch(err => console.log(err));
+    
+    this.loadArtistInfo();
     this.loadGigs();
   };
 
@@ -61,6 +77,35 @@ class ArtistProfile extends Component {
       .catch(err => console.log(err));
   };
 
+  
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  loadArtistInfo() {
+    API.Artists.getArtistInfo().then(res => {
+      this.setState({
+        artistInfo: res.data
+      })
+    }).catch(err => console.log(err));
+  };
+
+  // This function is for editing the profile (it's executed in ProfileLeft/index.js)
+  toggleEdit = () => {
+    if (this.state.editing === false){
+      this.setState({
+        editing: true
+      });
+    }
+    else if (this.state.editing === true){
+      this.setState({
+        editing:false
+      });
+    }
+  }
   bookGigAsArtist = (event,id) => {
     const ArtistId = this.state.requests.id;
     const GigId = event;
@@ -78,10 +123,37 @@ class ArtistProfile extends Component {
 
     // console.log(this.state);
 
+  submitChanges = (event) => {
+    console.log(this.state);
+    event.preventDefault();
+
+    let updatedArtistInfo = {
+      profileImage: this.state.profileImage,
+      artistName: this.state.artistName,
+      genre: this.state.genre,
+      numberOfMembers: parseInt(this.state.numberOfMembers),
+      instrumentation: this.state.instrumentation,
+      phone: this.state.phone,
+      website: this.state.website,
+      email:this.state.email
+    }
+
+    console.log("=/=/=/=/=U=P=D=A=T=E=/=/=/=/=/=/=/");
+    console.log(updatedArtistInfo);
+    
+    API.Artists.update(updatedArtistInfo)
+    .then(this.setState({editing:false})).catch(err => console.log(err));
+  }
+
+  render() {
     return (
       <div>
+        <h1>Artist Profile Page</h1>
+
         {this.state.requests.profileImage ? 
           <ProfileLeft 
+          editing = {this.state.editing}
+          toggleEdit = {this.toggleEdit}
           image={this.state.requests.profileImage}
           artistName={this.state.requests.artistName}
           genre={this.state.requests.genre}
@@ -90,11 +162,14 @@ class ArtistProfile extends Component {
           email={this.state.requests.email}
           website={this.state.requests.website}
           phone={this.state.requests.phone}
+          submitChanges = {this.submitChanges}
+          handleInputChange = {this.handleInputChange}
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft> 
         : 
         <ProfileLeft 
+        editing = {this.state.editing}
         image={"https://via.placeholder.com/150"}
         artistName={this.state.requests.artistName}
         genre={this.state.requests.genre}
@@ -103,6 +178,8 @@ class ArtistProfile extends Component {
         email={this.state.requests.email}
         website={this.state.requests.website}
         phone={this.state.requests.phone}
+        submitChanges = {this.submitChanges}
+        handleInputChange = {this.handleInputChange}
       >
         <LogoutButton onClick={this.handleLogout}/>
       </ProfileLeft>}

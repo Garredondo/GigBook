@@ -57,6 +57,7 @@ class Home extends Component {
         role: this.state.roleLogin
       })
         .then(res => {
+          console.log(res.request);
           if (res.data.role === "venue") {
             this.props.history.push("/venue/profile/" + res.data.id);
           } else if (res.data.role === "artist") {
