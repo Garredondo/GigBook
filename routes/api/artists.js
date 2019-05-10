@@ -68,4 +68,13 @@ router.put("/", function(req, res) {
     .catch(err => res.json(err));
 });
 
+// get the id of the gig and the id of the artist and post it to the requests table
+router.put("/", function(req, res) {
+    db.Requests.update({
+        gigId:1,
+        ArtistId:6
+    }).then(response => res.json(response))
+    .catch(err => res.json(err));
+});
+
 module.exports = router;
