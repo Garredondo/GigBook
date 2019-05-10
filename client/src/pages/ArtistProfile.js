@@ -30,12 +30,12 @@ class ArtistProfile extends Component {
     API.Artists.getGigs()
       .then(res => {
         // console.log("loadGigs res: ")
-        // console.log(res.data);
+        // console.log(res.data.booked);
         this.setState({ 
           gigs: res.data.availableGigs, 
           venues: res.data.allVenues, 
           requests: res.data.artistRequests,
-          booked: res.data.artistRequests.Gigs
+          booked: res.data.booked
         })
       })
       .catch(err => console.log(err));
@@ -73,10 +73,10 @@ class ArtistProfile extends Component {
 
 
   render() {
-    console.log("ArtistProfile state.requests")
-    // console.log(this.state.);
+    // console.log("ArtistProfile state")
+    // // console.log(this.state.);
 
-    console.log(this.state.gigs);
+    // console.log(this.state);
 
     return (
       <div>
@@ -138,8 +138,8 @@ class ArtistProfile extends Component {
             date = "05/17/2019" /> */}
             <hr />
             <h2>Pending Gigs</h2>
-            
-            {/* { this.state.booked.map( gig => (
+       
+            { this.state.booked.map( gig => (
               <BookedGigs
                 src = {gig.image}
                 name = {gig.gigName}
@@ -147,7 +147,8 @@ class ArtistProfile extends Component {
                 genre = {gig.genre}
                 date = {gig.date} 
               />
-            ))} */}
+            ))}
+
         </div>
         </ProfileRightArtist>
         

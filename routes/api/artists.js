@@ -42,8 +42,10 @@ router.get("/", function (req, res) {
                         var resultsObj = {
                             allVenues: dbVenueAll,
                             availableGigs: dbUnbookedGigs,
-                            artistRequests: dbRequest
+                            artistRequests: dbRequest,
+                            booked: dbRequest.PotentialGig
                         }
+
                         res.json(resultsObj);
                     }).catch(err => console.log(err))
                 })

@@ -9,9 +9,9 @@ import "./style.css";
 
 function BookedGigs(props) {
     return (
-            <div className = "booked-gig-card">
+            <div id={props.id} className = "booked-gig-card">
     
-                <img src = {props.src} alt = "result image" className= "image"/>
+                <img src = {props.src} alt = "result" className= "image"/>
 
                 <div className = "card-text">
                     {/* either the artist's name/description/genre or the venue's */}
