@@ -5,14 +5,16 @@ import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRightArtist from "../components/containers/ProfileRightArtist";
 import ResultBox from "../components/cards";
-import BookedGigs from "../components/pendinggigs"
+import BookedGigs from "../components/pendinggigs";
+
 
 class ArtistProfile extends Component {
 
   state = {
     gigs:[],
     requests:{},
-    venues:[]
+    venues:[],
+    booked:{}
   };
 
   componentDidMount() {
@@ -32,7 +34,8 @@ class ArtistProfile extends Component {
         this.setState({ 
           gigs: res.data.availableGigs, 
           venues: res.data.allVenues, 
-          requests: res.data.artistRequests 
+          requests: res.data.artistRequests,
+          booked: res.data.artistRequests.Gigs
         })
       })
       .catch(err => console.log(err));
@@ -54,7 +57,7 @@ class ArtistProfile extends Component {
 
   render() {
     console.log("artistprofile state.requests")
-    console.log(this.state.requests);
+    console.log(this.state.booked);
 
     return (
       <div>
@@ -74,23 +77,31 @@ class ArtistProfile extends Component {
         
 
         <ProfileRightArtist>
-          <GigFilter filter = {this.filterButton} venues = {this.state.venues} ></GigFilter>
-
-          <ResultBox 
-          src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-          name = "Emo's Austin"
-          description = "Jesse's Jam Sesh"
-          genre = "Funk"
-          date = "05/16/2019" />
-          
-
-          <BookedGigs
+          <GigFilter filter = {this.filterButton} venues = {this.state.venues} />
+          <div className = "result-box">
+            <ResultBox 
             src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
             name = "Emo's Austin"
             description = "Jesse's Jam Sesh"
             genre = "Funk"
             date = "05/16/2019" />
-          />
+            <BookedGigs 
+            src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+            name = "Central Market"
+            description = "boogaloo"
+            genre = "Funk"
+            date = "05/17/2019" />
+            
+            {/* { this.state.booked.map( gig => (
+              <BookedGigs
+                src = {gig.image}
+                name = {gig.gigName}
+                description = {gig.description}
+                genre = {gig.genre}
+                date = {gig.date} 
+              />
+            ))} */}
+        </div>
         </ProfileRightArtist>
         
         {/* <LogoutButton />

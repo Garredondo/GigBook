@@ -4,7 +4,7 @@ import "./style.css";
 
 function ResultBox(props) {
     return (
-        <div className = "result-box">
+        
             <div className = "gig-card">
                 <img src = {props.src} alt = "result image" className= "image"/>
 
@@ -14,12 +14,11 @@ function ResultBox(props) {
                     <p className = "card-desc">{props.description}</p>
                     <p className = "card-genre">{props.genre}</p>
                     {/*===========================================================*/}
-
                     <p className = "card-date"> {props.date}</p>
                     <BookGigButton />
                 </div>
             </div>
-        </div>
+        
     );
 }
 
