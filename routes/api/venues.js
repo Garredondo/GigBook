@@ -45,6 +45,7 @@ router.post("/", function(req, res) {
 //             },
 //             include: [db.Artist]
 //         }).then(function ( dbRequest ) {
+//             console.log(dbRequest);
 //             res.json(dbRequest);
 //         });
 //     });
@@ -55,11 +56,31 @@ router.get("/", function (req, res) {
         where: {
             UserId: req.user.id
         }
-    }).then(response => {
-        res.json(response);
-    })
-    .catch(err => res.json(err));
+    }).then(function ( dbVenue ) {
+        db.Venue.findOne({
+            where:{
+                VenueId: dbVenue.id
+            },
+            include: [db.Gig]
+        }).then(function ( dbRequest ) {
+            console.log(dbRequest);
+            res.json(dbRequest);
+        });
+    });
 });
+
+
+
+// router.get("/", function (req, res) {
+//     db.Venue.findOne({
+//         where: {
+//             UserId: req.user.id
+//         }
+//     }).then(response => {
+//         res.json(response);
+//     })
+//     .catch(err => res.json(err));
+// });
 
 router.put("/", function(req, res) {
     db.Venue.update({

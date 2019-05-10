@@ -26,6 +26,10 @@ router.post("/", function(req, res) {
         });
     });
 });
+router.get("/", function (req, res) {
+    db.Gig.findAll({}).then(response => res.json(response))
+    .catch(err => res.json(err));
+});
 // Get one specific gig
 router.get("/:id", function (req, res) {
     var gigId = req.params.id
@@ -53,5 +57,19 @@ router.put("/:id", function (req, res) {
         res.send(results);
     });
 });
+
+// Delete Gig ========= 
+router.delete("/api/gigs/:id", function(req, res) {
+    var id = req.params.id;
+    db.Gig.destroy({
+        where: {
+            id: id
+        }
+    }).then(function() {
+        res.send(200);
+    });
+});
+
+// Get All Gigs ==========
 
 module.exports = router;
