@@ -41,7 +41,6 @@ class Home extends Component {
     .catch(err => console.log(err));
     }
 
-
     this.setState({
       name: "",
       password: "",
@@ -93,7 +92,7 @@ class Home extends Component {
 
 
     {/* Login Modal */}
-    <div className="modal fade" id="login-modal" tabindex="-1" aria-hidden="true">
+    <div className="modal fade" id="login-modal" tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
@@ -139,7 +138,7 @@ class Home extends Component {
 
 
       {/* SignUp Modal */}
-    <div className="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div className="modal fade" id="form-modal" tabIndex="-1" role="dialog" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">

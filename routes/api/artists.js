@@ -36,15 +36,18 @@ router.route("/").get(function (req, res) {
                             UserId: req.user.id
                             // id: 3
                         },
-                        include: [db.Gig]
+                        include: [{model: db.Gig, as: "PotentialGig"}]
                     }).then(dbRequest => {
+                        console.log(dbRequest);
                         var resultsObj = {
                             allVenues: dbVenueAll,
                             availableGigs: dbUnbookedGigs,
-                            artistRequests: dbRequest
+                            artistRequests: dbRequest,
+                            booked: dbRequest.PotentialGig
                         }
+
                         res.json(resultsObj);
-                    })
+                    }).catch(err => console.log(err))
                 })
         })
 });
@@ -65,6 +68,7 @@ router.route("/").put(function(req, res) {
         profileImage: req.body.profileImage
     }, {
         where: {
+            // UserId: 2
             UserId: req.user.id
         }
     }).then(response => res.json(response))

@@ -11,12 +11,12 @@ import BookedGigs from "../components/pendinggigs";
 
 
 class ArtistProfile extends Component {
-
   state = {
     gigs:[],
     requests:{},
     venues:[],
-    booked: [],
+    booked:[],
+    filter:"",
     // This is for the Profile Left Component =/=/=/=/=/=/=/=/=/=/=/
     editing:false,
     profileImage: "",
@@ -26,9 +26,10 @@ class ArtistProfile extends Component {
     instrumentation: "",
     phone: 0,
     website: "",
-    email: ""
+    email: "",
     //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
-  }
+
+  };
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
@@ -44,21 +45,30 @@ class ArtistProfile extends Component {
   loadGigs = () => {
     API.Artists.getGigs()
       .then(res => {
+        // console.log("loadGigs res: ")
+        // console.log(res.data.booked);
         this.setState({ 
           gigs: res.data.availableGigs, 
           venues: res.data.allVenues, 
           requests: res.data.artistRequests,
-          booked: res.data.artistRequests.Gigs
+          booked: res.data.booked
         })
       })
       .catch(err => console.log(err));
   };
 
-  filterButton = (event) => {
-    event.preventDefault();
-    console.log("filter button was clicked.");
+  // filterButton = (event) => {
+  //   event.preventDefault();
 
-  }
+  //   this.state.gigs.filter(gig => {
+  //     //compare gigName to state.filter. only render those which gigName === this.state.filter
+  //     if(gigName===)
+
+  //   })
+
+  //   console.log("filter button was clicked.");
+
+  // }
 
   handleLogout = event => {
     event.preventDefault();
@@ -96,6 +106,22 @@ class ArtistProfile extends Component {
       });
     }
   }
+  bookGigAsArtist = (event,id) => {
+    const ArtistId = this.state.requests.id;
+    const GigId = event;
+    API.Requests.bookGigAsArtist({
+      ArtistId,
+      GigId
+    }).then(res => console.log(res))
+    .catch(err => console.log(err));
+  };
+
+
+  render() {
+    // console.log("ArtistProfile state")
+    // // console.log(this.state.);
+
+    // console.log(this.state);
 
   submitChanges = (event) => {
     console.log(this.state);
@@ -158,40 +184,56 @@ class ArtistProfile extends Component {
         <LogoutButton onClick={this.handleLogout}/>
       </ProfileLeft>}
 
-      <ProfileRightArtist>
-        <GigFilter filter = {this.filterButton} venues = {this.state.venues} />
-        <div className = "result-box">
-          <ResultBox 
-          src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-          name = "Emo's Austin"
-          description = "Jesse's Jam Sesh"
-          genre = "Funk"
-          date = "05/16/2019" />
-          {/* <BookedGigs 
-          src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-          name = "Central Market"
-          description = "boogaloo"
-          genre = "Funk"
-          date = "05/17/2019" /> */}
-          
-          { this.state.booked.map( gig => (
-            <BookedGigs
-              src = {gig.image}
-              name = {gig.gigName}
-              description = {gig.description}
-              genre = {gig.genre}
-              date = {gig.date} 
-            />
-          ))}
-      </div>
-      </ProfileRightArtist>
-      
+        
+
+        <ProfileRightArtist>
+          <GigFilter filter = {this.filterButton} venues = {this.state.venues} />
+
+          <div className = "result-box">
+            { this.state.gigs.map( gig => (
+              <ResultBox 
+            src = {gig.image}
+            name = {gig.gigName}
+            description = {gig.description}
+            genre = {gig.genre}
+            date = {gig.date}>
+              <BookGigButton dataId={gig.id} onClick={() => this.bookGigAsArtist(gig.id)}/>
+            </ResultBox>
+            ))
+            
+            // src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+            // name = "Emo's Austin"
+            // description = "Jesse's Jam Sesh"
+            // genre = "Funk"
+            // date = "05/16/2019" />
+            }
+            {/* <BookedGigs 
+            src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+            name = "Central Market"
+            description = "boogaloo"
+            genre = "Funk"
+            date = "05/17/2019" /> */}
+            <hr />
+            <h2>Pending Gigs</h2>
+       
+            { this.state.booked.map( gig => (
+              <BookedGigs
+                src = {gig.image}
+                name = {gig.gigName}
+                description = {gig.description}
+                genre = {gig.genre}
+                date = {gig.date} 
+              />
+            ))}
+
+        </div>
+        </ProfileRightArtist>
+        
         {/* <LogoutButton />
         <FilterButton /> */}
 
         {/* When we map out each gig, 
         BookGigButton will have dataID={gig.Id} */}
-        <BookGigButton dataId={1} />
       </div>
     );
   }

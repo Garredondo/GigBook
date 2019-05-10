@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
 
     // create an association thing e.g.  Artist.associate = function( models ) {
         Gig.associate = function( models ) {
-            models.Gig.belongsToMany(models.Artist, {through: "Requests"})
+            models.Gig.belongsToMany(models.Artist, {as: "PotentialArtist", through: "Requests"})
         };
 
     // Another association belongsToMany with Gigs
