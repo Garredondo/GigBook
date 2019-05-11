@@ -7,7 +7,7 @@ export default {
     deleteThisGig: data => {
         return axios.delete("/api/gigs/" + data);
     },
-    getUnbookedGigs: data => {
+    getGigs: data => {
         return axios.get("/api/gigs/unbooked/" + data);
     }
 }
