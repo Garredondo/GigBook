@@ -64,7 +64,7 @@ class ArtistProfile extends Component {
       // console.log("loadGigs res: ")
       // console.log(res.data.booked);
       const option = document.getElementById('inputGroupSelect03').value;
-      console.log("what is option", option);
+      // console.log("what is option", option);
       const filteredGigs = res.data.availableGigs.filter(gig => { 
         //compare gigName to state.filter. only render those which gigName === this.state.filter
         if(option=== "All Venues"){
@@ -143,7 +143,7 @@ class ArtistProfile extends Component {
 
 
   submitChanges = (event) => {
-    console.log(this.state);
+    // console.log(this.state);
     event.preventDefault();
 
     let updatedArtistInfo = {
@@ -157,8 +157,8 @@ class ArtistProfile extends Component {
       email:this.state.email
     }
 
-    console.log("=/=/=/=/=U=P=D=A=T=E=/=/=/=/=/=/=/");
-    console.log(updatedArtistInfo);
+    // console.log("=/=/=/=/=U=P=D=A=T=E=/=/=/=/=/=/=/");
+    // console.log(updatedArtistInfo);
     
     API.Artists.update(updatedArtistInfo)
     .then(this.setState({editing:false})).catch(err => console.log(err));
@@ -170,7 +170,7 @@ class ArtistProfile extends Component {
       <div>
         <h1>Artist Profile Page</h1>
 
-        {/* {(this.state.requests.profileImage) ? 
+        {(this.state.requests.profileImage) ? 
           <ProfileLeft 
           editing = {this.state.editing}
           toggleEdit = {this.toggleEdit}
@@ -187,7 +187,7 @@ class ArtistProfile extends Component {
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft> 
-        :  */}
+        : 
         <ProfileLeft 
         editing = {this.state.editing}
         image={"https://via.placeholder.com/150"}

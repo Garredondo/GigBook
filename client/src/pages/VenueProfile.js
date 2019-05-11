@@ -42,7 +42,7 @@ class VenueProfile extends Component {
         genre: this.state.genre,
         date: this.state.date
       })
-        .then(res => console.log(res))
+        // .then(res => console.log(res))
         .catch(err => console.log(err));
     }
   };
@@ -57,8 +57,8 @@ class VenueProfile extends Component {
 
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(res => {
+      console.log("what data are we getting back?")
       console.log(res.data);
-      
       this.setState({
         venue: res.data.venue,
         gigs: res.data.gigs
