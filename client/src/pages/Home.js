@@ -13,22 +13,10 @@ const styles = {
   }
 }
 
-
-const PasswordError = ({ name }) => <div> {name}</div>
-const Success = ({name}) => <div> {name}</div>
-const UsernameTaken = ({name}) => <div> {name}</div>
-// const Com = ({ name }) => <div> {name}</div>
+// Defines the messages to the user
+const PasswordMatch = ({ name }) => <div> {name}</div>
+const IncompleteForm = ({ name }) => <div> {name}</div>
     
-// function handleClick() {
-//   toast(<Error name="Your password does not match" />);
-// };
-  
-// const ToastBtn = () => {
-//   return(
-//       <button onClick={handleClick}>My Awesome Button</button>
-//   )
-// };
-
 class Home extends Component {
   state = {
     name: "",
@@ -39,7 +27,6 @@ class Home extends Component {
   };
 
 
-
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -47,51 +34,31 @@ class Home extends Component {
     });
   };
 
-  // THIS WORKS>>> BUT NO WAY TO TELL USER
-  // handleSignUp = event => {
-  //   if(this.state.name && this.state.password){
-  //     if(this.state.password === this.state.password_confirmation){
-  //       API.Users.signUp({
-  //         name: this.state.name,
-  //         password: this.state.password,
-  //         role: this.state.roleSignUp
-  //       })
-  //       .then(toast(<Success name="Success! Please Login!"/>))
-  //       .catch(err => toast(<UsernameTaken name="Sorry, that username is taken."/>));
-  //     } else {
-  //       // console.log("Your passwords don't match.");
-  //       toast(<PasswordError name="Opps... your passwords don't match."/>);
-  //     }
-  //     this.setState({
-  //       name: "",
-  //       password: "",
-  //       roleSignUp: ""
-  //     })
-  //   } else {
-  //     console.log("Please complete all fields.");
-  //   }
-  // };
-
-  // THIS is the OG CODE
+  
   handleSignUp = event => {
-    event.preventDefault();
-    if (this.state.name && this.state.password) {
-      API.Users.signUp({
-        name: this.state.name,
-        password: this.state.password,
-        role: this.state.roleSignUp
-      })     
-    .then()
-    .catch(err => console.log(err));
+    if(this.state.name && this.state.password){
+      if(this.state.password === this.state.password_confirmation){
+        API.Users.signUp({
+          name: this.state.name,
+          password: this.state.password,
+          role: this.state.roleSignUp
+        })
+        .then()
+        .catch(err => console.log(err));
+      } else {
+        toast(<PasswordMatch name="Sorry, your passwords don't match."/>);
+      }
+      this.setState({
+        name: "",
+        password: "",
+        roleSignUp: ""
+      })
+    } else {
+      toast(<IncompleteForm name="Please complete all fields to sign up."/>);
     }
-
-    this.setState({
-      name: "",
-      password: "",
-      roleSignUp: ""
-    });
   };
 
+  
   handleLogin = event => {
     event.preventDefault();
     if (this.state.name && this.state.password) {
@@ -251,20 +218,13 @@ class Home extends Component {
           </div>
       </div>
 
-
-      {/* <ToastBtn/> */}
-
       {/* Footer */}
       <footer>
           <div id="footer-text">
               &copy; Copyright 2019
           </div>
       </footer>
-
-
-
-      
-
+    
     </div>
     );
   }
