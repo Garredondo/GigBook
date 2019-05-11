@@ -106,6 +106,7 @@ class ArtistProfile extends Component {
       });
     }
   }
+
   bookGigAsArtist = (event,id) => {
     const ArtistId = this.state.requests.id;
     const GigId = event;
@@ -116,12 +117,6 @@ class ArtistProfile extends Component {
     .catch(err => console.log(err));
   };
 
-
-  render() {
-    // console.log("ArtistProfile state")
-    // // console.log(this.state.);
-
-    // console.log(this.state);
 
   submitChanges = (event) => {
     console.log(this.state);
