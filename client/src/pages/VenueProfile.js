@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { LogoutButton, DeleteGigButton, StartButton, FormButton, ModalButton } from "../components/buttons";
+import { LogoutButton, DeleteGigButton, StartButton, FormButton} from "../components/buttons";
 import API from "../utils/index";
 import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
-// import { ViewArtistModal } from "../components/modals";
+import ResultBox2 from "../components/requestedCards";
 // import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
@@ -72,6 +72,7 @@ class VenueProfile extends Component {
           this.setState({
             gigsAndTheirArtists: gigsAndTheirArtists.data
           })
+          console.log(this.state.gigsAndTheirArtists);
         }).catch(err => console.log(err));
       }).catch(err => console.log(err));
     }).catch(err => console.log(err));
@@ -169,26 +170,23 @@ class VenueProfile extends Component {
 
           {/* Requested Gigs and their Associated Artists */}
           <div className = "main-title">Requested Gigs</div>
-          {this.state.gigsAndTheirArtists.map(gig => (
-            <div>
-              <ResultBox
-              src = {this.state.venue.image}
-              name = {gig.gigName}
-              description = {gig.description}
-              genre = {gig.genre}
-              date = {gig.date}
-              >
-                <ModalButton 
-                  className={"for-artist"} 
-                  dataEventTarget={`#${gig.id}`}
-                  label={"View Artists"}
-                />
-              </ResultBox>
-              {/* <ViewArtistModal
-                  target={gig.id}
-              ></ViewArtistModal> */}
-            </div>
-          ))}
+            <div className="row">
+            {this.state.gigsAndTheirArtists.map(gig => (
+              <div>
+                <ResultBox2
+                src = {this.state.venue.image}
+                name = {gig.gigName}
+                description = {gig.description}
+                genre = {gig.genre}
+                date = {gig.date}
+                >
+                </ResultBox2>
+                {gig.PotentialArtist.map(artist => (
+                  <h2>{artist}</h2>
+                ))}
+              </div>
+            ))}
+          </div>
 
           {/* Booked Gigs */}
           <div className = "main-title">Booked Gigs</div>
