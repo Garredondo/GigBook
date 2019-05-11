@@ -5,8 +5,9 @@
 //Also, not for this file, we need to populate the artist ID, of the artist who made the request, whenever the Vender approves his/her book request 
 const router = require("express").Router();
 const db = require("../../models");
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 // var isAuthenticated = require("../config/middleware/isAuthenticated");
-router.post("/", function(req, res) {
+router.post("/", isAuthenticated, function(req, res) {
     db.Venue.create({
         venueName: req.body.venueName,
         street_address: req.body.street_address,
@@ -52,7 +53,7 @@ router.post("/", function(req, res) {
 // });
 
 // Gets the venue's profile Information
-router.get("/", function (req, res) {
+router.get("/", isAuthenticated, function (req, res) {
     db.Venue.findOne({
         where: {
             UserId: req.user.id
@@ -74,7 +75,7 @@ router.get("/", function (req, res) {
 });
 
 // Updates the venue's profile information
-router.put("/", function(req, res) {
+router.put("/", isAuthenticated, function(req, res) {
     db.Venue.update({
         venueName: req.body.venueName,
         street_address: req.body.street_address,

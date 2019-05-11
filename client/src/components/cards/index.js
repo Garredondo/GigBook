@@ -1,5 +1,4 @@
 import React from 'react';
-import { BookGigButton } from "../buttons";
 import "./style.css";
 
 function ResultBox(props) {

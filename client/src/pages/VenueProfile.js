@@ -5,7 +5,7 @@ import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
-import VenueResultBox from "../components/deletegig";
+// import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
 

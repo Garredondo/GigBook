@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const db = require("../../models");
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
-router.post("/", (req, res) => {
+router.post("/", isAuthenticated, (req, res) => {
     var ArtistId=req.body.ArtistId;
     var GigId=req.body.GigId;
     db.Artist.findOne({ 
@@ -19,8 +20,5 @@ router.post("/", (req, res) => {
     })
 });
 
-router.get("/:id", (req, res) => {
-    
-});
 
 module.exports = router;
