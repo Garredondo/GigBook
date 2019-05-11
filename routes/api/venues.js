@@ -45,22 +45,35 @@ router.post("/", function(req, res) {
 //             },
 //             include: [db.Artist]
 //         }).then(function ( dbRequest ) {
+//             console.log(dbRequest);
 //             res.json(dbRequest);
 //         });
 //     });
 // });
 
+// Gets the venue's profile Information
 router.get("/", function (req, res) {
     db.Venue.findOne({
         where: {
             UserId: req.user.id
         }
-    }).then(response => {
-        res.json(response);
-    })
-    .catch(err => res.json(err));
+    }).then(function ( dbVenue ) {
+        db.Gig.findAll({
+            where:{
+                id: dbVenue.id
+            }
+        }).then(function ( dbRequest ) {
+            // res.json({
+            //     venue: dbVenue,
+            //     gigs: dbRequest
+            // });
+            res.json(dbVenue);
+        })
+        .catch(err => res.json(err));
+    });
 });
 
+// Updates the venue's profile information
 router.put("/", function(req, res) {
     db.Venue.update({
         venueName: req.body.venueName,

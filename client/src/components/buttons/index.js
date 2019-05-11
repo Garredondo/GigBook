@@ -53,11 +53,31 @@ export function BookGigButton({
 }
 
 export function StartButton(props){
-    console.log(props);
-    console.log(props.display)
     return (
         <button className="btn btn-primary btn-lg btn-scnd"
         id={props.id} onClick = {props.onClick}>{props.label}</button>
         
+    );
+}
+
+export function DeleteGigButton({
+    dataId,
+    label,
+    onClick
+    }) {
+    return (
+        <button className="btn btn-primary btn-lg"
+        data-id={dataId} onClick={onClick}>
+            {label}
+        </button>
+    );
+}
+
+export function DeleteProfileButton({
+    onClick
+    }) {
+    return (
+        <button className="btn btn-primary btn-lg logout" onClick={onClick}>
+        Delete Profile</button>
     );
 }

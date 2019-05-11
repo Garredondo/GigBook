@@ -26,6 +26,26 @@ router.post("/", function(req, res) {
         });
     });
 });
+
+// router.get("/", function (req, res) {
+//     db.Gig.findAll({}).then(response => res.json(response))
+//     .catch(err => res.json(err));
+// });
+
+
+// Gets the venue's unbooked gigs
+router.get("/unbooked/:id", function(req, res) {
+    var id = req.params.id;
+    db.Gig.findAll({
+        where: {
+            VenueId: id
+        }
+    }).then(response => {
+        res.json(response);
+    }).catch(err => res.json(err));
+});
+
+
 // Get one specific gig
 router.get("/:id", function (req, res) {
     var gigId = req.params.id
@@ -41,9 +61,9 @@ router.get("/:id", function (req, res) {
     });
 });
 
+// This update a gig to "booked" -----Outdated?
 router.put("/:id", function (req, res) {
-    var id = req.params.id
-    console.log(id);
+    var id = req.params.id;
     db.Gig.update({
         isBooked: true
         }, { where: {
@@ -52,6 +72,17 @@ router.put("/:id", function (req, res) {
     }).then(function(results) {
         res.send(results);
     });
+});
+
+// This deletes a single gig
+router.delete("/:id", function (req, res) {
+    var id = req.params.id;
+    db.Gig.destroy({
+        where: {
+            id: id
+        }
+    }).then(res => res.json(res))
+    .catch(err => res.json(err));
 });
 
 

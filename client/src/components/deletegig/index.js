@@ -1,8 +1,8 @@
 import React from 'react';
-import { BookGigButton } from "../buttons";
-import "./style.css";
+import { DeleteGigButton } from "../buttons";
+import "../cards/style.css";
 
-function ResultBox(props) {
+function VenueResultBox(props) {
     return (
         
             <div className = "gig-card">
@@ -15,12 +15,11 @@ function ResultBox(props) {
                     <p className = "card-genre">{props.genre}</p>
                     {/*===========================================================*/}
                     <p className = "card-date"> {props.date}</p>
-                    {props.children}
+                    <DeleteGigButton {...props}/>
                 </div>
             </div>
         
     );
 }
 
-
-export default ResultBox;
+export default VenueResultBox;

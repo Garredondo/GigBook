@@ -12,5 +12,8 @@ export default {
     },
     isAuthed: () => {
         return axios.get("/isAuthed");
+    },
+    deleteProfile: id => {
+        return axios.delete("/api/users", id);
     }
 }
