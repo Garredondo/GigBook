@@ -51,6 +51,7 @@ router.post("/", function(req, res) {
 //     });
 // });
 
+// Gets the venue's profile Information
 router.get("/", function (req, res) {
     db.Venue.findOne({
         where: {
@@ -62,20 +63,17 @@ router.get("/", function (req, res) {
                 id: dbVenue.id
             }
         }).then(function ( dbRequest ) {
-            console.log(dbRequest);
-            console.log(dbVenue.id);
-            res.json({
-                venue: dbVenue,
-                gigs: dbRequest
-            });
+            // res.json({
+            //     venue: dbVenue,
+            //     gigs: dbRequest
+            // });
+            res.json(dbVenue);
         })
         .catch(err => res.json(err));
     });
 });
 
-
-
-
+// Updates the venue's profile information
 router.put("/", function(req, res) {
     db.Venue.update({
         venueName: req.body.venueName,

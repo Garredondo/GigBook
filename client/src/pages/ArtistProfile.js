@@ -96,7 +96,7 @@ class ArtistProfile extends Component {
 
   
   handleInputChange = event => {
-    const { name, value } = event.target;
+    var { name, value } = event.target;
     this.setState({
       [name]: value
     });
@@ -131,8 +131,8 @@ class ArtistProfile extends Component {
   // }
 
   bookGigAsArtist = (event,id) => {
-    const ArtistId = this.state.requests.id;
-    const GigId = event;
+    var ArtistId = this.state.requests.id;
+    var GigId = event;
     API.Requests.bookGigAsArtist({
       ArtistId,
       GigId

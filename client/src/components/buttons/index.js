@@ -60,21 +60,24 @@ export function StartButton(props){
     );
 }
 
-export function DeleteProfileButton({
-    onClick
-}) {
-    return (
-        <button className="btn btn-primary btn-lg logout" onClick={onClick}>
-        Delete Profile</button>
-    );
-}
-
 export function DeleteGigButton({
     dataId,
+    label,
     onClick
     }) {
     return (
-        <button className="btn btn-primary btn-lg btn-main book card-button" 
-        data-id={dataId} onClick={onClick}>Delete</button>
+        <button className="btn btn-primary btn-lg"
+        data-id={dataId} onClick={onClick}>
+            {label}
+        </button>
+    );
+}
+
+export function DeleteProfileButton({
+    onClick
+    }) {
+    return (
+        <button className="btn btn-primary btn-lg logout" onClick={onClick}>
+        Delete Profile</button>
     );
 }
