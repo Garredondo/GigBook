@@ -63,27 +63,14 @@ router.get("/", function (req, res) {
                 id: dbVenue.id
             }
         }).then(function ( dbRequest ) {
-            console.log(dbRequest);
-            console.log(dbVenue.id);
-            res.json({
-                venue: dbVenue,
-                gigs: dbRequest
-            });
+            // res.json({
+            //     venue: dbVenue,
+            //     gigs: dbRequest
+            // });
+            res.json(dbVenue);
         })
         .catch(err => res.json(err));
     });
-});
-
-// Gets the venue's unbooked gigs
-router.get("/unbooked/:id", function(req, res) {
-    var id = req.params.id;
-    db.Gig.findAll({
-        where: {
-            venueId: id
-        }
-    }).then(response => {
-        res.json(response);
-    }).catch(err => res.json(err));
 });
 
 // Updates the venue's profile information

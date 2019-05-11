@@ -64,11 +64,10 @@ class VenueProfile extends Component {
         venue: venueProfile.data
       })
       var id = venueProfile.data.id;
-      API.Venues.getUnbookedGigs(id).then(unbookedGigs => {
+      API.Gigs.getUnbookedGigs(id).then(unbookedGigs => {
         this.setState({
           unbookedGigs: unbookedGigs.data
         })
-        console.log(venueProfile.data);
       }).catch(err => console.log(err));
     }).catch(err => console.log(err));
   };
