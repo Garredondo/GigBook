@@ -21,4 +21,16 @@ router.post("/", isAuthenticated, (req, res) => {
 });
 
 
+router.get("/:id", (req, res) => {
+    var VenueId = req.params.id;
+    db.Gig.findAll({
+        where: {
+            VenueId
+        },
+        include: [{model: db.Artist, as: "PotentialArtist"}]
+    }).then(gigsAndTheirArtists => {
+        res.json(gigsAndTheirArtists);
+    }).catch(err => res.json(err));
+});
+
 module.exports = router;

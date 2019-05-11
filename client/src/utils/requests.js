@@ -5,6 +5,6 @@ export default {
         return axios.post("/api/requests", data);
     },
     getRequestedGigs: data => {
-        return axios.get("/api/requests/", data);
-    }
+        return axios.get("/api/requests/" + data);
+    },
 }

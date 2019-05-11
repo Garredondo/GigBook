@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { LogoutButton, DeleteGigButton, StartButton, FormButton } from "../components/buttons";
+import { LogoutButton, DeleteGigButton, StartButton, FormButton, ModalButton } from "../components/buttons";
 import API from "../utils/index";
 import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
+// import { ViewArtistModal } from "../components/modals";
 // import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
@@ -15,7 +16,7 @@ class VenueProfile extends Component {
     date: "",
     venue: {},
     unbookedGigs: [],
-    requestedGigs: [],
+    gigsAndTheirArtists: [],
     bookedGigs: [],
     display: true
   };
@@ -27,7 +28,6 @@ class VenueProfile extends Component {
       // }
     }).catch(err => console.log(err));
     this.loadVenueInfo();
-    // this.loadRequestedGigs();
   };
 
   handleInputChange = event => {
@@ -68,19 +68,14 @@ class VenueProfile extends Component {
         this.setState({
           unbookedGigs: unbookedGigs.data
         })
+        API.Requests.getRequestedGigs(id).then(gigsAndTheirArtists => {
+          this.setState({
+            gigsAndTheirArtists: gigsAndTheirArtists.data
+          })
+        }).catch(err => console.log(err));
       }).catch(err => console.log(err));
     }).catch(err => console.log(err));
   };
-
-  // loadRequestedGigs() {
-    // console.log("venue id-------------------")
-    // console.log(this.state.venue);
-  //   API.Requests.getRequestedGigs().then(res => {
-  //     this.setState({
-  //       requestedGigs: res.data
-  //     })
-  //   }).catch(err => console.log(err));
-  // };
 
   handleLogout = event => {
     event.preventDefault();
@@ -163,6 +158,7 @@ class VenueProfile extends Component {
         />
         </ResultBox>
         ))}
+
         {/* This is dummy data */}
         <ResultBox 
           src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
@@ -170,6 +166,31 @@ class VenueProfile extends Component {
           description = "Jesse's Jam Sesh"
           genre = "Funk"
           date = "05/16/2019" />
+
+          {/* Requested Gigs and their Associated Artists */}
+          <div className = "main-title">Requested Gigs</div>
+          {this.state.gigsAndTheirArtists.map(gig => (
+            <div>
+              <ResultBox
+              src = {this.state.venue.image}
+              name = {gig.gigName}
+              description = {gig.description}
+              genre = {gig.genre}
+              date = {gig.date}
+              >
+                <ModalButton 
+                  className={"for-artist"} 
+                  dataEventTarget={`#${gig.id}`}
+                  label={"View Artists"}
+                />
+              </ResultBox>
+              {/* <ViewArtistModal
+                  target={gig.id}
+              ></ViewArtistModal> */}
+            </div>
+          ))}
+
+          {/* Booked Gigs */}
           <div className = "main-title">Booked Gigs</div>
           <hr className = "divider"></hr>
         <ResultBox 
@@ -178,7 +199,6 @@ class VenueProfile extends Component {
           description = "Jesse's Jam Sesh"
           genre = "Funk"
           date = "05/16/2019" />
-
       </div>
     )
   }

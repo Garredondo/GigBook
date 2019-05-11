@@ -1,6 +1,6 @@
 import React from 'react';
 import "./style.css";
-function Modal(props) {
+export function Modal(props) {
     
     /* If/Else Statement to show either the Login or Sign Up modal. 
         Might make more intuitive in future.                     */
@@ -60,4 +60,16 @@ function Modal(props) {
     }
 }
 
-export default Modal;
+// export function ViewArtistModal({
+//     props
+//     }) {
+//     return (
+        // <div className={`modal fade ${props.target}`} tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        //     <div className="modal-dialog modal-lg">
+        //         <div className="modal-content">
+                
+        //         </div>
+        //     </div>
+        // </div>
+    );
+}
