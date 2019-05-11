@@ -4,6 +4,8 @@ import {ModalButton, FormButton} from "../components/buttons";
 import API from "../utils/index";
 import TopBar from "../components/topbar";
 import "./landing.css";
+import { toast } from 'react-toastify';
+
 
 const styles = {
   text: {
@@ -11,11 +13,27 @@ const styles = {
   }
 }
 
+
+const PasswordError = ({ name }) => <div> {name}</div>
+const Success = ({name}) => <div> {name}</div>
+const UsernameTaken = ({name}) => <div> {name}</div>
+// const Com = ({ name }) => <div> {name}</div>
+    
+// function handleClick() {
+//   toast(<Error name="Your password does not match" />);
+// };
+  
+// const ToastBtn = () => {
+//   return(
+//       <button onClick={handleClick}>My Awesome Button</button>
+//   )
+// };
+
 class Home extends Component {
   state = {
     name: "",
     password: "",
-    confirmPassword: "",
+    password_confirmation: "",
     roleSignUp: "",
     roleLogin: ""
   };
@@ -29,48 +47,50 @@ class Home extends Component {
     });
   };
 
-  handleSignUp = event => {
-    if(this.state.name && this.state.password){
-      if(this.state.password === this.state.confirmPassword){
-        API.Users.signUp({
-          name: this.state.name,
-          password: this.state.password,
-          role: this.state.roleSignUp
-        })
-        .then()
-        .catch(err => console.log("Your username is not unique"));
-      } else {
-        console.log("Your passwords don't match.");
-      }
-      this.setState({
-        name: "",
-        password: "",
-        roleSignUp: ""
-      })
-    } else {
-      console.log("Please complete all fields.");
-    }
-  };
+  // THIS WORKS>>> BUT NO WAY TO TELL USER
+  // handleSignUp = event => {
+  //   if(this.state.name && this.state.password){
+  //     if(this.state.password === this.state.password_confirmation){
+  //       API.Users.signUp({
+  //         name: this.state.name,
+  //         password: this.state.password,
+  //         role: this.state.roleSignUp
+  //       })
+  //       .then(toast(<Success name="Success! Please Login!"/>))
+  //       .catch(err => toast(<UsernameTaken name="Sorry, that username is taken."/>));
+  //     } else {
+  //       // console.log("Your passwords don't match.");
+  //       toast(<PasswordError name="Opps... your passwords don't match."/>);
+  //     }
+  //     this.setState({
+  //       name: "",
+  //       password: "",
+  //       roleSignUp: ""
+  //     })
+  //   } else {
+  //     console.log("Please complete all fields.");
+  //   }
+  // };
 
   // THIS is the OG CODE
-  // handleSignUp = event => {
-  //   event.preventDefault();
-  //   if (this.state.name && this.state.password) {
-  //     API.Users.signUp({
-  //       name: this.state.name,
-  //       password: this.state.password,
-  //       role: this.state.roleSignUp
-  //     })     
-  //   .then()
-  //   .catch(err => console.log(err));
-  //   }
+  handleSignUp = event => {
+    event.preventDefault();
+    if (this.state.name && this.state.password) {
+      API.Users.signUp({
+        name: this.state.name,
+        password: this.state.password,
+        role: this.state.roleSignUp
+      })     
+    .then()
+    .catch(err => console.log(err));
+    }
 
-  //   this.setState({
-  //     name: "",
-  //     password: "",
-  //     roleSignUp: ""
-  //   });
-  // };
+    this.setState({
+      name: "",
+      password: "",
+      roleSignUp: ""
+    });
+  };
 
   handleLogin = event => {
     event.preventDefault();
@@ -189,9 +209,9 @@ class Home extends Component {
           <TextLabel style={styles.text}>Confirm Password</TextLabel>
           <InputBox 
             placeholder="Confirm Password" 
-            name="confirmPassword"
+            name="password_confirmation"
             type="password"
-            value={this.state.confirmPassword}
+            value={this.state.password_confirmation}
             onChange={this.handleInputChange}
           />
 
@@ -231,12 +251,20 @@ class Home extends Component {
           </div>
       </div>
 
+
+      {/* <ToastBtn/> */}
+
       {/* Footer */}
       <footer>
           <div id="footer-text">
               &copy; Copyright 2019
           </div>
       </footer>
+
+
+
+      
+
     </div>
     );
   }
