@@ -55,14 +55,16 @@ class VenueProfile extends Component {
   };
 
   loadVenueInfo() {
-    API.Venues.getVenueInfo().then(res => {
+    API.Venues.getVenueInfo().then(venueProfile => {
       this.setState({
-        venue: res.data
+        venue: venueProfile.data
       })
-      API.Requests.getRequestedGigs().then(res => {
+      var id = venueProfile.data.id;
+      API.Venues.getUnbookedGigs(id).then(unbookedGigs => {
         this.setState({
-          requestedGigs: res.data
+          unbookedGigs: unbookedGigs.data
         })
+        console.log(venueProfile.data);
       }).catch(err => console.log(err));
     }).catch(err => console.log(err));
   };
@@ -133,20 +135,34 @@ class VenueProfile extends Component {
         <StartButton id="dis-make-gig-form-btn" label="Make A Gig" onClick={this.toggleView} />
         <div className = "main-title">Live Listings</div>
         <hr className = "divider"></hr>
+
+        {/* This maps out unbooked gigs */}
+        {this.state.unbookedGigs.map(gig => (
+        <ResultBox
+          src = {this.state.venue.image}
+          name = {gig.gigName}
+          description = {gig.description}
+          genre = {gig.genre}
+          date = {gig.date}
+        >
+        
+        </ResultBox>
+        ))}
+        {/* This is dummy data */}
         <ResultBox 
-        src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-        name = "Emo's Austin"
-        description = "Jesse's Jam Sesh"
-        genre = "Funk"
-        date = "05/16/2019" />
-        <div className = "main-title">Booked Gigs</div>
-        <hr className = "divider"></hr>
+          src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+          name = "Emo's Austin"
+          description = "Jesse's Jam Sesh"
+          genre = "Funk"
+          date = "05/16/2019" />
+          <div className = "main-title">Booked Gigs</div>
+          <hr className = "divider"></hr>
         <ResultBox 
-        src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-        name = "Emo's Austin"
-        description = "Jesse's Jam Sesh"
-        genre = "Funk"
-        date = "05/16/2019" />
+          src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
+          name = "Emo's Austin"
+          description = "Jesse's Jam Sesh"
+          genre = "Funk"
+          date = "05/16/2019" />
 
       </div>
     )

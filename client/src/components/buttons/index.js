@@ -59,3 +59,9 @@ export function StartButton(props){
         
     );
 }
+
+export function DeleteGig(props) {
+    return (
+        
+    );
+}

@@ -50,18 +50,31 @@ router.post("/", function(req, res) {
 //     });
 // });
 
+// Gets the venue's profile Information
 router.get("/", function (req, res) {
     db.Venue.findOne({
         where: {
             UserId: req.user.id
         }
     }).then(response => {
-        console.log(response);
         res.json(response);
     })
     .catch(err => res.json(err));
 });
 
+// Gets the venue's unbooked gigs
+router.get("/unbooked/:id", function(req, res) {
+    var id = req.params.id;
+    db.Gig.findAll({
+        where: {
+            venueId: id
+        }
+    }).then(response => {
+        res.json(response);
+    }).catch(err => res.json(err));
+});
+
+// Updates the venue's profile information
 router.put("/", function(req, res) {
     db.Venue.update({
         venueName: req.body.venueName,

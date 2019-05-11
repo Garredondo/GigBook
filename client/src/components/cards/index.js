@@ -3,7 +3,6 @@ import {BookGigButton} from "../buttons";
 import "./style.css";
 
 function ResultBox(props) {
-    console.log(props);
     return (
         
             <div className = "gig-card">
