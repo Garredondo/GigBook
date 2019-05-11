@@ -60,8 +60,15 @@ export function StartButton(props){
     );
 }
 
-export function DeleteGig(props) {
+export function DeleteGigButton({
+    dataId,
+    label,
+    onClick
+    }) {
     return (
-        
+        <button className="btn btn-primary btn-lg"
+        data-id={dataId} onClick={onClick}>
+            {label}
+        </button>
     );
 }

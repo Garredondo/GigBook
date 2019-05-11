@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LogoutButton, BookGigButton, StartButton, FormButton } from "../components/buttons";
+import { LogoutButton, DeleteGigButton, StartButton, FormButton } from "../components/buttons";
 import API from "../utils/index";
 import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
@@ -92,6 +92,14 @@ class VenueProfile extends Component {
     });
   };
 
+  deleteThisGig = event => {
+    var id = event;
+    API.Gigs.deleteThisGig(id).then(res => {console.log(res)
+      this.loadVenueInfo();
+    })
+    .catch(err => console.log(err));
+  };
+
   render1 = () => {
     return (
       <div>
@@ -145,7 +153,11 @@ class VenueProfile extends Component {
           genre = {gig.genre}
           date = {gig.date}
         >
-        
+        <DeleteGigButton
+        dataId={gig.id}
+        label={"Delete Gig"}
+        onClick={() => this.deleteThisGig(gig.id)}
+        />
         </ResultBox>
         ))}
         {/* This is dummy data */}

@@ -41,6 +41,7 @@ router.get("/:id", function (req, res) {
     });
 });
 
+// This update a gig to "booked" -----Outdated?
 router.put("/:id", function (req, res) {
     var id = req.params.id
     console.log(id);
@@ -52,6 +53,17 @@ router.put("/:id", function (req, res) {
     }).then(function(results) {
         res.send(results);
     });
+});
+
+// This deletes a single gig
+router.delete("/:id", function (req, res) {
+    var id = req.params.id;
+    db.Gig.destroy({
+        where: {
+            id: id
+        }
+    }).then(res => res.json(res))
+    .catch(err => res.json(err));
 });
 
 
