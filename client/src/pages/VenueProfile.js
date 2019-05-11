@@ -5,6 +5,7 @@ import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
+import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
 
@@ -21,9 +22,9 @@ class VenueProfile extends Component {
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      if(res.data === "false") {
-        this.props.history.push("/");
-      }
+      // if(res.data === "false") {
+      //   this.props.history.push("/");
+      // }
     }).catch(err => console.log(err));
     this.loadVenueInfo();
     // this.loadRequestedGigs();
@@ -47,12 +48,15 @@ class VenueProfile extends Component {
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
-    this.setState({
-      description: "",
-      genre: "",
-      date: ""
-    });
   };
+
+  // loadGigs() {
+  //   API.Venues.getVenueGigs().then(res => {
+  //     this.setState({
+  //       gigs: res.data 
+  //     })
+  //   }).catch(err => console.log(err));
+  // };
 
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(venueProfile => {

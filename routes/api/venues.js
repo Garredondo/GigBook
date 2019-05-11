@@ -45,6 +45,7 @@ router.post("/", function(req, res) {
 //             },
 //             include: [db.Artist]
 //         }).then(function ( dbRequest ) {
+//             console.log(dbRequest);
 //             res.json(dbRequest);
 //         });
 //     });
@@ -56,10 +57,21 @@ router.get("/", function (req, res) {
         where: {
             UserId: req.user.id
         }
-    }).then(response => {
-        res.json(response);
-    })
-    .catch(err => res.json(err));
+    }).then(function ( dbVenue ) {
+        db.Gig.findAll({
+            where:{
+                id: dbVenue.id
+            }
+        }).then(function ( dbRequest ) {
+            console.log(dbRequest);
+            console.log(dbVenue.id);
+            res.json({
+                venue: dbVenue,
+                gigs: dbRequest
+            });
+        })
+        .catch(err => res.json(err));
+    });
 });
 
 // Gets the venue's unbooked gigs

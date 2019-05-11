@@ -72,3 +72,12 @@ export function DeleteGigButton({
         </button>
     );
 }
+
+export function DeleteProfileButton({
+    onClick
+    }) {
+    return (
+        <button className="btn btn-primary btn-lg logout" onClick={onClick}>
+        Delete Profile</button>
+    );
+}

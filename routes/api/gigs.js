@@ -26,6 +26,10 @@ router.post("/", function(req, res) {
         });
     });
 });
+router.get("/", function (req, res) {
+    db.Gig.findAll({}).then(response => res.json(response))
+    .catch(err => res.json(err));
+});
 // Get one specific gig
 router.get("/:id", function (req, res) {
     var gigId = req.params.id
