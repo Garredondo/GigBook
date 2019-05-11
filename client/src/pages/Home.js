@@ -30,23 +30,47 @@ class Home extends Component {
   };
 
   handleSignUp = event => {
-    event.preventDefault();
-    if (this.state.name && this.state.password) {
-      API.Users.signUp({
-        name: this.state.name,
-        password: this.state.password,
-        role: this.state.roleSignUp
-      })     
-    .then()
-    .catch(err => console.log(err));
+    if(this.state.name && this.state.password){
+      if(this.state.password === this.state.confirmPassword){
+        API.Users.signUp({
+          name: this.state.name,
+          password: this.state.password,
+          role: this.state.roleSignUp
+        })
+        .then()
+        .catch(err => console.log("Your username is not unique"));
+      } else {
+        console.log("Your passwords don't match.");
+      }
+      this.setState({
+        name: "",
+        password: "",
+        roleSignUp: ""
+      })
+    } else {
+      console.log("Please complete all fields.");
     }
-
-    this.setState({
-      name: "",
-      password: "",
-      roleSignUp: ""
-    });
   };
+
+  // THIS is the OG CODE
+  // handleSignUp = event => {
+  //   event.preventDefault();
+  //   if (this.state.name && this.state.password) {
+  //     API.Users.signUp({
+  //       name: this.state.name,
+  //       password: this.state.password,
+  //       role: this.state.roleSignUp
+  //     })     
+  //   .then()
+  //   .catch(err => console.log(err));
+  //   }
+
+  //   this.setState({
+  //     name: "",
+  //     password: "",
+  //     roleSignUp: ""
+  //   });
+  // };
 
   handleLogin = event => {
     event.preventDefault();
