@@ -16,6 +16,7 @@ const styles = {
 // Defines the messages to the user
 const PasswordMatch = ({ name }) => <div> {name}</div>
 const IncompleteForm = ({ name }) => <div> {name}</div>
+const UsernameUnavailable = ({name}) => <div> {name}</div>
     
 class Home extends Component {
   state = {
@@ -44,7 +45,7 @@ class Home extends Component {
           role: this.state.roleSignUp
         })
         .then()
-        .catch(err => console.log(err));
+        .catch(err => toast(<UsernameUnavailable name="Sorry, that username is taken."/>));
       } else {
         toast(<PasswordMatch name="Sorry, your passwords don't match."/>);
       }
