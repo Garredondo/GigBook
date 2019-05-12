@@ -39,4 +39,17 @@ router.get("/:id", (req, res) => {
     }).catch(err => res.json(err));
 });
 
+router.delete("/:gigId/:venueId/:artistId", (req, res) => {
+    var gigId = req.params.gigId;
+    var venueId = req.params.venueId;
+    var artistId = req.params.artistId;
+});
+
+router.put("/:gigId/:venueId/:artistId", (req, res) => {
+    var gigId = req.params.gigId;
+    var venueId = req.params.venueId;
+    var artistId = req.params.artistId;
+});
+
+
 module.exports = router;
