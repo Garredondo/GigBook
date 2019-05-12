@@ -49,6 +49,14 @@ router.put("/:gigId/:venueId/:artistId", (req, res) => {
     var gigId = req.params.gigId;
     var venueId = req.params.venueId;
     var artistId = req.params.artistId;
+    db.Gig.update(
+        {ArtistId: artistId},
+        {where: {
+            id: gigId
+        }}
+    ).then(results => {
+        res.json(results);
+    }).catch(err => res.json(err));
 });
 
 
