@@ -15,8 +15,8 @@ class VenueProfile extends Component {
     genre: "",
     date: "",
     venue: {},
-    unbookedGigs: [],
-    gigsAndTheirArtists: [],
+    gigs: [],
+    requestedGigs: [],
     bookedGigs: [],
     display: true
   };
@@ -64,9 +64,29 @@ class VenueProfile extends Component {
         venue: venueProfile.data
       })
       var id = venueProfile.data.id;
-      API.Gigs.getUnbookedGigs(id).then(unbookedGigs => {
+      API.Gigs.getGigs(id).then(gigs => {
+        
+        // console.log("what is gigs? client/src/pages/VenueProfile.js" )
+        // console.log(gigs.data)
+
+        const unbookedGigs = gigs.data.filter(gig => {
+          if(gig.ArtistId === null){
+            return gig
+          }
+
+        })
+
+        const bookedGigs = gigs.data.filter(gig => {
+          if(gig.ArtistId !== null ) {
+            return gig
+          }
+
+        })
+
+
         this.setState({
-          unbookedGigs: unbookedGigs.data
+          gigs: unbookedGigs,
+          bookedGigs: bookedGigs
         })
         API.Requests.getRequestedGigs(id).then(gigsAndTheirArtists => {
           this.setState({
@@ -137,6 +157,8 @@ class VenueProfile extends Component {
   }
 
   render2 = () => {
+    // console.log("what is this.state.gigs?: client/src/pages/VenueProfile.js");
+    // console.log(this.state.gigs);
     return(
       <div id = "display-venue-gigs">
         <StartButton id="dis-make-gig-form-btn" label="Make A Gig" onClick={this.toggleView} />
@@ -144,24 +166,25 @@ class VenueProfile extends Component {
         <hr className = "divider"></hr>
 
         {/* This maps out unbooked gigs */}
-        {this.state.unbookedGigs.map(gig => (
-        <ResultBox
-          src = {this.state.venue.image}
-          name = {gig.gigName}
-          description = {gig.description}
-          genre = {gig.genre}
-          date = {gig.date}
-        >
-        <DeleteGigButton
-        dataId={gig.id}
-        label={"Delete Gig"}
-        onClick={() => this.deleteThisGig(gig.id)}
-        />
-        </ResultBox>
-        ))}
-
+        <div className = "result-box">
+          {this.state.gigs.map(gig => (
+          <ResultBox
+            src = {this.state.venue.image}
+            name = {gig.gigName}
+            description = {gig.description}
+            genre = {gig.genre}
+            date = {gig.date}
+          >
+          <DeleteGigButton
+          dataId={gig.id}
+          label={"Delete Gig"}
+          onClick={() => this.deleteThisGig(gig.id)}
+          />
+          </ResultBox>
+          ))}
+        </div>
         {/* This is dummy data */}
-        <ResultBox 
+        {/* <ResultBox 
           src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
           name = "Emo's Austin"
           description = "Jesse's Jam Sesh"
@@ -191,12 +214,27 @@ class VenueProfile extends Component {
           {/* Booked Gigs */}
           <div className = "main-title">Booked Gigs</div>
           <hr className = "divider"></hr>
-        <ResultBox 
+          <div className = "result-box">
+            {this.state.bookedGigs.map(gig => (
+              <ResultBox
+                src = {this.state.venue.image}
+                name = {gig.gigName}
+                description = {gig.description}
+                genre = {gig.genre}
+                date = {gig.date}
+              />
+              
+          ))}
+        </div>
+
+          {/* this is dummy data for booked gigs */}
+        {/* <ResultBox 
           src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
           name = "Emo's Austin"
           description = "Jesse's Jam Sesh"
           genre = "Funk"
-          date = "05/16/2019" />
+          date = "05/16/2019" /> */}
+
       </div>
     )
   }

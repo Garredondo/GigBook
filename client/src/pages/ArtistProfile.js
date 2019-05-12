@@ -64,7 +64,7 @@ class ArtistProfile extends Component {
       // console.log("loadGigs res: ")
       // console.log(res.data.booked);
       const option = document.getElementById('inputGroupSelect03').value;
-      console.log("what is option", option);
+      // console.log("what is option", option);
       const filteredGigs = res.data.availableGigs.filter(gig => { 
         //compare gigName to state.filter. only render those which gigName === this.state.filter
         if(option=== "All Venues"){
@@ -163,7 +163,6 @@ class ArtistProfile extends Component {
   }
 
   render() {
-
     return (
       <div>
 

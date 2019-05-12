@@ -64,10 +64,6 @@ router.get("/", isAuthenticated, function (req, res) {
                 id: dbVenue.id
             }
         }).then(function ( dbRequest ) {
-            // res.json({
-            //     venue: dbVenue,
-            //     gigs: dbRequest
-            // });
             res.json(dbVenue);
         })
         .catch(err => res.json(err));
