@@ -23,12 +23,18 @@ router.post("/", isAuthenticated, (req, res) => {
 
 router.get("/:id", (req, res) => {
     var VenueId = req.params.id;
+    var gigsAndTheirArtists =[];
     db.Gig.findAll({
         where: {
             VenueId
         },
         include: [{model: db.Artist, as: "PotentialArtist"}]
-    }).then(gigsAndTheirArtists => {
+    }).then(gigs => {
+        for(let i = 0; i < gigs.length; i++) {
+            if(gigs[i].PotentialArtist.length > 0) {
+                gigsAndTheirArtists.push(gigs[i]);
+            }
+        }
         res.json(gigsAndTheirArtists);
     }).catch(err => res.json(err));
 });

@@ -13,6 +13,9 @@ function ResultBox2(props) {
             <p className = "card-genre">{props.genre}</p>
             {/*===========================================================*/}
             <p className = "card-date"> {props.date}</p>
+            {props.artists.map(artist => (
+                  <h3>{artist.artistName}</h3>
+                ))}
             {props.children}
         </div>
     </div>
