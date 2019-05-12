@@ -1,11 +1,10 @@
 import React from 'react';
-import { BookGigButton } from "../buttons";
 import "./style.css";
 
 function ResultBox(props) {
     return (
-        
-            <div className = "gig-card">
+        <div>
+            <div className = "gig-card col-sm-12 col-md-4 col-ld-3">
                 <img src = {props.src} alt = "result image" className= "image"/>
 
                 <div className = "card-text">
@@ -18,9 +17,8 @@ function ResultBox(props) {
                     {props.children}
                 </div>
             </div>
-        
+        </div>
     );
 }
-
 
 export default ResultBox;

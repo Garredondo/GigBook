@@ -22,6 +22,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Code to run React Build
+console.log("NODE ARGUMENT---------------------");
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { LogoutButton, DeleteGigButton, StartButton, FormButton } from "../components/buttons";
+import { LogoutButton, DeleteGigButton, StartButton, FormButton} from "../components/buttons";
 import API from "../utils/index";
 import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
-import VenueResultBox from "../components/deletegig";
+import ResultBox2 from "../components/requestedCards";
+// import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
 
@@ -14,7 +15,7 @@ class VenueProfile extends Component {
     genre: "",
     date: "",
     venue: {},
-    unbookedGigs: [],
+    gigs: [],
     requestedGigs: [],
     bookedGigs: [],
     display: true
@@ -22,12 +23,11 @@ class VenueProfile extends Component {
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      // if(res.data === "false") {
-      //   this.props.history.push("/");
-      // }
+      if(res.data === "false") {
+        this.props.history.push("/");
+      }
     }).catch(err => console.log(err));
     this.loadVenueInfo();
-    // this.loadRequestedGigs();
   };
 
   handleInputChange = event => {
@@ -50,37 +50,36 @@ class VenueProfile extends Component {
     }
   };
 
-  // loadGigs() {
-  //   API.Venues.getVenueGigs().then(res => {
-  //     this.setState({
-  //       gigs: res.data 
-  //     })
-  //   }).catch(err => console.log(err));
-  // };
-
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(venueProfile => {
       this.setState({
         venue: venueProfile.data
       })
       var id = venueProfile.data.id;
-      API.Gigs.getUnbookedGigs(id).then(unbookedGigs => {
-        this.setState({
-          unbookedGigs: unbookedGigs.data
+      API.Gigs.getGigs(id).then(gigs => {
+        const unbookedGigs = gigs.data.filter(gig => {
+          if(gig.ArtistId === null){
+            return gig;
+          }
         })
+        const bookedGigs = gigs.data.filter(gig => {
+          if(gig.ArtistId !== null ) {
+            return gig;
+          }
+        })
+        this.setState({
+          gigs: unbookedGigs,
+          bookedGigs: bookedGigs
+        })
+        API.Requests.getRequestedGigs(id).then(gigsAndTheirArtists => {
+          this.setState({
+            gigsAndTheirArtists: gigsAndTheirArtists.data
+          })
+          // console.log(this.state.gigsAndTheirArtists);
+        }).catch(err => console.log(err));
       }).catch(err => console.log(err));
     }).catch(err => console.log(err));
   };
-
-  // loadRequestedGigs() {
-    // console.log("venue id-------------------")
-    // console.log(this.state.venue);
-  //   API.Requests.getRequestedGigs().then(res => {
-  //     this.setState({
-  //       requestedGigs: res.data
-  //     })
-  //   }).catch(err => console.log(err));
-  // };
 
   handleLogout = event => {
     event.preventDefault();
@@ -103,6 +102,25 @@ class VenueProfile extends Component {
     .catch(err => console.log(err));
   };
 
+  handleDenyRequest = (gigId, venueId, artistId) => {
+    API.Requests.denyThisRequest({
+      gigId,
+      venueId,
+      artistId
+    }).then()
+    .catch();
+  };
+
+  handleConfirmRequest = (gigId, venueId, artistId) => {
+    API.Requests.confirmThisRequest({
+      gigId,
+      venueId,
+      artistId
+    }).then()
+    .catch();
+  };
+
+  // This renders the right side of the page ----------------------------------------
   render1 = () => {
     return (
       <div>
@@ -148,41 +166,71 @@ class VenueProfile extends Component {
         <hr className = "divider"></hr>
 
         {/* This maps out unbooked gigs */}
-        {this.state.unbookedGigs.map(gig => (
-        <ResultBox
-          src = {this.state.venue.image}
-          name = {gig.gigName}
-          description = {gig.description}
-          genre = {gig.genre}
-          date = {gig.date}
-        >
-        <DeleteGigButton
-        dataId={gig.id}
-        label={"Delete Gig"}
-        onClick={() => this.deleteThisGig(gig.id)}
-        />
-        </ResultBox>
-        ))}
-        {/* This is dummy data */}
-        <ResultBox 
-          src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-          name = "Emo's Austin"
-          description = "Jesse's Jam Sesh"
-          genre = "Funk"
-          date = "05/16/2019" />
+        <div className = "result-box">
+          {this.state.gigs.map(gig => (
+          <ResultBox
+            src = {this.state.venue.image}
+            name = {gig.gigName}
+            description = {gig.description}
+            genre = {gig.genre}
+            date = {gig.date}
+          >
+          <DeleteGigButton
+          dataId={gig.id}
+          label={"Delete Gig"}
+          onClick={() => this.deleteThisGig(gig.id)}
+          />
+          </ResultBox>
+          ))}
+        </div>
+
+        {/* Requested Gigs and their Associated Artists */}
+        <div className = "main-title">Requested Gigs</div>
+          <div className="row">
+          {this.state.gigsAndTheirArtists.map(gig => (
+            <div>
+              <ResultBox2
+              src = {this.state.venue.image}
+              name = {gig.gigName}
+              description = {gig.description}
+              genre = {gig.genre}
+              date = {gig.date}
+              artists = {gig.PotentialArtist}
+              venueId = {this.state.venue.id}
+              onClick = {this.handleDeny}
+              >
+              {gig.PotentialArtist.map(artist => {
+                return (
+                <div>
+                  <h3>{artist.artistName}</h3>
+                  <button onClick={() => this.handleDenyRequest(gig.id, this.state.venue.id, artist.id)}>Deny</button>
+                  <button onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
+                </div>
+                )
+              })}
+              </ResultBox2>
+            </div>
+            ))}
+
+          </div>
+
+          {/* Booked Gigs */}
           <div className = "main-title">Booked Gigs</div>
           <hr className = "divider"></hr>
-        <ResultBox 
-          src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-          name = "Emo's Austin"
-          description = "Jesse's Jam Sesh"
-          genre = "Funk"
-          date = "05/16/2019" />
-
+          <div className = "result-box">
+            {this.state.bookedGigs.map(gig => (
+              <ResultBox
+                src = {this.state.venue.image}
+                name = {gig.gigName}
+                description = {gig.description}
+                genre = {gig.genre}
+                date = {gig.date}
+              />          
+            ))}
+          </div>
       </div>
     )
   }
-
 
   render() {
     return (
@@ -213,39 +261,8 @@ class VenueProfile extends Component {
         </ProfileLeft>
         }
 
-
         <ProfileRightVenue >
           {this.state.display ? this.render1() : this.render2()}
-  
-          {/* <div className="div" id = "display-make-gig-form">
-              <div className = "main-title">Post A Gig</div>
-              <br></br>
-              <div className = "createGigForm">
-                  <form>
-                      <TextLabel for = "gig-des">Gig Description:</TextLabel>
-                      <InputBox type = "text" id = "gig-des" name="description"
-                        onChange={this.handleInputChange}
-                        value={this.state.description}
-                      />
-                      <TextLabel for = "gig-genre">Genre(s): </TextLabel>
-                      <InputBox type = "text" id = "gig-genre" name="genre"
-                        onChange={this.handleInputChange}
-                        value={this.state.genre}
-                      />  
-                      <TextLabel for = "gig-date">Date: </TextLabel>
-                      <InputBox type="text" id = "gig-date" name = "date" placeholder = "MM/DD/YYYY"
-                        onChange={this.handleInputChange}
-                        value={this.state.date}
-                      />
-                      <FormButton id = "gig-create"
-                        value = "Post-Gig"
-                        className = "btn btn-primary btn-lg btn-main"
-                        label = "Post Gig" 
-                        onClick={this.handleFormSubmit}
-                      />
-                  </form>
-              </div>
-          </div> */}
         </ProfileRightVenue>
       </div>
     );
