@@ -87,7 +87,6 @@ router.post("/", function (req, res) {
     }
 });
 
-
 router.delete("/:id", function(req, res){
     db.User.delete({
         where: {
