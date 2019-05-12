@@ -1,23 +1,18 @@
 const router = require("express").Router();
 const db = require("../../models");
 
-
 router.get("/:name", function(req, res){
     let userName = req.params.name;
-    console.log(userName);
     db.User.findAll({
         where: {
             name: userName
         }
     })
     .then(function(results){
-        var obj = {
-            users: results
-        }
-        res.send(obj);
+        res.send(results);
     })
     .catch(error => {
-        console.log(error);
+        res.json(error);
     })
 });
 

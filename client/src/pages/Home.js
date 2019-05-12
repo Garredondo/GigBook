@@ -10,6 +10,14 @@ import { toast } from 'react-toastify';
 const styles = {
   text: {
     color: "black"
+  },
+  role: {
+    display: "inline",
+    color: "black",
+    paddingLeft: 6
+  },
+  radio: {
+    float: "left",
   }
 }
 
@@ -18,8 +26,8 @@ const PasswordMatch = ({ name }) => <div> {name}</div>
 const IncompleteForm = ({ name }) => <div> {name}</div>
 const UsernameUnavailable = ({name}) => <div> {name}</div>
 const Success = ({name}) => <div> {name}</div>
-const Test = ({name}) => <div> {name}</div>
-    
+const Denied = ({name}) => <div> {name}</div>
+ 
 class Home extends Component {
   state = {
     name: "",
@@ -37,14 +45,21 @@ class Home extends Component {
     });
   };
 
-  createUser = () => {
+  createUser = event => {
+    event.preventDefault();
     API.Users.signUp({
       name: this.state.name,
       password: this.state.password,
       role: this.state.roleSignUp
     })
-    .then(res => toast (<Success name="You've signed up please login!"/>))
+    .then(toast (<Success name="You've signed up please login!"/>))
     .catch(err => console.log(err));
+
+    this.setState({
+      name: "",
+      password: "",
+      roleSignUp: ""
+    });
   };
 
   handleSignUp = event => {
@@ -52,16 +67,8 @@ class Home extends Component {
     if(this.state.name && this.state.password){
       if(this.state.password === this.state.password_confirmation){
         API.Users.checkAvail(this.state.name)
-        .then(res => {
-          
-          if(res.data.users[0].name === undefined){
-            // this.createUser();
-            // toast(<Test name="THIS IS A TEST"/>);
-          } else {
-            toast(<UsernameUnavailable name="Sorry, that username is taken."/>);
-          }
-          
-        })
+        .then(res => res.data.length > 0 ? toast(<UsernameUnavailable name="Sorry, that username is taken."/>)
+        : this.createUser(event))
         .catch(err => console.log(err));
       }
       else {
@@ -72,33 +79,6 @@ class Home extends Component {
       toast(<IncompleteForm name="Please complete all fields to sign up."/>);
     }
   };
-
-  
-  
-  // handleSignUp = event => {
-  //   if(this.state.name && this.state.password){
-  //     if(this.state.password === this.state.password_confirmation){
-  //       API.Users.signUp({
-  //         name: this.state.name,
-  //         password: this.state.password,
-  //         role: this.state.roleSignUp
-  //       })
-  //       .then()
-  //       .catch(err => console.log(err));
-  //       .catch(err => toast(<UsernameUnavailable name="Sorry, that username is taken."/>));
-  //     } else {
-  //       toast(<PasswordMatch name="Sorry, your passwords don't match."/>);
-  //     }
-  //     this.setState({
-  //       name: "",
-  //       password: "",
-  //       roleSignUp: ""
-  //     })
-  //   } else {
-  //     toast(<IncompleteForm name="Please complete all fields to sign up."/>);
-  //   }
-  // };
-
   
   handleLogin = event => {
     event.preventDefault();
@@ -115,7 +95,7 @@ class Home extends Component {
             this.props.history.push("/artist/profile/" + res.data.id);
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => toast(<Denied name="Please check your credentials and try again."/>));
     }
 
     this.setState({
@@ -169,8 +149,8 @@ class Home extends Component {
               />
 
               <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
-              <Radio value="venue" name="roleLogin" checked={this.state.roleLogin === "venue"} onChange={this.handleInputChange} /><p style={styles.text}>Venue</p>
-              <Radio value="artist" name="roleLogin" checked={this.state.roleLogin === "artist"} onChange={this.handleInputChange} /><p style={styles.text}>Artist</p>
+              <Radio value="venue" name="roleLogin" checked={this.state.roleLogin === "venue"} onChange={this.handleInputChange} style={styles.radio}/><p style={styles.role}> Venue</p>
+              <Radio value="artist" name="roleLogin" checked={this.state.roleLogin === "artist"} onChange={this.handleInputChange} style={styles.radio}/><p style={styles.role}> Artist</p>
             
           </div>
           <div className="modal-footer">
@@ -198,36 +178,37 @@ class Home extends Component {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <TextLabel style={styles.text}>Username</TextLabel>
-          <InputBox 
-            placeholder="Username"
-            name="name" 
-            value={this.state.name}
-            onChange={this.handleInputChange}
-          />
-          <TextLabel style={styles.text}>Password</TextLabel>
-          <InputBox 
-            placeholder="Password" 
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-          <TextLabel style={styles.text}>Confirm Password</TextLabel>
-          <InputBox 
-            placeholder="Confirm Password" 
-            name="password_confirmation"
-            type="password"
-            value={this.state.password_confirmation}
-            onChange={this.handleInputChange}
-          />
+          <div className="modal-body">
+            <TextLabel style={styles.text}>Username</TextLabel>
+            <InputBox 
+              placeholder="Username"
+              name="name" 
+              value={this.state.name}
+              onChange={this.handleInputChange}
+            />
+            <TextLabel style={styles.text}>Password</TextLabel>
+            <InputBox 
+              placeholder="Password" 
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleInputChange}
+            />
+            <TextLabel style={styles.text}>Confirm Password</TextLabel>
+            <InputBox 
+              placeholder="Confirm Password" 
+              name="password_confirmation"
+              type="password"
+              value={this.state.password_confirmation}
+              onChange={this.handleInputChange}
+            />
 
-          <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
-          <Radio value="venue" name="roleSignUp" checked={this.state.roleSignUp === "venue"} onChange={this.handleInputChange}/><p style={styles.text}>Venue</p>
-          <Radio value="artist" name="roleSignUp" checked={this.state.roleSignUp === "artist"} onChange={this.handleInputChange}/><p style={styles.text}>Artist</p>
+            <TextLabel style={styles.text}>Are you a Venue or Artist?</TextLabel>
+            <Radio value="venue" name="roleSignUp" checked={this.state.roleSignUp === "venue"} onChange={this.handleInputChange} style={styles.radio}/><p style={styles.role}>Venue</p>
+            <Radio value="artist" name="roleSignUp" checked={this.state.roleSignUp === "artist"} onChange={this.handleInputChange} style={styles.radio}/><p style={styles.role}>Artist</p>
+          </div>
       
           <div className="modal-footer">
-
             <FormButton 
               id={"signup-submit"} 
               type={"submit"} 
@@ -236,8 +217,7 @@ class Home extends Component {
               label={"Sign Up"}
               onClick={this.handleSignUp}
               dataDismiss="modal"
-            />
-            
+            /> 
           </div>
         </div>
       </div>
