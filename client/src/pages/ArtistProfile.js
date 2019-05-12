@@ -44,14 +44,23 @@ class ArtistProfile extends Component {
   loadGigs = () => {
     API.Artists.getGigs()
       .then(res => {
-        // console.log("loadGigs res: ")
-        // console.log(res.data.booked);
+        console.log("loadGigs res: ")
+        console.log(res.data);
         this.setState({ 
           gigs: res.data.availableGigs, 
           venues: res.data.allVenues, 
           requests: res.data.artistRequests,
-          booked: res.data.booked
+          booked: res.data.booked,
+          image:res.data.artistRequests.profileImage,
+          artistName:res.data.artistRequests.artistName,
+          genre:res.data.artistRequests.genre,
+          numberOfMembers:res.data.artistRequests.numberOfMembers,
+          instrumentation:res.data.artistRequests.instrumentation,
+          email:res.data.artistRequests.email,
+          website:res.data.artistRequests.website,
+          phone:res.data.artistRequests.phone
         })
+     
       })
       .catch(err => console.log(err));
   };
@@ -81,9 +90,6 @@ class ArtistProfile extends Component {
       })
     })
     .catch(err => console.log(err));
-
-    console.log(this.state.filter);
-
   }
 
   handleLogout = event => {
@@ -95,10 +101,12 @@ class ArtistProfile extends Component {
 
   
   handleInputChange = event => {
+    console.log("testing")
     var { name, value } = event.target;
     this.setState({
       [name]: value
     });
+    console.log({[name]: value});
   };
 
   // loadArtistInfo() {
@@ -111,6 +119,8 @@ class ArtistProfile extends Component {
 
   // This function is for editing the profile (it's executed in ProfileLeft/index.js)
   toggleEdit = () => {
+    console.log("Edit was clicked")
+
     if (this.state.editing === false){
       this.setState({
         editing: true
@@ -143,6 +153,7 @@ class ArtistProfile extends Component {
 
   submitChanges = (event) => {
     event.preventDefault();
+    this.setState({editing:false})
 
     let updatedArtistInfo = {
       profileImage: this.state.profileImage,
@@ -155,50 +166,82 @@ class ArtistProfile extends Component {
       email:this.state.email
     }
 
-    console.log("=/=/=/=/=U=P=D=A=T=E=/=/=/=/=/=/=/");
-    console.log(updatedArtistInfo);
+    // console.log("=/=/=/=/=U=P=D=A=T=E=/=/=/=/=/=/=/");
+    // console.log(updatedArtistInfo);
+    // console.log("submitchanges state");
+    // console.log(this.state);
+
+
     
     API.Artists.update(updatedArtistInfo)
-    .then(this.setState({editing:false})).catch(err => console.log(err));
+    .then(e=>{
+      API.Artists.getGigs()
+      .then(res => {
+        // console.log("loadGigs res: ")
+        // console.log(res.data.booked);
+        this.setState({ 
+
+          image:res.requests.profileImage,
+          artistName:res.requests.artistName,
+          genre:res.requests.genre,
+          numberOfMembers:res.requests.numberOfMembers,
+          instrumentation:res.requests.instrumentation,
+          email:res.requests.email,
+          website:res.requests.website,
+          phone:res.requests.phone
+        })
+      })
+      .catch(err => console.log(err));  
+    
+    })
+    .catch(err => console.log(err));
+    
   }
 
   render() {
+
+    // console.log("what is this.state.requests? client/src/pages/ArtistProfile.js")
+    // console.log(this.state.requests)
+    console.log("what is this.state.editing? client/src/pages/ArtistProfile.js")
+    console.log(this.state.editing)
     return (
       <div>
 
-        {/* {(this.state.requests.profileImage) ? 
-          <ProfileLeft 
-          editing = {this.state.editing}
-          toggleEdit = {this.toggleEdit}
-          image={this.state.requests.profileImage}
-          artistName={this.state.requests.artistName}
-          genre={this.state.requests.genre}
-          numberOfMembers={this.state.requests.numberOfMembers}
-          instrumentation={this.state.requests.instrumentation}
-          email={this.state.requests.email}
-          website={this.state.requests.website}
-          phone={this.state.requests.phone}
-          submitChanges = {this.submitChanges}
-          handleInputChange = {this.handleInputChange}
-        >
-          <LogoutButton onClick={this.handleLogout}/>
-        </ProfileLeft> 
-        :  */}
-        <ProfileLeft 
-        editing = {this.state.editing}
-        image={"https://via.placeholder.com/150"}
-        artistName={this.state.requests.artistName}
-        genre={this.state.requests.genre}
-        numberOfMembers={this.state.requests.numberOfMembers}
-        instrumentation={this.state.requests.instrumentation}
-        email={this.state.requests.email}
-        website={this.state.requests.website}
-        phone={this.state.requests.phone}
-        submitChanges = {this.submitChanges}
-        handleInputChange = {this.handleInputChange}
-      >
-        <LogoutButton onClick={this.handleLogout}/>
-      </ProfileLeft>
+        {(this.state.requests.profileImage) ? 
+            <ProfileLeft 
+              editing = {this.state.editing}
+              toggleEdit = {this.toggleEdit}
+              image={this.state.requests.profileImage}
+              artistName={this.state.requests.artistName}
+              genre={this.state.requests.genre}
+              numberOfMembers={this.state.requests.numberOfMembers}
+              instrumentation={this.state.requests.instrumentation}
+              email={this.state.requests.email}
+              website={this.state.requests.website}
+              phone={this.state.requests.phone}
+              submitChanges = {this.submitChanges}
+              handleInputChange = {this.handleInputChange}
+            >
+              <LogoutButton onClick={this.handleLogout}/>
+            </ProfileLeft> 
+          : 
+            <ProfileLeft 
+              editing = {this.state.editing}
+              toggleEdit = {this.toggleEdit}
+              image={"https://via.placeholder.com/150"}
+              artistName={this.state.requests.artistName}
+              genre={this.state.requests.genre}
+              numberOfMembers={this.state.requests.numberOfMembers}
+              instrumentation={this.state.requests.instrumentation}
+              email={this.state.requests.email}
+              website={this.state.requests.website}
+              phone={this.state.requests.phone}
+              submitChanges = {this.submitChanges}
+              handleInputChange = {this.handleInputChange}
+            >
+              <LogoutButton onClick={this.handleLogout}/>
+            </ProfileLeft>
+        }
 
         
 
@@ -229,8 +272,8 @@ class ArtistProfile extends Component {
             description = "boogaloo"
             genre = "Funk"
             date = "05/17/2019" /> */}
-            <hr />
-            <h2>Pending Gigs</h2>
+            <div className = "main-title">Booked Gigs</div>
+          <hr className = "divider"></hr>
        
             { this.state.booked.map( gig => (
               <BookedGigs
