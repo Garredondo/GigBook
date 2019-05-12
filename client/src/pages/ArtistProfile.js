@@ -66,14 +66,13 @@ class ArtistProfile extends Component {
       const option = document.getElementById('inputGroupSelect03').value;
       // console.log("what is option", option);
       const filteredGigs = res.data.availableGigs.filter(gig => { 
-        //compare gigName to state.filter. only render those which gigName === this.state.filter
+        //compare gigName to selection. only render those which gigName === option
         if(option=== "All Venues"){
           return gig;
         }
         if(gig.gigName === option) {
           return gig
         }
-  
       })
 
       this.setState({ 
@@ -82,9 +81,6 @@ class ArtistProfile extends Component {
       })
     })
     .catch(err => console.log(err));
-
-    console.log(this.state.filter);
-
   }
 
   handleLogout = event => {
@@ -169,7 +165,7 @@ class ArtistProfile extends Component {
       <div>
         <h1>Artist Profile Page</h1>
 
-        {/* {(this.state.requests.profileImage) ? 
+        {(this.state.requests.profileImage) ? 
           <ProfileLeft 
           editing = {this.state.editing}
           toggleEdit = {this.toggleEdit}
@@ -186,7 +182,7 @@ class ArtistProfile extends Component {
         >
           <LogoutButton onClick={this.handleLogout}/>
         </ProfileLeft> 
-        :  */}
+        : 
         <ProfileLeft 
         editing = {this.state.editing}
         image={"https://via.placeholder.com/150"}
