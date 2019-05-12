@@ -81,9 +81,6 @@ class ArtistProfile extends Component {
       })
     })
     .catch(err => console.log(err));
-
-    console.log(this.state.filter);
-
   }
 
   handleLogout = event => {
@@ -163,42 +160,46 @@ class ArtistProfile extends Component {
   }
 
   render() {
+
+    console.log("what is this.state.requests? client/src/pages/ArtistProfile.js")
+    console.log(this.state.requests)
     return (
       <div>
 
-        {/* {(this.state.requests.profileImage) ? 
-          <ProfileLeft 
-          editing = {this.state.editing}
-          toggleEdit = {this.toggleEdit}
-          image={this.state.requests.profileImage}
-          artistName={this.state.requests.artistName}
-          genre={this.state.requests.genre}
-          numberOfMembers={this.state.requests.numberOfMembers}
-          instrumentation={this.state.requests.instrumentation}
-          email={this.state.requests.email}
-          website={this.state.requests.website}
-          phone={this.state.requests.phone}
-          submitChanges = {this.submitChanges}
-          handleInputChange = {this.handleInputChange}
-        >
-          <LogoutButton onClick={this.handleLogout}/>
-        </ProfileLeft> 
-        :  */}
-        <ProfileLeft 
-        editing = {this.state.editing}
-        image={"https://via.placeholder.com/150"}
-        artistName={this.state.requests.artistName}
-        genre={this.state.requests.genre}
-        numberOfMembers={this.state.requests.numberOfMembers}
-        instrumentation={this.state.requests.instrumentation}
-        email={this.state.requests.email}
-        website={this.state.requests.website}
-        phone={this.state.requests.phone}
-        submitChanges = {this.submitChanges}
-        handleInputChange = {this.handleInputChange}
-      >
-        <LogoutButton onClick={this.handleLogout}/>
-      </ProfileLeft>
+        {(this.state.requests.profileImage) ? 
+            <ProfileLeft 
+              editing = {this.state.editing}
+              toggleEdit = {this.toggleEdit}
+              image={this.state.requests.profileImage}
+              artistName={this.state.requests.artistName}
+              genre={this.state.requests.genre}
+              numberOfMembers={this.state.requests.numberOfMembers}
+              instrumentation={this.state.requests.instrumentation}
+              email={this.state.requests.email}
+              website={this.state.requests.website}
+              phone={this.state.requests.phone}
+              submitChanges = {this.submitChanges}
+              handleInputChange = {this.handleInputChange}
+            >
+              <LogoutButton onClick={this.handleLogout}/>
+            </ProfileLeft> 
+          : 
+            <ProfileLeft 
+              editing = {this.state.editing}
+              image={"https://via.placeholder.com/150"}
+              artistName={this.state.requests.artistName}
+              genre={this.state.requests.genre}
+              numberOfMembers={this.state.requests.numberOfMembers}
+              instrumentation={this.state.requests.instrumentation}
+              email={this.state.requests.email}
+              website={this.state.requests.website}
+              phone={this.state.requests.phone}
+              submitChanges = {this.submitChanges}
+              handleInputChange = {this.handleInputChange}
+            >
+              <LogoutButton onClick={this.handleLogout}/>
+            </ProfileLeft>
+        }
 
         
 
@@ -229,8 +230,8 @@ class ArtistProfile extends Component {
             description = "boogaloo"
             genre = "Funk"
             date = "05/17/2019" /> */}
-            <hr />
-            <h2>Pending Gigs</h2>
+            <div className = "main-title">Booked Gigs</div>
+          <hr className = "divider"></hr>
        
             { this.state.booked.map( gig => (
               <BookedGigs
