@@ -1,18 +1,19 @@
 import React from 'react';
-import "./style.css";
-function Modal(props) {
+// import "./style.css";
+
+// export function Modal(props) {
     
     /* If/Else Statement to show either the Login or Sign Up modal. 
         Might make more intuitive in future.                     */
 
     /* Subject to change. If we have enough time, we can DRY this up a bit.*/
 
-    if (props.type === "login"){
-        return (
-            <div>
-                <div className = "modal">
-                    {/* This is just an assumption of the Login modal */}
-                    <form>
+    // if (props.type === "login"){
+    //     return (
+    //         <div>
+    //             <div className = "modal">
+                    /* This is just an assumption of the Login modal */
+                    /* <form>
                         <h1>Login</h1>
                         <hr />
                         <input id = "username-input" type = "text" placeholder = "Username..." />
@@ -34,9 +35,9 @@ function Modal(props) {
     else {
         return (
             <div>
-            <div className = "modal">
-            {/* This is just an assumption of the Sign Up modal */}
-            <form>
+            <div className = "modal"> */
+            /* This is just an assumption of the Sign Up modal */
+            /* <form>
                 <h1>Sign Up</h1>
                 <hr />
                 <div id = "input-centering">
@@ -58,6 +59,18 @@ function Modal(props) {
             </div>
         );
     }
-}
+} */
 
-export default Modal;
+export function ViewArtistModal({
+    target
+    }) {
+    return (
+        <div className={`modal fade bd-example-modal-lg ${target}`} tabindex="-1" role="dialog" aria-labelledby={target} aria-hidden="true">
+            <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                ahhhhhh
+                </div>
+            </div>
+        </div>
+    );
+}

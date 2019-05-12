@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const db = require("../../models");
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
 //  Posts to gigs table from venue view
-router.post("/", function(req, res) {
+router.post("/", isAuthenticated, function(req, res) {
     db.Venue.findAll({
         where: {
             UserId: req.user.id
@@ -34,7 +35,7 @@ router.post("/", function(req, res) {
 
 
 // Gets the venue's unbooked gigs
-router.get("/unbooked/:id", function(req, res) {
+router.get("/unbooked/:id", isAuthenticated, function(req, res) {
     var id = req.params.id;
     db.Gig.findAll({
         where: {
@@ -47,7 +48,7 @@ router.get("/unbooked/:id", function(req, res) {
 
 
 // Get one specific gig
-router.get("/:id", function (req, res) {
+router.get("/:id", isAuthenticated, function (req, res) {
     var gigId = req.params.id
     db.Gig.findOne({
         where: {
@@ -62,7 +63,7 @@ router.get("/:id", function (req, res) {
 });
 
 // This update a gig to "booked" -----Outdated?
-router.put("/:id", function (req, res) {
+router.put("/:id", isAuthenticated, function (req, res) {
     var id = req.params.id;
     db.Gig.update({
         isBooked: true
@@ -75,7 +76,7 @@ router.put("/:id", function (req, res) {
 });
 
 // This deletes a single gig
-router.delete("/:id", function (req, res) {
+router.delete("/:id", isAuthenticated, function (req, res) {
     var id = req.params.id;
     db.Gig.destroy({
         where: {
