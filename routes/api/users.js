@@ -1,6 +1,26 @@
 const router = require("express").Router();
 const db = require("../../models");
 
+
+router.get("/:name", function(req, res){
+    let userName = req.params.name;
+    console.log(userName);
+    db.User.findAll({
+        where: {
+            name: userName
+        }
+    })
+    .then(function(results){
+        var obj = {
+            users: results
+        }
+        res.send(obj);
+    })
+    .catch(error => {
+        console.log(error);
+    })
+});
+
 router.post("/", function (req, res) {
     if(req.body.role === "artist") {
         db.User.create({

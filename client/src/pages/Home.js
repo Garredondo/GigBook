@@ -17,6 +17,8 @@ const styles = {
 const PasswordMatch = ({ name }) => <div> {name}</div>
 const IncompleteForm = ({ name }) => <div> {name}</div>
 const UsernameUnavailable = ({name}) => <div> {name}</div>
+const Success = ({name}) => <div> {name}</div>
+const Test = ({name}) => <div> {name}</div>
     
 class Home extends Component {
   state = {
@@ -35,29 +37,67 @@ class Home extends Component {
     });
   };
 
-  
+  createUser = () => {
+    API.Users.signUp({
+      name: this.state.name,
+      password: this.state.password,
+      role: this.state.roleSignUp
+    })
+    .then(res => toast (<Success name="You've signed up please login!"/>))
+    .catch(err => console.log(err));
+  };
+
   handleSignUp = event => {
+    event.preventDefault();
     if(this.state.name && this.state.password){
       if(this.state.password === this.state.password_confirmation){
-        API.Users.signUp({
-          name: this.state.name,
-          password: this.state.password,
-          role: this.state.roleSignUp
+        API.Users.checkAvail(this.state.name)
+        .then(res => {
+          
+          if(res.data.users[0].name === undefined){
+            // this.createUser();
+            // toast(<Test name="THIS IS A TEST"/>);
+          } else {
+            toast(<UsernameUnavailable name="Sorry, that username is taken."/>);
+          }
+          
         })
-        .then()
-        .catch(err => toast(<UsernameUnavailable name="Sorry, that username is taken."/>));
-      } else {
-        toast(<PasswordMatch name="Sorry, your passwords don't match."/>);
+        .catch(err => console.log(err));
       }
-      this.setState({
-        name: "",
-        password: "",
-        roleSignUp: ""
-      })
-    } else {
+      else {
+        toast(<PasswordMatch name="Sorry, your passwords do not match."/>);
+      }
+    }
+    else {
       toast(<IncompleteForm name="Please complete all fields to sign up."/>);
     }
   };
+
+  
+  
+  // handleSignUp = event => {
+  //   if(this.state.name && this.state.password){
+  //     if(this.state.password === this.state.password_confirmation){
+  //       API.Users.signUp({
+  //         name: this.state.name,
+  //         password: this.state.password,
+  //         role: this.state.roleSignUp
+  //       })
+  //       .then()
+  //       .catch(err => console.log(err));
+  //       .catch(err => toast(<UsernameUnavailable name="Sorry, that username is taken."/>));
+  //     } else {
+  //       toast(<PasswordMatch name="Sorry, your passwords don't match."/>);
+  //     }
+  //     this.setState({
+  //       name: "",
+  //       password: "",
+  //       roleSignUp: ""
+  //     })
+  //   } else {
+  //     toast(<IncompleteForm name="Please complete all fields to sign up."/>);
+  //   }
+  // };
 
   
   handleLogin = event => {
