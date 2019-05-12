@@ -12,6 +12,17 @@ export function ModalButton({
     );
 }
 
+export function ModalButton2({
+    className,
+    dataEventTarget,
+    label
+    }) {
+    return (
+        <button type="button" className={`${className} btn btn-primary btn-lg`} data-toggle="modal"
+        data-target={dataEventTarget}>{label}</button>
+    );
+}
+
 export function FormButton({
     id,
     value,

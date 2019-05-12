@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const db = require("../../models");
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
-router.route("/").post(function (req, res) {
+router.route("/", isAuthenticated).post(function (req, res) {
     db.Artist.create({
         artistName: req.body.artistName,
         genre: req.body.genre,
@@ -22,7 +23,7 @@ router.route("/").post(function (req, res) {
 
 
 // findAll gigs that have not yet been verified
-router.route("/").get(function (req, res) {
+router.route("/", isAuthenticated).get(function (req, res) {
     db.Gig.findAll({
             where: {
                 ArtistId: null
@@ -38,7 +39,6 @@ router.route("/").get(function (req, res) {
                         },
                         include: [{model: db.Gig, as: "PotentialGig"}]
                     }).then(dbRequest => {
-                        console.log(dbRequest);
                         var resultsObj = {
                             allVenues: dbVenueAll,
                             availableGigs: dbUnbookedGigs,
@@ -53,7 +53,10 @@ router.route("/").get(function (req, res) {
 });
 
 
-router.route("/").put(function(req, res) {
+router.route("/", isAuthenticated).put(function(req, res) {
+    console.log(req.body.profileImage);
+    console.log(req.user);
+
     db.Artist.update({
         artistName: req.body.artistName,
         genre: req.body.genre,

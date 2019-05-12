@@ -1,6 +1,9 @@
 import axios from "axios";
 
 export default {
+    checkAvail: data => {
+        return axios.get("/api/users/" + data);
+    },
     signUp: data => {
         return axios.post("/api/users", data);
     },
@@ -14,6 +17,6 @@ export default {
         return axios.get("/isAuthed");
     },
     deleteProfile: id => {
-        return axios.delete("/api/users", id);
+        return axios.delete("/api/users/" + id);
     }
 }

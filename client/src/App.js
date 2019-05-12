@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import VenueProfile from "./pages/VenueProfile";
 import ArtistProfile from "./pages/ArtistProfile";
 import NoMatch from "./pages/NoMatch";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'; 
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           <Route exact path="/artist/profile/:id" component={ArtistProfile} />
           <Route component={NoMatch} />
         </Switch>
+        <ToastContainer />
       </div>
     </Router>
   );

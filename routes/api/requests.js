@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const db = require("../../models");
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
-router.post("/", (req, res) => {
+router.post("/", isAuthenticated, (req, res) => {
     var ArtistId=req.body.ArtistId;
     var GigId=req.body.GigId;
     db.Artist.findOne({ 
@@ -19,8 +20,44 @@ router.post("/", (req, res) => {
     })
 });
 
+
 router.get("/:id", (req, res) => {
-    
+    var VenueId = req.params.id;
+    var gigsAndTheirArtists =[];
+    db.Gig.findAll({
+        where: {
+            VenueId
+        },
+        include: [{model: db.Artist, as: "PotentialArtist"}]
+    }).then(gigs => {
+        for(let i = 0; i < gigs.length; i++) {
+            if(gigs[i].PotentialArtist.length > 0) {
+                gigsAndTheirArtists.push(gigs[i]);
+            }
+        }
+        res.json(gigsAndTheirArtists);
+    }).catch(err => res.json(err));
 });
+
+router.delete("/:gigId/:venueId/:artistId", (req, res) => {
+    var gigId = req.params.gigId;
+    var venueId = req.params.venueId;
+    var artistId = req.params.artistId;
+});
+
+router.put("/:gigId/:venueId/:artistId", (req, res) => {
+    var gigId = req.params.gigId;
+    var venueId = req.params.venueId;
+    var artistId = req.params.artistId;
+    db.Gig.update(
+        {ArtistId: artistId},
+        {where: {
+            id: gigId
+        }}
+    ).then(results => {
+        res.json(results);
+    }).catch(err => res.json(err));
+});
+
 
 module.exports = router;
