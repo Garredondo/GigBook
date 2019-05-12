@@ -102,6 +102,25 @@ class VenueProfile extends Component {
     .catch(err => console.log(err));
   };
 
+  handleDenyRequest = (gigId, venueId, artistId) => {
+    API.Requests.denyThisRequest({
+      gigId,
+      venueId,
+      artistId
+    }).then()
+    .catch();
+  };
+
+  handleConfirmRequest = (gigId, venueId, artistId) => {
+    API.Requests.confirmThisRequest({
+      gigId,
+      venueId,
+      artistId
+    }).then()
+    .catch();
+  };
+
+  // This renders the right side of the page ----------------------------------------
   render1 = () => {
     return (
       <div>
@@ -177,7 +196,18 @@ class VenueProfile extends Component {
               genre = {gig.genre}
               date = {gig.date}
               artists = {gig.PotentialArtist}
+              venueId = {this.state.venue.id}
+              onClick = {this.handleDeny}
               >
+              {gig.PotentialArtist.map(artist => {
+                return (
+                <div>
+                  <h3>{artist.artistName}</h3>
+                  <button onClick={() => this.handleDenyRequest(gig.id, this.state.venue.id, artist.id)}>Deny</button>
+                  <button onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
+                </div>
+                )
+              })}
               </ResultBox2>
             </div>
             ))}
