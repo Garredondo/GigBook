@@ -1,7 +1,7 @@
 import {LogoutButton, BookGigButton} from "../components/buttons";
 import GigFilter from "../components/gigfilter";
 import API from "../utils/index";
-import { log } from "util";
+// import { log } from "util";
 import React, {Component} from "react";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRightArtist from "../components/containers/ProfileRightArtist";
@@ -31,12 +31,12 @@ class ArtistProfile extends Component {
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      // if(res.data === "false") {
-      //   this.props.history.push("/");
-      // }
+      if(res.data === "false") {
+        this.props.history.push("/");
+      }
     }).catch(err => console.log(err));
     
-    this.loadArtistInfo();
+    // this.loadArtistInfo();
     this.loadGigs();
     
   };
@@ -71,9 +71,8 @@ class ArtistProfile extends Component {
           return gig;
         }
         if(gig.gigName === option) {
-          return gig
+          return gig;
         }
-  
       })
 
       this.setState({ 
@@ -102,13 +101,13 @@ class ArtistProfile extends Component {
     });
   };
 
-  loadArtistInfo() {
-    API.Artists.getArtistInfo().then(res => {
-      this.setState({
-        artistInfo: res.data
-      })
-    }).catch(err => console.log(err));
-  };
+  // loadArtistInfo() {
+  //   API.Artists.getArtistInfo().then(res => {
+  //     this.setState({
+  //       artistInfo: res.data
+  //     })
+  //   }).catch(err => console.log(err));
+  // };
 
   // This function is for editing the profile (it's executed in ProfileLeft/index.js)
   toggleEdit = () => {
@@ -143,7 +142,6 @@ class ArtistProfile extends Component {
 
 
   submitChanges = (event) => {
-    console.log(this.state);
     event.preventDefault();
 
     let updatedArtistInfo = {
@@ -167,7 +165,6 @@ class ArtistProfile extends Component {
   render() {
     return (
       <div>
-        <h1>Artist Profile Page</h1>
 
         {/* {(this.state.requests.profileImage) ? 
           <ProfileLeft 
@@ -201,7 +198,7 @@ class ArtistProfile extends Component {
         handleInputChange = {this.handleInputChange}
       >
         <LogoutButton onClick={this.handleLogout}/>
-      </ProfileLeft>}
+      </ProfileLeft>
 
         
 

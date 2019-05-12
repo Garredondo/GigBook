@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import {LogoutButton,FormButton} from "../../buttons";
+import {FormButton} from "../../buttons";
 import {InputBox} from "../../inputs";
 
 function ProfileLeft(props) {
