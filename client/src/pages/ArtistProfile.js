@@ -26,8 +26,8 @@ class ArtistProfile extends Component {
     website: "",
     email: "",
     //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
-
   };
+
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
@@ -38,7 +38,6 @@ class ArtistProfile extends Component {
     
     this.loadArtistInfo();
     this.loadGigs();
-    
   };
 
   loadGigs = () => {
@@ -84,7 +83,6 @@ class ArtistProfile extends Component {
     .catch(err => console.log(err));
 
     console.log(this.state.filter);
-
   }
 
   handleLogout = event => {
@@ -112,6 +110,7 @@ class ArtistProfile extends Component {
 
   // This function is for editing the profile (it's executed in ProfileLeft/index.js)
   toggleEdit = () => {
+    console.log("This is the state before the function's work: " + this.state.editing)
     if (this.state.editing === false){
       this.setState({
         editing: true
@@ -122,6 +121,7 @@ class ArtistProfile extends Component {
         editing:false
       });
     }
+    console.log("This is the state after the function's done: " + this.state.editing)
   };
 
   // handleDeleteProfile = id => {
@@ -163,6 +163,7 @@ class ArtistProfile extends Component {
     .then(this.setState({editing:false})).catch(err => console.log(err));
   }
 
+
   render() {
 
     return (
@@ -189,6 +190,7 @@ class ArtistProfile extends Component {
         :  */}
         <ProfileLeft 
         editing = {this.state.editing}
+        toggleEdit = {this.toggleEdit}
         image={"https://via.placeholder.com/150"}
         artistName={this.state.requests.artistName}
         genre={this.state.requests.genre}

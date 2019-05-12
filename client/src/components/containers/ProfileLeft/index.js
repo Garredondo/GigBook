@@ -5,6 +5,8 @@ import {InputBox} from "../../inputs";
 
 function ProfileLeft(props) {
 
+    let infoArray = [];
+
     if (props.editing === false){
         return(
             <div className = "profile-left">
@@ -21,7 +23,6 @@ function ProfileLeft(props) {
                     <br></br>
                     <p>Members: <strong>{props.numberOfMembers}</strong> </p>
                     <p className = "instruments"> {props.instrumentation} </p>
-    
     
                     {/* For Venue */}
                     <p className = "venue-address"> {props.street_address} </p>
@@ -59,11 +60,9 @@ function ProfileLeft(props) {
                     <h3># of Instruments</h3>
                     <InputBox name = "instrumentation" onChange = {props.handleInputChange} defaultValue = {props.instrumentation} />
     
-    
                     {/* For Venue */}
                     <p className = "venue-address"> {props.street_address} </p>
                     <p className = "venue-address"> {props.city && props.state && props.zipcode ? `${props.city}, ${props.state} ${props.zipcode}` : ""}</p>
-                
                 
                     <p>Email Address</p>
                     <InputBox name = "email" onChange = {props.handleInputChange} defaultValue = {props.email} />
@@ -75,11 +74,9 @@ function ProfileLeft(props) {
                     <FormButton label = "Submit Changes" onClick = {props.submitChanges}/>
                     {/* {props.children} */}
                 </div>
-    
             </div>
         )
     }
-
 }
 
 export default ProfileLeft;

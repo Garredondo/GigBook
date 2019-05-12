@@ -54,9 +54,6 @@ router.route("/").get(function (req, res) {
 
 
 router.route("/").put(function(req, res) {
-    console.log(req.body.profileImage);
-    console.log(req.user);
-
     db.Artist.update({
         artistName: req.body.artistName,
         genre: req.body.genre,
@@ -73,6 +70,9 @@ router.route("/").put(function(req, res) {
         }
     }).then(response => res.json(response))
     .catch(err => res.json(err));
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    //End of Put method =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
 });
 
 // get the id of the gig and the id of the artist and post it to the requests table
