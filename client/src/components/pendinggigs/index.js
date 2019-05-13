@@ -3,15 +3,11 @@ import React from 'react';
 import "./style.css";
 
 
-
-
-  
-
 function BookedGigs(props) {
     return (
             <div id={props.id} className = "booked-gig-card">
     
-                <img src = {props.src} alt = "result" className= "image"/>
+                <img src = {props.src} alt = "venues profile image" className= "image"/>
 
                 <div className = "card-text">
                     {/* either the artist's name/description/genre or the venue's */}
