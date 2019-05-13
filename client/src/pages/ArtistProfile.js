@@ -42,6 +42,8 @@ class ArtistProfile extends Component {
     
   };
 
+  //get gig data and load users information
+
   loadGigs = () => {
     API.Artists.getGigs()
       .then(res => {

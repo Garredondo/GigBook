@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require("../../models");
 
+
 router.get("/:name", function(req, res){
     let userName = req.params.name;
     db.User.findAll({
@@ -16,6 +17,7 @@ router.get("/:name", function(req, res){
     })
 });
 
+//create user venue else artist
 router.post("/", function (req, res) {
     if(req.body.role === "artist") {
         db.User.create({
@@ -34,9 +36,9 @@ router.post("/", function (req, res) {
                 profileImage: "",
                 website: ""
             }).then(function(response){
-                console.log(response.data);
-                console.log(response.status);
-                console.log(response.statusText);
+                // console.log(response.data);
+                // console.log(response.status);
+                // console.log(response.statusText);
             }).catch(function (error) {
                 if(error.response){
                     console.log(error.response.data);
@@ -68,9 +70,9 @@ router.post("/", function (req, res) {
                 website: "",
                 image: ""
             }).then(function(response){
-                console.log(response.data);
-                console.log(response.status);
-                console.log(response.statusText);
+                // console.log(response.data);
+                // console.log(response.status);
+                // console.log(response.statusText);
             }).catch(function (error) {
                 if(error.response){
                     console.log(error.response.data);
@@ -87,6 +89,7 @@ router.post("/", function (req, res) {
     }
 });
 
+//delete user
 router.delete("/:id", function(req, res){
     db.User.delete({
         where: {

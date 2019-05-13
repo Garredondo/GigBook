@@ -10,7 +10,8 @@ module.exports = function( sequelize, DataTypes ) {
         website: DataTypes.STRING
     });
 
-    // // Artist Table
+    // // Associate artist to gigs through the requests table. Alias potential gig
+    // also associate artist to user table
     Artist.associate = function( models ) {
         models.Artist.belongsToMany(models.Gig, {as: "PotentialGig", through: "Requests"})
         models.Artist.belongsTo(models.User);
