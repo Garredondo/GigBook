@@ -1,7 +1,9 @@
 # GigBook
 - - -
 ## What GigBook does
-GigBook is a full-stack web application, which allows artists and venues to connect on one, easy-to-use hub. Both artists and venues can create accounts, update their profile with fields such as a profile image, name, and contact information, and manage their gigs. Users who sign up as a venue can create gigs. These gigs are displayed to artists. Users who login as an artist can search through posted gigs and submit requests to venues to book a posted gig. Arstist(s) requests are displayed to venues as pending. Venues may accept or deny artist's pending gig requests.
+GigBook is a full-stack web application, which allows artists and venues to connect on one, easy-to-use hub. Both artists and venues can create accounts, update their profile with fields such as a profile image, name, and contact information, and manage their gigs. 
+Users who sign up as a venue can create gigs and accept or deny artist's pending gig requests. These gigs are displayed to artists.
+Users who login as an artist can search through posted gigs and submit requests to venues to book a posted gig. Arstist(s) requests are displayed to venues as pending. Once the request is confirmed by the venue, it is displayed as a booked gig to the respective Artist.
 
 ### Users can find the deployed application [here](https://gigbook-p3.herokuapp.com/).
 
@@ -45,7 +47,6 @@ GigBook allows users to dynamically create a venue profile or an artist profile.
 * Toastify
 * mysql
 * axios
-* Passport
 
 #### Setting up the product on your machine
 1. Clone the repository to your machine.
