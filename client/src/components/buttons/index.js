@@ -59,7 +59,7 @@ export function BookGigButton({
     }) {
     return (
         <button className="btn btn-primary btn-lg btn-main book card-button" 
-        data-id={dataId} onClick={onClick}>Book</button>
+        data-id={dataId} onClick={onClick}>Request</button>
     );
 }
 

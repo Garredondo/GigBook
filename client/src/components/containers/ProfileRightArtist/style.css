@@ -1,9 +1,14 @@
 .profile-right {
     margin: auto;
-    margin-left: 350px;
+    
+    margin-left: 20px;
     padding: 40px;
     overflow: hidden;
     background-color: #232426;
-    height: 100vh;
+    height: 100%;
 }
 
+.venue-filter {
+    margin:0 auto;
+    width:50%;
+}

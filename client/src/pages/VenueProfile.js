@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LogoutButton, DeleteGigButton, StartButton, FormButton} from "../components/buttons";
+import { LogoutButton, DeleteGigButton, StartButton, FormButton } from "../components/buttons";
 import API from "../utils/index";
 import { InputBox, TextLabel } from "../components/inputs";
 import ProfileRightVenue from "../components/containers/ProfileRightVenue";
@@ -11,19 +11,35 @@ import ResultBox2 from "../components/requestedCards";
 class VenueProfile extends Component {
 
   state = {
+    role: "venue",
     description: "",
     genre: "",
     date: "",
     venue: {},
     gigs: [],
     requestedGigs: [],
+    bookedGigs: [],
     newBookedGigs: [],
-    display: true
+    display: true,
+    // This is for the Profile Right Component =======
+    editing: false,
+    image: "",
+    venueName: "",
+    street_address: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    phone: 0,
+    email: "",
+    website: "",
+    //================================================
+
+    mobile:false
   };
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
-      if(res.data === "false") {
+      if (res.data === "false") {
         this.props.history.push("/");
       }
     }).catch(err => console.log(err));
@@ -53,12 +69,22 @@ class VenueProfile extends Component {
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(venueProfile => {
       this.setState({
-        venue: venueProfile.data
+        venue: venueProfile.data,
+        image: venueProfile.image,
+        venueName: venueProfile.venueName,
+        street_address: venueProfile.street_address,
+        city: venueProfile.city,
+        state: venueProfile.state,
+        zipcode: venueProfile.zipcode,
+        phone: venueProfile.phone,
+        email: venueProfile.email,
+        website: venueProfile.website,
       })
+      
       var id = venueProfile.data.id;
       API.Gigs.getGigs(id).then(gigs => {
         const unbookedGigs = gigs.data.filter(gig => {
-          if(gig.ArtistId === null){
+          if (gig.ArtistId === null) {
             return gig;
           }
         })
@@ -106,10 +132,11 @@ class VenueProfile extends Component {
 
   deleteThisGig = event => {
     var id = event;
-    API.Gigs.deleteThisGig(id).then(res => {console.log(res)
+    API.Gigs.deleteThisGig(id).then(res => {
+      console.log(res)
       this.loadVenueInfo();
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   };
 
   handleDenyRequest = (gigId, venueId, artistId) => {
@@ -118,7 +145,7 @@ class VenueProfile extends Component {
       venueId,
       artistId
     }).then()
-    .catch();
+      .catch();
   };
 
   handleConfirmRequest = (gigId, venueId, artistId) => {
@@ -127,8 +154,79 @@ class VenueProfile extends Component {
       venueId,
       artistId
     }).then()
-    .catch();
+      .catch();
   };
+
+  // This function is for editing the profile (it's executed in ProfileLeft/index.js)
+  toggleEdit = () => {
+    if (this.state.editing === false) {
+      this.setState({
+        editing: true
+      });
+    }
+    else if (this.state.editing === true) {
+      this.setState({
+        editing: false
+      });
+    }
+  };
+
+  submitChanges = (event) => {
+    event.preventDefault();
+    this.setState({ editing: false })
+
+    let updatedVenueInfo = {
+      image: this.state.image,
+      venueName: this.state.venueName,
+      phone: this.state.phone,
+      website: this.state.website,
+      email: this.state.email,
+      street_address: this.state.street_address,
+      city: this.state.city,
+      state: this.state.state,
+      zipcode: this.state.zipcode
+    }
+
+    API.Venues.update(updatedVenueInfo)
+      .then(res => {
+        this.setState({
+          image: res.venue.image,
+          artistName: res.venue.venueName,
+          email: res.venue.email,
+          website: res.venue.website,
+          phone: res.venue.phone,
+          street_address: res.venue.street_address,
+          city: res.venue.city,
+          state: res.venue.state,
+          zipcode: res.venue.zipcode
+        })
+      })
+      .catch(err => console.log(err));
+  };
+
+
+  //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+  // Hunter: "These originally weren't in this file. Adds mobile
+  //          responsiveness."
+  //-------------------------------------------------------------
+  toggleSidebar = () => {
+    console.log(this.state.mobile);
+    if (this.state.mobile === false){
+      this.setState({
+        mobile:true
+      });
+    }
+
+    else {
+      this.setState({
+        mobile:false
+      });
+    }
+  }
+  // =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+
+
 
   // This renders the right side of the page ----------------------------------------
   render1 = () => {
@@ -169,60 +267,60 @@ class VenueProfile extends Component {
   }
 
   render2 = () => {
-    return(
-      <div id = "display-venue-gigs">
+    return (
+      <div id="display-venue-gigs">
         <StartButton id="dis-make-gig-form-btn" label="Make A Gig" onClick={this.toggleView} />
-        <div className = "main-title">Live Listings</div>
-        <hr className = "divider"></hr>
+        <div className="main-title">Live Listings</div>
+        <hr className="divider"></hr>
 
         {/* This maps out unbooked gigs */}
-        <div className = "result-box">
+        <div className="result-box">
           {this.state.gigs.map(gig => (
-          <ResultBox
-            src = {this.state.venue.image}
-            name = {gig.gigName}
-            description = {gig.description}
-            genre = {gig.genre}
-            date = {gig.date}
-          >
-          <DeleteGigButton
-          dataId={gig.id}
-          label={"Delete Gig"}
-          onClick={() => this.deleteThisGig(gig.id)}
-          />
-          </ResultBox>
+            <ResultBox
+              src={this.state.venue.image}
+              name={gig.gigName}
+              description={gig.description}
+              genre={gig.genre}
+              date={gig.date}
+            >
+              <DeleteGigButton
+                dataId={gig.id}
+                label={"Delete Gig"}
+                onClick={() => this.deleteThisGig(gig.id)}
+              />
+            </ResultBox>
           ))}
         </div>
 
         {/* Requested Gigs and their Associated Artists */}
-        <div className = "main-title">Requested Gigs</div>
-          <div className="row">
+        <div className="main-title">Requested Gigs</div>
+        <div className="row">
           {this.state.gigsAndTheirArtists.map(gig => (
             <div>
               <ResultBox2
-              src = {this.state.venue.image}
-              name = {gig.gigName}
-              description = {gig.description}
-              genre = {gig.genre}
-              date = {gig.date}
-              artists = {gig.PotentialArtist}
-              venueId = {this.state.venue.id}
-              onClick = {this.handleDeny}
+                src={this.state.venue.image}
+                name={gig.gigName}
+                description={gig.description}
+                genre={gig.genre}
+                date={gig.date}
+                artists={gig.PotentialArtist}
+                venueId={this.state.venue.id}
+                onClick={this.handleDeny}
               >
-              {gig.PotentialArtist.map(artist => {
-                return (
-                <div>
-                  <h3>{artist.artistName}</h3>
-                  <button onClick={() => this.handleDenyRequest(gig.id, this.state.venue.id, artist.id)}>Deny</button>
-                  <button onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
-                </div>
-                )
-              })}
+                {gig.PotentialArtist.map(artist => {
+                  return (
+                    <div>
+                      <h3>{artist.artistName}</h3>
+                      <button onClick={() => this.handleDenyRequest(gig.id, this.state.venue.id, artist.id)}>Deny</button>
+                      <button onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
+                    </div>
+                  )
+                })}
               </ResultBox2>
             </div>
-            ))}
+          ))}
 
-          </div>
+        </div>
 
           {/* Booked Gigs */}
           <div className = "main-title">Booked Gigs</div>
@@ -248,30 +346,46 @@ class VenueProfile extends Component {
   render() {
     return (
       <div>
-        {this.state.venue.image ? 
-          <ProfileLeft image={this.state.venue.image}
-          venueName={this.state.venue.venueName}
-          email={this.state.venue.email}
-          website={this.state.venue.website}
-          street_address={this.state.venue.street_address}
-          city={this.state.venue.city}
-          state={this.state.venue.state}
-          zipcode={this.state.venue.zipcode}
-          phone={this.state.venue.phone}>
-          <LogoutButton onClick={this.handleLogout} />
-        </ProfileLeft>
-        :
-        <ProfileLeft image={"https://via.placeholder.com/150"}
-          venueName={this.state.venue.venueName}
-          email={this.state.venue.email}
-          website={this.state.venue.website}
-          street_address = {this.state.venue.street_address}
-          city = {this.state.venue.city}
-          state = {this.state.venue.state}
-          zipcode = {this.state.venue.zipcode}
-          phone={this.state.venue.phone}>
-          <LogoutButton onClick={this.handleLogout}/>
-        </ProfileLeft>
+        {(this.state.venue.image) ?
+          <ProfileLeft
+            // Hunter: "This is for the toggle sidebar feature." /=/=/=/
+            mobile={this.state.mobile}
+            toggleSidebar={this.toggleSidebar}
+            // =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+            role={this.state.role}
+            editing={this.state.editing}
+            toggleEdit={this.toggleEdit}
+            image={this.state.venue.image}
+            venueName={this.state.venue.venueName}
+            email={this.state.venue.email}
+            website={this.state.venue.website}
+            street_address={this.state.venue.street_address}
+            city={this.state.venue.city}
+            state={this.state.venue.state}
+            zipcode={this.state.venue.zipcode}
+            phone={this.state.venue.phone}
+            submitChanges={this.submitChanges}
+            handleInputChange={this.handleInputChange}>
+            <LogoutButton onClick={this.handleLogout} />
+          </ProfileLeft>
+          :
+          <ProfileLeft
+            role={this.state.role}
+            editing={this.state.editing}
+            toggleEdit={this.toggleEdit}
+            image={"https://via.placeholder.com/150"}
+            venueName={this.state.venue.venueName}
+            email={this.state.venue.email}
+            website={this.state.venue.website}
+            street_address={this.state.venue.street_address}
+            city={this.state.venue.city}
+            state={this.state.venue.state}
+            zipcode={this.state.venue.zipcode}
+            phone={this.state.venue.phone}
+            submitChanges={this.submitChanges}
+            handleInputChange={this.handleInputChange}>
+            <LogoutButton onClick={this.handleLogout} />
+          </ProfileLeft>
         }
 
         <ProfileRightVenue >

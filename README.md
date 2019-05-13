@@ -1,9 +1,20 @@
 # GigBook
 - - -
 ## What GigBook does
-GigBook is a full-stack web application that allows artists and venues to connect on one, easy-to-use hub. Either an artist or venue can create an account, build their profile with fields such as a profile image, name, and contact information, and manage their gigs. Users who sign up as a venue can create gigs and display the gig information to musicians. Users who sign up as an artist can search through the posted gigs and book themselves.
+GigBook is a full-stack web application, which allows artists and venues to connect on one, easy-to-use hub. Both artists and venues can create accounts, update their profile with fields such as a profile image, name, and contact information, and manage their gigs. Users who sign up as a venue can create gigs. These gigs are displayed to artists. Users who login as an artist can search through posted gigs and submit requests to venues to book a posted gig. Arstist(s) requests are displayed to venues as pending. Venues may accept or deny artist's pending gig requests.
 
-### Users can find the deployed page [here](https://blooming-tundra-24887.herokuapp.com/).
+### Users can find the deployed application [here](https://gigbook-p3.herokuapp.com/).
+
+## How users can get started with GigBook
+### For Artists
+1. Create an account
+2. Build your profile with information about yourself / group
+3. Search through gigs and submit requests
+### For Venues
+1. Create an account
+2. Build your profile with information about your venue
+3. Create gigs so that artists can request to book them
+4. Confirm or deny artists' request to play at your venue
 - - -
 ### Screenshots of GigBook
 #### GigBook's landing page on a large screen
@@ -19,9 +30,23 @@ GigBook is a full-stack web application that allows artists and venues to connec
 - - -
 ## Why GigBook is useful
 GigBook allows users to dynamically create a venue profile or an artist profile. This profile helps a user advertise themselves and connect with other users.
+
 - - -
-## How users can get started with GigBook
 ### For Developers
+### Technologies used: gigBook is a full stack MERN application
+* MySQL
+* Express
+* React
+* Node.JS
+
+### NPM packages:
+* Passport
+* BCrypt
+* Toastify
+* mysql
+* axios
+* Passport
+
 #### Setting up the product on your machine
 1. Clone the repository to your machine.
 `https://github.com/Garredondo/GigBook.git`
@@ -45,14 +70,7 @@ GigBook allows users to dynamically create a venue profile or an artist profile.
 
 
 3. Sequelize will create tables using the files in the [models_folder](/models) once the server has started.
-### For Artists
-1. Create an account
-2. Build your profile with information about yourself / group
-3. Search through gigs and book
-### For Venues
-1. Create an account
-2. Build your profile with information about your venue
-3. Create gigs so that artists can book
+
 - - -
 ## Where users can get help with GigBook:
 * Wesley Berry: wesleyberry52@gmail.com
@@ -61,7 +79,6 @@ GigBook allows users to dynamically create a venue profile or an artist profile.
 ## Who maintains and contributes to GigBook
 * George Arredondo
 * Wesley Berry [LinkedIn](https://www.linkedin.com/in/wesley-berry-89742317a) - [GitHub](https://github.com/wesleyberry) - [online portfolio](https://wesleyberry.github.io/Personal_Portfolio/)
-* Wes Lebert
 * Eric Price
 * Hunter Wilkins
 * Israel Medina

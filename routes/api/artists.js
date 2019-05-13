@@ -2,6 +2,7 @@ const router = require("express").Router();
 const db = require("../../models");
 const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
+// create an artist's profile
 router.route("/", isAuthenticated).post(function (req, res) {
     db.Artist.create({
         artistName: req.body.artistName,
@@ -52,10 +53,10 @@ router.route("/", isAuthenticated).get(function (req, res) {
         })
 });
 
-
+//update an artist's profile
 router.route("/", isAuthenticated).put(function(req, res) {
-    console.log(req.body.profileImage);
-    console.log(req.user);
+    // console.log(req.body.profileImage);
+    // console.log(req.user);
 
     db.Artist.update({
         artistName: req.body.artistName,
@@ -73,15 +74,9 @@ router.route("/", isAuthenticated).put(function(req, res) {
         }
     }).then(response => res.json(response))
     .catch(err => res.json(err));
-});
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-// get the id of the gig and the id of the artist and post it to the requests table
-// router.put("/", function(req, res) {
-//     db.Requests.update({
-//         gigId:1,
-//         ArtistId:6
-//     }).then(response => res.json(response))
-//     .catch(err => res.json(err));
-// });
+    //End of Put method =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+});
 
 module.exports = router;

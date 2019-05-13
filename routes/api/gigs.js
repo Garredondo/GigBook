@@ -30,11 +30,6 @@ router.post("/", isAuthenticated, function(req, res) {
     });
 });
 
-// router.get("/", function (req, res) {
-//     db.Gig.findAll({}).then(response => res.json(response))
-//     .catch(err => res.json(err));
-// });
-
 
 // Gets the venue's unbooked gigs
 router.get("/unbooked/:id", function(req, res) {
