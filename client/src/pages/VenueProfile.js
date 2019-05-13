@@ -327,7 +327,7 @@ class VenueProfile extends Component {
                 date = {gig.date}
               >
               <h3>{gig.artistName}</h3>
-              <h5>{gig.email}</h5>
+              <a href="mailto:"{...gig.email}>{gig.email}</a>
               </ResultBox>          
             ))}
           </div>
