@@ -13,7 +13,6 @@ router.route("/", isAuthenticated).post(function (req, res) {
         phone: req.body.phone,
         profileImage: req.body.profileImg,
         website: req.body.website,
-        // This is commented out because req.user comes from passport
         // UserId: req.user.id
     }).then(response => {
         res.json(response);
@@ -36,7 +35,6 @@ router.route("/", isAuthenticated).get(function (req, res) {
                     db.Artist.findOne({
                         where: {
                             UserId: req.user.id
-                            // id: 3
                         },
                         include: [{model: db.Gig, as: "PotentialGig"}]
                     }).then(dbRequest => {
@@ -55,9 +53,6 @@ router.route("/", isAuthenticated).get(function (req, res) {
 
 //update an artist's profile
 router.route("/", isAuthenticated).put(function(req, res) {
-    // console.log(req.body.profileImage);
-    // console.log(req.user);
-
     db.Artist.update({
         artistName: req.body.artistName,
         genre: req.body.genre,
@@ -69,7 +64,6 @@ router.route("/", isAuthenticated).put(function(req, res) {
         profileImage: req.body.profileImage
     }, {
         where: {
-            // UserId: 2
             UserId: req.user.id
         }
     }).then(response => res.json(response))
