@@ -223,10 +223,6 @@ class ArtistProfile extends Component {
 
   render() {
 
-    // console.log("what is this.state.requests? client/src/pages/ArtistProfile.js")
-    // console.log(this.state.requests)
-    console.log("what is this.state.editing? client/src/pages/ArtistProfile.js")
-    console.log(this.state.editing)
     return (
       <div>
         {(this.state.requests.profileImage) ? 

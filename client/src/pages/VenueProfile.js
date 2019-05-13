@@ -31,6 +31,9 @@ class VenueProfile extends Component {
     phone: 0,
     email: "",
     website: "",
+    //================================================
+
+    mobile:false
   };
 
   componentDidMount() {
@@ -191,6 +194,26 @@ class VenueProfile extends Component {
   };
 
 
+  //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+  // Hunter: "These originally weren't in this file. Adds mobile
+  //          responsiveness."
+  //-------------------------------------------------------------
+  toggleSidebar = () => {
+    console.log(this.state.mobile);
+    if (this.state.mobile === false){
+      this.setState({
+        mobile:true
+      });
+    }
+
+    else {
+      this.setState({
+        mobile:false
+      });
+    }
+  }
+  // =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
 
 
 
@@ -311,6 +334,10 @@ class VenueProfile extends Component {
       <div>
         {(this.state.venue.image) ?
           <ProfileLeft
+            // Hunter: "This is for the toggle sidebar feature." /=/=/=/
+            mobile={this.state.mobile}
+            toggleSidebar={this.toggleSidebar}
+            // =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
             role={this.state.role}
             editing={this.state.editing}
             toggleEdit={this.toggleEdit}

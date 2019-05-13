@@ -35,7 +35,7 @@ function ProfileLeft(props) {
             )
         } else {
             return(
-                <div className = "profile-left">
+                <div className = "profile-left" style = {{left: props.mobile ? "-300px" : "0px"}}>
                     <button id = "collapse-profile" onClick = {props.toggleSidebar}>></button>
                     <div className = "profile-picture">
                         <img className = "image-profile" alt = "profile-pic" src = {props.image} />

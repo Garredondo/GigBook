@@ -3,8 +3,8 @@ import "./style.css";
 
 function ResultBox(props) {
     return (
-        <div>
-            <div className = "gig-card col-sm-12 col-md-4 col-ld-3">
+        <div id = "">
+            <div className = "gig-card">
                 <img src = {props.src} alt = "users profile image" className= "image"/>
 
                 <div className = "card-text">
