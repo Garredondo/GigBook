@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const db = require("../../models");
 const isAuthenticated = require("../../config/middleware/isAuthenticated");
+const Sequelize = require("sequelize");
+
 
 //  Posts to gigs table from venue view
 router.post("/", isAuthenticated, function(req, res) {
@@ -30,7 +32,7 @@ router.post("/", isAuthenticated, function(req, res) {
 
 
 // Gets the venue's unbooked gigs
-router.get("/unbooked/:id", isAuthenticated, function(req, res) {
+router.get("/unbooked/:id", function(req, res) {
     var id = req.params.id;
     db.Gig.findAll({
         where: {
@@ -40,6 +42,45 @@ router.get("/unbooked/:id", isAuthenticated, function(req, res) {
         res.json(response);
     }).catch(err => res.json(err));
 });
+
+router.get("/booked/:id", function(req, res) {
+    var id = req.params.id;
+    var query = `
+    SELECT *, gigs.id AS gigsId FROM gigs
+    LEFT JOIN artists ON gigs.ArtistId = artists.id
+    UNION
+    SELECT *, gigs.id AS gigsID FROM gigs
+    RIGHT JOIN artists ON gigs.ArtistId = artists.id
+    WHERE VenueId=${id}`;
+    db.sequelize.query(query)
+    .then(response => {
+        res.json(response);
+    }).catch(err => res.json(err));
+});
+
+// Gets the venue's booked gigs
+// router.get("/booked/:id", function(req, res) {
+//     var id = req.params.id;
+//     var bookedArray = [];
+//     db.Artist.findAll().then(artists => {
+//         db.Gig.findAll({
+//             where: {
+//                 VenueId: id
+//             }
+//         }).then(gigs => {
+//             console.log(artists[0].dataValues);
+//             for(var i = 0; i < gigs.length; i++) {
+//                 if(gigs[i].dataValues.ArtistId) {
+//                     for(var j = 0; j < artists.length; j++) {
+//                         if(gigs[i].dataValues.ArtistId === artists[j].dataValues.id) {
+//                             bookedArray.push(gigs[i] + artists[j]);
+//                         }
+//                     }
+//                 }
+//             }
+//         }).catch(err => res.json(err));
+//     }).catch(err => res.json(err));
+// });
 
 
 // Get one specific gig

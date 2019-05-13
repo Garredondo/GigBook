@@ -19,6 +19,7 @@ class VenueProfile extends Component {
     gigs: [],
     requestedGigs: [],
     bookedGigs: [],
+    newBookedGigs: [],
     display: true,
     // This is for the Profile Right Component =======
     editing: false,
@@ -87,20 +88,30 @@ class VenueProfile extends Component {
             return gig;
           }
         })
-        const bookedGigs = gigs.data.filter(gig => {
-          if (gig.ArtistId !== null) {
-            return gig;
-          }
-        })
+        // const bookedGigs = gigs.data.filter(gig => {
+        //   if(gig.ArtistId !== null ) {
+        //     return gig;
+        //   }
+        // })
         this.setState({
           gigs: unbookedGigs,
-          bookedGigs: bookedGigs
+          // bookedGigs: bookedGigs
         })
         API.Requests.getRequestedGigs(id).then(gigsAndTheirArtists => {
           this.setState({
             gigsAndTheirArtists: gigsAndTheirArtists.data
           })
-          // console.log(this.state.gigsAndTheirArtists);
+          API.Gigs.getBookedGigs(id).then(bookedGigs => {
+            var newBookedGigs = [];
+            for(var i = 0; i < bookedGigs.data[0].length; i++) {
+              if(bookedGigs.data[0][i].id) {
+                newBookedGigs.push(bookedGigs.data[0][i])
+              }
+            }
+            this.setState({
+              newBookedGigs: newBookedGigs
+            })
+          }).catch(err => console.log(err));
         }).catch(err => console.log(err));
       }).catch(err => console.log(err));
     }).catch(err => console.log(err));
@@ -311,20 +322,23 @@ class VenueProfile extends Component {
 
         </div>
 
-        {/* Booked Gigs */}
-        <div className="main-title">Booked Gigs</div>
-        <hr className="divider"></hr>
-        <div className="result-box">
-          {this.state.bookedGigs.map(gig => (
-            <ResultBox
-              src={this.state.venue.image}
-              name={gig.gigName}
-              description={gig.description}
-              genre={gig.genre}
-              date={gig.date}
-            />
-          ))}
-        </div>
+          {/* Booked Gigs */}
+          <div className = "main-title">Booked Gigs</div>
+          <hr className = "divider"></hr>
+          <div className = "result-box">
+            {this.state.newBookedGigs.map(gig => (
+              <ResultBox
+                src = {gig.profileImage ? gig.profileImage: "https://via.placeholder.com/150x150"}
+                name = {gig.gigName}
+                description = {gig.description}
+                genre = {gig.genre}
+                date = {gig.date}
+              >
+              <h3>{gig.artistName}</h3>
+              <h5>{gig.email}</h5>
+              </ResultBox>          
+            ))}
+          </div>
       </div>
     )
   }
