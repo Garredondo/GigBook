@@ -27,8 +27,14 @@ class ArtistProfile extends Component {
     website: "",
     email: "",
     //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+ 
+    // This is for Mobile Responsiveness -\-\-\-\-\-\-\-\-\-\-\
+    mobile:true
+    // -\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\
 
+  
   };
+
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
@@ -39,7 +45,6 @@ class ArtistProfile extends Component {
     
     // this.loadArtistInfo();
     this.loadGigs();
-    
   };
 
   //get gig data and load users information
@@ -121,6 +126,7 @@ class ArtistProfile extends Component {
   // };
 
   // This function is for editing the profile (it's executed in ProfileLeft/index.js)
+  
   toggleEdit = () => {
     console.log("Edit was clicked")
 
@@ -134,6 +140,7 @@ class ArtistProfile extends Component {
         editing:false
       });
     }
+    console.log("This is the state after the function's done: " + this.state.editing)
   };
 
   // handleDeleteProfile = id => {
@@ -151,7 +158,6 @@ class ArtistProfile extends Component {
     }).then(res => console.log(res))
     .catch(err => console.log(err));
   };
-
 
 
   submitChanges = (event) => {
@@ -174,8 +180,6 @@ class ArtistProfile extends Component {
     // console.log("submitchanges state");
     // console.log(this.state);
 
-
-    
     API.Artists.update(updatedArtistInfo)
     .then(e=>{
       API.Artists.getGigs()
@@ -201,6 +205,22 @@ class ArtistProfile extends Component {
     
   }
 
+  toggleSidebar = () => {
+    console.log(this.state.mobile);
+    if (this.state.mobile === false){
+      this.setState({
+        mobile:true
+      });
+    }
+
+    else {
+      this.setState({
+        mobile:false
+      });
+    }
+    
+  }
+
   render() {
 
     // console.log("what is this.state.requests? client/src/pages/ArtistProfile.js")
@@ -209,9 +229,10 @@ class ArtistProfile extends Component {
     console.log(this.state.editing)
     return (
       <div>
-
         {(this.state.requests.profileImage) ? 
             <ProfileLeft 
+              toggleSidebar = {this.toggleSidebar}
+              mobile = {this.state.mobile}
               role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
@@ -228,8 +249,10 @@ class ArtistProfile extends Component {
             >
               <LogoutButton onClick={this.handleLogout}/>
             </ProfileLeft> 
-          : 
+          :        
             <ProfileLeft
+              toggleSidebar = {this.toggleSidebar}
+              mobile = {this.state.mobile}
               role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}

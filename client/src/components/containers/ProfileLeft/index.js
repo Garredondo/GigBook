@@ -7,7 +7,8 @@ function ProfileLeft(props) {
     if (props.editing === false){
         if(props.role === "artist"){
             return(
-                <div className = "profile-left">
+                <div className = "profile-left" style = {{left: props.mobile ? "-300px" : "0"}}>
+                    <button id = "collapse-profile" onClick = {props.toggleSidebar}>></button>
                     <div className = "profile-picture">
                         <img className = "image-profile" alt = "profile-pic" src = {props.profileImage}/>
                     </div>
@@ -35,6 +36,7 @@ function ProfileLeft(props) {
         } else {
             return(
                 <div className = "profile-left">
+                    <button id = "collapse-profile" onClick = {props.toggleSidebar}>></button>
                     <div className = "profile-picture">
                         <img className = "image-profile" alt = "profile-pic" src = {props.image} />
                     </div>

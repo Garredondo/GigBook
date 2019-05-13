@@ -74,6 +74,9 @@ router.route("/", isAuthenticated).put(function(req, res) {
         }
     }).then(response => res.json(response))
     .catch(err => res.json(err));
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    //End of Put method =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
 });
 
 module.exports = router;
