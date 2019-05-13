@@ -5,11 +5,10 @@ import {InputBox} from "../../inputs";
 
 function ProfileLeft(props) {
 
-    let infoArray = [];
-
     if (props.editing === false){
         return(
-            <div className = "profile-left">
+            <div className = "profile-left" style = {{left:props.mobile ? "-300px" : "0"}}>
+                <button id = "collapse-profile" onClick = {props.toggleSidebar}>></button>
                 <div className = "profile-picture">
                     <img className = "image-profile" alt = "profile-pic" src = {`${props.image || props.profileImage}`} />
                 </div>
@@ -45,21 +44,23 @@ function ProfileLeft(props) {
     else {
         return(
             <div className = "profile-left editing">
+                <button id = "collapse-profile" onClick = {props.toggleSidebar}>></button>
                 <div className = "profile-content">
-                    <h3>Image Url</h3>
+                    <h4>Image Url</h4>
                     <InputBox name = "profileImage" onChange = {props.handleInputChange} defaultValue = {`${props.image || props.profileImage}`}/>
-                    <h3>Name</h3>
+                    <h4>Name</h4>
                     <InputBox name = "artistName" defaultValue = {props.artistName || props.venueName} onChange = {props.handleInputChange}/>
 
                     {/* For Artist */}
-                    <h3>Genre</h3>
+                    <h4>Genre</h4>
                     <InputBox name = "genre" defaultValue = {props.genre} onChange = {props.handleInputChange}/>
-                    <hr />
-                    <h3># of Members</h3>
-                    <InputBox name = "numberOfMembers" onChange = {props.handleInputChange} defaultValue = {props.numberOfMembers} />
-                    <h3># of Instruments</h3>
-                    <InputBox name = "instrumentation" onChange = {props.handleInputChange} defaultValue = {props.instrumentation} />
-    
+                    
+                    <div id = "quantities">
+                        <p id = "members"># of Members</p>
+                        <p id = "instruments">Instrumentation</p>
+                        <InputBox name = "numberOfMembers" onChange = {props.handleInputChange} defaultValue = {props.numberOfMembers} />
+                        <InputBox name = "instrumentation" onChange = {props.handleInputChange} defaultValue = {props.instrumentation} />
+                    </div>
                     {/* For Venue */}
                     <p className = "venue-address"> {props.street_address} </p>
                     <p className = "venue-address"> {props.city && props.state && props.zipcode ? `${props.city}, ${props.state} ${props.zipcode}` : ""}</p>

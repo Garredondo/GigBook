@@ -26,6 +26,12 @@ class ArtistProfile extends Component {
     website: "",
     email: "",
     //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+ 
+    // This is for Mobile Responsiveness -\-\-\-\-\-\-\-\-\-\-\
+    mobile:true
+    // -\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\
+
+  
   };
 
 
@@ -117,6 +123,7 @@ class ArtistProfile extends Component {
   // };
 
   // This function is for editing the profile (it's executed in ProfileLeft/index.js)
+  
   toggleEdit = () => {
     console.log("Edit was clicked")
 
@@ -170,8 +177,6 @@ class ArtistProfile extends Component {
     // console.log("submitchanges state");
     // console.log(this.state);
 
-
-    
     API.Artists.update(updatedArtistInfo)
     .then(e=>{
       API.Artists.getGigs()
@@ -197,6 +202,21 @@ class ArtistProfile extends Component {
     
   }
 
+  toggleSidebar = () => {
+    console.log(this.state.mobile);
+    if (this.state.mobile === false){
+      this.setState({
+        mobile:true
+      });
+    }
+
+    else {
+      this.setState({
+        mobile:false
+      });
+    }
+    
+  }
 
   render() {
 
@@ -206,9 +226,10 @@ class ArtistProfile extends Component {
     console.log(this.state.editing)
     return (
       <div>
-
         {(this.state.requests.profileImage) ? 
             <ProfileLeft 
+              toggleSidebar = {this.toggleSidebar}
+              mobile = {this.state.mobile}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
               image={this.state.requests.profileImage}
@@ -226,6 +247,8 @@ class ArtistProfile extends Component {
             </ProfileLeft> 
           : 
             <ProfileLeft 
+              toggleSidebar = {this.toggleSidebar}
+              mobile = {this.state.mobile}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
               image={"https://via.placeholder.com/150"}

@@ -4,10 +4,31 @@
     top: 0;
     left: 0;
     background: #333437;
-    width: 350px;
+    width: 300px;
     height: 100%;
     font-family: 'Lato', sans-serif;
     color: #ffffff;
+
+    transition: left .25s;
+}
+
+#collapse-profile {
+    border:none;
+    width:30px;
+    height:100%;
+    background:#47494c;
+    color:white;
+    font-size:25px;
+    
+    position:absolute;
+    right:-30px;
+    top:0;
+    z-index: 4;
+}
+
+#collapse-profile:hover {
+    background:#686b6e;
+
 }
 
 .profile-picture {
@@ -72,4 +93,31 @@
 
 .editing {
    overflow-y:scroll;
+}
+
+.editing p{
+    margin:4px;
+}
+
+
+Input[name="numberOfMembers"], Input[name="instrumentation"] {
+    width:45%;
+}
+
+Input[name="numberOfMembers"]{
+    float:left;
+}
+
+Input[name="instrumentation"]{
+    float:right;
+}
+
+
+
+#members{
+    float:left;
+}
+
+#instruments{
+    float:right;
 }
