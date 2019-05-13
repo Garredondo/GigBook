@@ -27,8 +27,14 @@ class ArtistProfile extends Component {
     website: "",
     email: "",
     //=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+ 
+    // This is for Mobile Responsiveness -\-\-\-\-\-\-\-\-\-\-\
+    mobile:true
+    // -\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\
 
+  
   };
+
 
   componentDidMount() {
     API.Users.isAuthed().then(res => {
@@ -39,7 +45,6 @@ class ArtistProfile extends Component {
     
     // this.loadArtistInfo();
     this.loadGigs();
-    
   };
 
   //get gig data and load users information
@@ -47,8 +52,6 @@ class ArtistProfile extends Component {
   loadGigs = () => {
     API.Artists.getGigs()
       .then(res => {
-        console.log("loadGigs res: ")
-        console.log(res.data);
         this.setState({ 
           gigs: res.data.availableGigs, 
           venues: res.data.allVenues, 
@@ -73,10 +76,7 @@ class ArtistProfile extends Component {
 
     API.Artists.getGigs()
     .then(res => {
-      // console.log("loadGigs res: ")
-      // console.log(res.data.booked);
       const option = document.getElementById('inputGroupSelect03').value;
-      // console.log("what is option", option);
       const filteredGigs = res.data.availableGigs.filter(gig => { 
         //compare gigName to state.filter. only render those which gigName === this.state.filter
         if(option=== "All Venues"){
@@ -104,12 +104,10 @@ class ArtistProfile extends Component {
 
   
   handleInputChange = event => {
-    console.log("testing")
     var { name, value } = event.target;
     this.setState({
       [name]: value
     });
-    console.log({[name]: value});
   };
 
   // loadArtistInfo() {
@@ -121,9 +119,8 @@ class ArtistProfile extends Component {
   // };
 
   // This function is for editing the profile (it's executed in ProfileLeft/index.js)
+  
   toggleEdit = () => {
-    console.log("Edit was clicked")
-
     if (this.state.editing === false){
       this.setState({
         editing: true
@@ -134,6 +131,7 @@ class ArtistProfile extends Component {
         editing:false
       });
     }
+    console.log("This is the state after the function's done: " + this.state.editing)
   };
 
   // handleDeleteProfile = id => {
@@ -148,10 +146,9 @@ class ArtistProfile extends Component {
     API.Requests.bookGigAsArtist({
       ArtistId,
       GigId
-    }).then(res => console.log(res))
+    }).then(this.loadGigs())
     .catch(err => console.log(err));
   };
-
 
 
   submitChanges = (event) => {
@@ -168,20 +165,11 @@ class ArtistProfile extends Component {
       website: this.state.website,
       email:this.state.email
     }
-
-    // console.log("=/=/=/=/=U=P=D=A=T=E=/=/=/=/=/=/=/");
-    // console.log(updatedArtistInfo);
-    // console.log("submitchanges state");
-    // console.log(this.state);
-
-
     
     API.Artists.update(updatedArtistInfo)
     .then(e=>{
       API.Artists.getGigs()
       .then(res => {
-        // console.log("loadGigs res: ")
-        // console.log(res.data.booked);
         this.setState({ 
 
           image:res.requests.profileImage,
@@ -201,17 +189,29 @@ class ArtistProfile extends Component {
     
   }
 
-  render() {
+  toggleSidebar = () => {
+    console.log(this.state.mobile);
+    if (this.state.mobile === false){
+      this.setState({
+        mobile:true
+      });
+    }
 
-    // console.log("what is this.state.requests? client/src/pages/ArtistProfile.js")
-    // console.log(this.state.requests)
-    console.log("what is this.state.editing? client/src/pages/ArtistProfile.js")
-    console.log(this.state.editing)
+    else {
+      this.setState({
+        mobile:false
+      });
+    }
+    
+  }
+
+  render() {
     return (
       <div>
-
         {(this.state.requests.profileImage) ? 
             <ProfileLeft 
+              toggleSidebar = {this.toggleSidebar}
+              mobile = {this.state.mobile}
               role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
@@ -228,8 +228,10 @@ class ArtistProfile extends Component {
             >
               <LogoutButton onClick={this.handleLogout}/>
             </ProfileLeft> 
-          : 
+          :        
             <ProfileLeft
+              toggleSidebar = {this.toggleSidebar}
+              mobile = {this.state.mobile}
               role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
@@ -248,8 +250,6 @@ class ArtistProfile extends Component {
             </ProfileLeft>
         }
 
-        
-
         <ProfileRightArtist>
           <GigFilter filter = {this.filterButton} venues = {this.state.venues} />
 
@@ -264,19 +264,7 @@ class ArtistProfile extends Component {
               <BookGigButton dataId={gig.id} onClick={() => this.bookGigAsArtist(gig.id)}/>
             </ResultBox>
             ))
-            
-            // src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-            // name = "Emo's Austin"
-            // description = "Jesse's Jam Sesh"
-            // genre = "Funk"
-            // date = "05/16/2019" />
             }
-            {/* <BookedGigs 
-            src = "https://static.spacecrafted.com/d0ff1849232e40769aef8fe7be7d853d/i/dee61aad9a52408abded3b7f0492bab4/2/4SoifmQp45JMgBnHp7ed2/EMOS-RELAUNCH2019-11-Resized.jpg"
-            name = "Central Market"
-            description = "boogaloo"
-            genre = "Funk"
-            date = "05/17/2019" /> */}
             <div className = "main-title">Booked Gigs</div>
           <hr className = "divider"></hr>
        
@@ -292,16 +280,6 @@ class ArtistProfile extends Component {
 
         </div>
         </ProfileRightArtist>
-        
-        {/* <LogoutButton />
-        <FilterButton /> */}
-
-        {/* When we map out each gig, 
-        BookGigButton will have dataID={gig.Id} */}
-
-
-
-
 
         {/* <DeleteProfileButton onClick={()=> {this.handleDeleteProfile(this.state.requests.id)}}/> */}
         {/* <DeleteProfileButton onClick={this.handleDeleteProfile}/> */}
