@@ -22,12 +22,13 @@ router.post("/", isAuthenticated, (req, res) => {
 });
 
 // this is where we get data to display potential artists to venues
-router.get("/:id", (req, res) => {
+router.get("/:id", isAuthenticated, (req, res) => {
     var VenueId = req.params.id;
     var gigsAndTheirArtists =[];
     db.Gig.findAll({
         where: {
-            VenueId
+            VenueId,
+            ArtistId: null
         },
         include: [{model: db.Artist, as: "PotentialArtist"}]
     }).then(gigs => {
@@ -40,15 +41,8 @@ router.get("/:id", (req, res) => {
     }).catch(err => res.json(err));
 });
 
-
-router.delete("/:gigId/:venueId/:artistId", (req, res) => {
-    var gigId = req.params.gigId;
-    var venueId = req.params.venueId;
-    var artistId = req.params.artistId;
-});
-
 // Venues confirm a gig. update the gigs table
-router.put("/:gigId/:venueId/:artistId", (req, res) => {
+router.put("/:gigId/:venueId/:artistId", isAuthenticated, (req, res) => {
     var gigId = req.params.gigId;
     var venueId = req.params.venueId;
     var artistId = req.params.artistId;

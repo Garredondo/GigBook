@@ -9,5 +9,8 @@ export default {
     },
     getGigs: data => {
         return axios.get("/api/gigs/unbooked/" + data);
+    },
+    getBookedGigs: data => {
+        return axios.get("/api/gigs/booked/" + data);
     }
 }
