@@ -133,19 +133,9 @@ class VenueProfile extends Component {
   deleteThisGig = event => {
     var id = event;
     API.Gigs.deleteThisGig(id).then(res => {
-      console.log(res)
       this.loadVenueInfo();
     })
       .catch(err => console.log(err));
-  };
-
-  handleDenyRequest = (gigId, venueId, artistId) => {
-    API.Requests.denyThisRequest({
-      gigId,
-      venueId,
-      artistId
-    }).then()
-      .catch();
   };
 
   handleConfirmRequest = (gigId, venueId, artistId) => {
@@ -311,7 +301,6 @@ class VenueProfile extends Component {
                   return (
                     <div>
                       <h3>{artist.artistName}</h3>
-                      <button onClick={() => this.handleDenyRequest(gig.id, this.state.venue.id, artist.id)}>Deny</button>
                       <button onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
                     </div>
                   )
