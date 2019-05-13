@@ -4,7 +4,7 @@ import React from 'react';
 function ResultBox2(props) {
     return (
         <div className = "gig-card col-12">
-        <img src = {props.src} alt = "result image" className= "image"/>
+        <img src = {props.src} alt = "Venue's profile image" className= "image"/>
 
         <div className = "card-text">
             {/* either the artist's name/description/genre or the venue's */}

@@ -11,6 +11,7 @@ import BookedGigs from "../components/pendinggigs";
 
 class ArtistProfile extends Component {
   state = {
+    role: "artist",
     gigs:[],
     requests:{},
     venues:[],
@@ -45,6 +46,8 @@ class ArtistProfile extends Component {
     // this.loadArtistInfo();
     this.loadGigs();
   };
+
+  //get gig data and load users information
 
   loadGigs = () => {
     API.Artists.getGigs()
@@ -230,9 +233,10 @@ class ArtistProfile extends Component {
             <ProfileLeft 
               toggleSidebar = {this.toggleSidebar}
               mobile = {this.state.mobile}
+              role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
-              image={this.state.requests.profileImage}
+              profileImage={this.state.requests.profileImage}
               artistName={this.state.requests.artistName}
               genre={this.state.requests.genre}
               numberOfMembers={this.state.requests.numberOfMembers}
@@ -245,13 +249,14 @@ class ArtistProfile extends Component {
             >
               <LogoutButton onClick={this.handleLogout}/>
             </ProfileLeft> 
-          : 
-            <ProfileLeft 
+          :        
+            <ProfileLeft
               toggleSidebar = {this.toggleSidebar}
               mobile = {this.state.mobile}
+              role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
-              image={"https://via.placeholder.com/150"}
+              profileImage={"https://via.placeholder.com/150"}
               artistName={this.state.requests.artistName}
               genre={this.state.requests.genre}
               numberOfMembers={this.state.requests.numberOfMembers}

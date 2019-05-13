@@ -5,7 +5,7 @@ function ResultBox(props) {
     return (
         <div>
             <div className = "gig-card col-sm-12 col-md-4 col-ld-3">
-                <img src = {props.src} alt = "result image" className= "image"/>
+                <img src = {props.src} alt = "users profile image" className= "image"/>
 
                 <div className = "card-text">
                     {/* either the artist's name/description/genre or the venue's */}
