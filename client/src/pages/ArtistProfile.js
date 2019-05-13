@@ -270,6 +270,7 @@ class ArtistProfile extends Component {
         
 
         <ProfileRightArtist>
+          <div className = "main-title">Booked Gigs</div>
           <GigFilter filter = {this.filterButton} venues = {this.state.venues} />
 
           <div className = "result-box">
@@ -296,7 +297,6 @@ class ArtistProfile extends Component {
             description = "boogaloo"
             genre = "Funk"
             date = "05/17/2019" /> */}
-            <div className = "main-title">Booked Gigs</div>
           <hr className = "divider"></hr>
        
             { this.state.booked.map( gig => (

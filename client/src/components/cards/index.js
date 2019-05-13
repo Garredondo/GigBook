@@ -3,7 +3,6 @@ import "./style.css";
 
 function ResultBox(props) {
     return (
-        <div id = "">
             <div className = "gig-card">
                 <img src = {props.src} alt = "users profile image" className= "image"/>
 
@@ -17,7 +16,6 @@ function ResultBox(props) {
                     {props.children}
                 </div>
             </div>
-        </div>
     );
 }
 
