@@ -55,7 +55,7 @@ class VenueProfile extends Component {
     });
   };
 
-  // Handles form submit by updating state and calling postGig
+  // Handles form submit and calls "postGig" request function
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.description && this.state.genre && this.state.date) {
@@ -69,7 +69,7 @@ class VenueProfile extends Component {
     }
   };
 
-  // This gets venue, gig, and artist info form DB
+  // This gets venue, gig, and artist info from DB
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(venueProfile => {
       this.setState({
@@ -123,13 +123,14 @@ class VenueProfile extends Component {
       .catch(err => console.log(err));
   };
 
+  // Toggles between render1 and render2
   toggleView = () => {
     this.setState({
       display: !this.state.display
     });
   };
 
-  // Deletes a gig
+  // Calls "deleteThisGig" request function
   deleteThisGig = event => {
     var id = event;
     API.Gigs.deleteThisGig(id).then(res => {
@@ -162,6 +163,7 @@ class VenueProfile extends Component {
     }
   };
 
+  // calls "update" request function and updates state
   submitChanges = (event) => {
     event.preventDefault();
     this.setState({ editing: false })
