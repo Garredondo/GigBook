@@ -37,7 +37,7 @@ class Home extends Component {
     roleLogin: ""
   };
 
-
+  // Handles Input change for form - updates state
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -45,6 +45,7 @@ class Home extends Component {
     });
   };
 
+  // Calls "signUp" request function
   createUser = event => {
     event.preventDefault();
     API.Users.signUp({
@@ -62,6 +63,7 @@ class Home extends Component {
     });
   };
 
+  // Handles form control and alerts user
   handleSignUp = event => {
     event.preventDefault();
     if(this.state.name && this.state.password){
@@ -80,6 +82,7 @@ class Home extends Component {
     }
   };
   
+  // Calls "login" request function
   handleLogin = event => {
     event.preventDefault();
     if (this.state.name && this.state.password) {
@@ -105,7 +108,7 @@ class Home extends Component {
     });
   };
 
-
+  // Renders page
   render(){
     return (
     <div className="bodyClass">
