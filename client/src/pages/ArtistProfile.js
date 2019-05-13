@@ -11,6 +11,7 @@ import BookedGigs from "../components/pendinggigs";
 
 class ArtistProfile extends Component {
   state = {
+    role: "artist",
     gigs:[],
     requests:{},
     venues:[],
@@ -209,9 +210,10 @@ class ArtistProfile extends Component {
 
         {(this.state.requests.profileImage) ? 
             <ProfileLeft 
+              role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
-              image={this.state.requests.profileImage}
+              profileImage={this.state.requests.profileImage}
               artistName={this.state.requests.artistName}
               genre={this.state.requests.genre}
               numberOfMembers={this.state.requests.numberOfMembers}
@@ -225,10 +227,11 @@ class ArtistProfile extends Component {
               <LogoutButton onClick={this.handleLogout}/>
             </ProfileLeft> 
           : 
-            <ProfileLeft 
+            <ProfileLeft
+              role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
-              image={"https://via.placeholder.com/150"}
+              profileImage={"https://via.placeholder.com/150"}
               artistName={this.state.requests.artistName}
               genre={this.state.requests.genre}
               numberOfMembers={this.state.requests.numberOfMembers}
