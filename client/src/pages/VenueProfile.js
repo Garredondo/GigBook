@@ -37,6 +37,7 @@ class VenueProfile extends Component {
     mobile:false
   };
 
+  // This fires when the page loads
   componentDidMount() {
     API.Users.isAuthed().then(res => {
       if (res.data === "false") {
@@ -46,6 +47,7 @@ class VenueProfile extends Component {
     this.loadVenueInfo();
   };
 
+  // Handles input change for input boxes; updates state
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -53,6 +55,7 @@ class VenueProfile extends Component {
     });
   };
 
+  // Handles form submit by updating state and calling postGig
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.description && this.state.genre && this.state.date) {
@@ -61,11 +64,12 @@ class VenueProfile extends Component {
         genre: this.state.genre,
         date: this.state.date
       })
-        .then(res => console.log(res))
+        .then(this.loadVenueInfo)
         .catch(err => console.log(err));
     }
   };
 
+  // This gets venue, gig, and artist info form DB
   loadVenueInfo() {
     API.Venues.getVenueInfo().then(venueProfile => {
       this.setState({
@@ -88,14 +92,8 @@ class VenueProfile extends Component {
             return gig;
           }
         })
-        // const bookedGigs = gigs.data.filter(gig => {
-        //   if(gig.ArtistId !== null ) {
-        //     return gig;
-        //   }
-        // })
         this.setState({
           gigs: unbookedGigs,
-          // bookedGigs: bookedGigs
         })
         API.Requests.getRequestedGigs(id).then(gigsAndTheirArtists => {
           this.setState({
@@ -117,6 +115,7 @@ class VenueProfile extends Component {
     }).catch(err => console.log(err));
   };
 
+  // Logs the User out
   handleLogout = event => {
     event.preventDefault();
     API.Users.logout()
@@ -130,6 +129,7 @@ class VenueProfile extends Component {
     });
   };
 
+  // Deletes a gig
   deleteThisGig = event => {
     var id = event;
     API.Gigs.deleteThisGig(id).then(res => {
@@ -138,12 +138,13 @@ class VenueProfile extends Component {
       .catch(err => console.log(err));
   };
 
+  // Confirms a request
   handleConfirmRequest = (gigId, venueId, artistId) => {
     API.Requests.confirmThisRequest({
       gigId,
       venueId,
       artistId
-    }).then()
+    }).then(this.loadVenueInfo())
       .catch();
   };
 
