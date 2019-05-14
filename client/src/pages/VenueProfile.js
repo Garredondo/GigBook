@@ -6,7 +6,6 @@ import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
 import ResultBox2 from "../components/requestedCards";
-// import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
 
@@ -253,6 +252,7 @@ class VenueProfile extends Component {
                 onChange={this.handleInputChange}
                 value={this.state.date}
               />
+              
               <FormButton id="gig-create"
                 value="Post-Gig"
                 className="btn btn-primary btn-lg btn-main"
