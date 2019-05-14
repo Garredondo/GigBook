@@ -4,12 +4,12 @@ INSERT INTO Users (name, password, role)
 VALUES ("Eric", "hello123", "Artist" ), ("Ken", "hello123", "Artist" ), ("Wes", "Hello$123", "Artist" ),("HoleinTheWall", "2314123","Venue"), ("TheBackRoom", "123", "Venue"),( "Sholzs", "123", "Venue"), ("TheWHO", "123", "Artist");
 
 
-ALTER TABLE venues MODIFY createdAt VARCHAR(255);
-ALTER TABLE venues MODIFY updatedAt VARCHAR(255);
-ALTER TABLE artists MODIFY createdAt VARCHAR(255);
-ALTER TABLE artists MODIFY updatedAt VARCHAR(255);
-ALTER TABLE gigs MODIFY createdAt VARCHAR(255);
-ALTER TABLE gigs MODIFY updatedAt VARCHAR(255);
+ALTER TABLE Venues MODIFY createdAt VARCHAR(255);
+ALTER TABLE Venues MODIFY updatedAt VARCHAR(255);
+ALTER TABLE Artists MODIFY createdAt VARCHAR(255);
+ALTER TABLE Artists MODIFY updatedAt VARCHAR(255);
+ALTER TABLE Gigs MODIFY createdAt VARCHAR(255);
+ALTER TABLE Gigs MODIFY updatedAt VARCHAR(255);
 
 INSERT INTO Venues (venueName, street_address, city, state, zipcode, phone, email, website, image) 
             VALUES ( "Hole in the Wall",
