@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import {FormButton} from "../../buttons";
 import {InputBox} from "../../inputs";
+import "../../buttons/style.css";
 
 function ProfileLeft(props) {
     if (props.editing === false){
@@ -14,7 +15,7 @@ function ProfileLeft(props) {
                     </div>
         
                     <div className = "profile-content">
-                        <button id = "edit-profile-button" onClick = {props.toggleEdit}>Edit</button>
+                        <button id = "edit-profile-button" className="log-in" onClick = {props.toggleEdit}>Edit</button>
                         <h1 className = "name"> {props.artistName} </h1>
                         <h3 className="band-genres"> {props.genre} </h3>
                         <br></br>
@@ -42,7 +43,7 @@ function ProfileLeft(props) {
                     </div>
         
                     <div className = "profile-content">
-                        <button id = "edit-profile-button" onClick = {props.toggleEdit}>Edit</button>
+                        <button id = "edit-profile-button" className="log-in" onClick = {props.toggleEdit}>Edit</button>
                         <h1 className = "name"> {props.venueName} </h1>
                         <p className = "venue-address"> {props.street_address} </p>
                         <p className = "venue-address"> {props.city && props.state && props.zipcode ? `${props.city}, ${props.state} ${props.zipcode}` : ""}</p>
