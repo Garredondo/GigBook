@@ -20,15 +20,16 @@ Users who login as an artist can search through posted gigs and submit requests 
 - - -
 ### Screenshots of GigBook
 #### GigBook's landing page on a large screen
-![Landing Page Desktop View](/screenshots/gigbooklanding.JPG)
+![Landing Page Desktop View](/screenshots/finalLanding.png)
 #### A venue's page on a large screen
-![Venue Page Desktop View](/screenshots/gigbookvenue.JPG)
+![Venue Page Desktop View](/screenshots/finalVenuePost.png)
+![Venue Page Desktop View](/screenshots/finalRequestedGig.png)
+![Venue Page Desktop View](/screenshots/finalLiveListing.png)
 #### An artist's page on a large screen
-![Artist Page Desktop View](/screenshots/gigbookband.JPG)
-#### GigBook's landing page on the Galaxy S5
-![Landing Page Galaxy S5 View](/screenshots/gigbookgalaxys5.JPG)
-#### GigBook's landing page on the IPhone X
-![Landing Page IPhone X View](/screenshots/gigbookiphonex.JPG)
+![Artist Page Desktop View](/screenshots/finalArtist.png)
+#### Edit Functionality for Artist and Venue
+![Artist Page Desktop View](/screenshots/finalEditFunction.png)
+
 - - -
 ## Why GigBook is useful
 GigBook allows users to dynamically create a venue profile or an artist profile. This profile helps a user advertise themselves and connect with other users.
