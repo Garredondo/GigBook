@@ -329,7 +329,9 @@ class VenueProfile extends Component {
                 {gig.PotentialArtist.map(artist => {
                   return (
                     <div>
-                      <h3>{artist.artistName}</h3>
+                      <div className="forH3">
+                        <h3>{artist.artistName}</h3>
+                      </div>
                       <div className="artistEmail">
                       <a className = "email" href="mailto:"{...artist.email}>{artist.email}</a>
                       </div>
