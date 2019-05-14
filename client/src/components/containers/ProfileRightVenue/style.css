@@ -2,12 +2,13 @@
     margin: auto;
     padding: 40px;
     overflow: hidden;
-    background-color: #232426;
-    height: 100%;
+    background-color:rgb(22,23,34);
+    min-height: 100vh;
+
 }
 
 #gig-create {
-    background-color: #af4ca3;
+    background-color: rgb(228,93,51);
 }
 
 .main-title {

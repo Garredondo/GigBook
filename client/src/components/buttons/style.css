@@ -1,21 +1,22 @@
 .log-in {
     background: #000;
-    color: #ffffff;
+    color: rgb(240,170,120);
     border: none;
 }
 
 .log-in:hover {
     background: #000;
-    color: #ffffff;
+    color: rgb(255, 227, 174);
     border: none;
 }
 
 .log-in:active {
     background: #000 !important; 
 }
+
 .sign-up {
     color: #000;
-    background: #ffffff;
+    background: rgb(228,93,51);
     border: none;
     margin-left: 30px;
 }
@@ -31,7 +32,7 @@
 .sign-up-main {
     margin-top: 30px;
     color: #ffffff;
-    background: #af4ca3;
+    background: rgb(228,93,51);
     border: none;
     width: 180px;
 }
@@ -59,6 +60,7 @@
 .btn-scnd:active {
     color: #000 !important;
     background: #ffffff !important;
+    border:none;
 }
 
 .logout {
@@ -82,7 +84,7 @@
 
 .btn-main {
     color: #ffffff;
-    background: #af4ca3;
+    background: rgb(228,93,51);
     border: none;
 }
 
@@ -93,7 +95,7 @@
 }
 
 .btn-main:active {
-    background: #9e3091 !important; 
+    background: rgb(228,93,51) !important; 
     border: none;
 }
 

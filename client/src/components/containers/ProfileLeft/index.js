@@ -16,14 +16,14 @@ function ProfileLeft(props) {
                     <div className = "profile-content">
                         <button id = "edit-profile-button" onClick = {props.toggleEdit}>Edit</button>
                         <h1 className = "name"> {props.artistName} </h1>
-                        <p className="band-genres"> {props.genre} </p>
+                        <h3 className="band-genres"> {props.genre} </h3>
                         <br></br>
-                        <p>Members: <strong>{props.numberOfMembers}</strong> </p>
-                        <p className = "instruments"> {props.instrumentation} </p>
+                        <h3>Members: <strong>{props.numberOfMembers}</strong> </h3>
+                        <h3 className = "instruments">Instrumentation: {props.instrumentation} </h3>
                     </div>
         
                     <div className = "profile-bottom">
-                        <p> {props.email} </p>
+                        <p className = "email"> {props.email} </p>
                         <a className = "website-link" href = {`${props.website}`} target="_blank" rel="noopener noreferrer">
                             {props.website}
                         </a>
@@ -75,9 +75,9 @@ function ProfileLeft(props) {
                         <h3>Genre</h3>
                         <InputBox name = "genre" defaultValue = {props.genre} onChange = {props.handleInputChange}/>
                         <hr />
-                        <h3># of Members</h3>
+                        <h5 id = "members"># of Members</h5>
                         <InputBox name = "numberOfMembers" onChange = {props.handleInputChange} defaultValue = {props.numberOfMembers} />
-                        <h3># of Instruments</h3>
+                        <h5 id = "instruments">Instrumentation</h5>
                         <InputBox name = "instrumentation" onChange = {props.handleInputChange} defaultValue = {props.instrumentation} />
         
                         <p>Email Address</p>

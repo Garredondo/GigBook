@@ -265,9 +265,9 @@ class ArtistProfile extends Component {
             </ResultBox>
             ))
             }
-            <div className = "main-title">Booked Gigs</div>
           <hr className = "divider"></hr>
-       
+         
+           <div className = "main-title">Booked Gigs</div>
             { this.state.booked.map( gig => (
               <BookedGigs
                 src = {gig.image}
