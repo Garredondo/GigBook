@@ -18,6 +18,11 @@
     color: white;
 }
 
+#logo img{
+    float:left;
+    width:50px;
+}
+
 #nav-right {
     float: right;
     padding: 15px;
