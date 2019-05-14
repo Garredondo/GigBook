@@ -48,6 +48,7 @@ router.get("/booked/:id", function(req, res) {
     var query = `
     SELECT *, Gigs.id AS gigsId FROM Gigs
     LEFT JOIN Artists ON Gigs.ArtistId = Artists.id
+    WHERE VenueId=${id}
     UNION
     SELECT *, Gigs.id AS gigsID FROM Gigs
     RIGHT JOIN Artists ON Gigs.ArtistId = Artists.id
