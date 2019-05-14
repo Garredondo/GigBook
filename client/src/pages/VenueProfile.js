@@ -88,7 +88,7 @@ class VenueProfile extends Component {
       date: new Date()
     })
 
-    this.loadVenueInfo();
+    window.location.reload();
 
   };
 
@@ -271,7 +271,7 @@ class VenueProfile extends Component {
               <DatePicker selected={this.state.date}
                 onChange={this.handleChange} 
                 placeholderText = "MM/DD/YYYY" />
-              
+              <br />
               <FormButton id="gig-create"
                 value="Post-Gig"
                 className="btn btn-primary btn-lg btn-main"
