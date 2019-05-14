@@ -87,8 +87,8 @@ class VenueProfile extends Component {
       genre: "",
       date: new Date()
     })
-
-    this.loadVenueInfo();
+    
+    window.location.reload();
 
   };
 
