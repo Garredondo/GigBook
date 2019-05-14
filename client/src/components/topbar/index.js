@@ -6,7 +6,8 @@ function TopBar(props){
         <nav id="topbar">
             <div className="wrapper">
                 <div id="logo">
-                    GigBook
+                <img src = "Gigbook-Icon.png" alt = "G"/>
+                    igBook
                 </div>
                 <div id="nav-right">
                     {props.children}
