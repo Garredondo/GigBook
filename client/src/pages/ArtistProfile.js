@@ -76,6 +76,7 @@ class ArtistProfile extends Component {
 
     API.Artists.getGigs()
     .then(res => {
+      console.log(res.bookedGigs)
       const option = document.getElementById('inputGroupSelect03').value;
       const filteredGigs = res.data.availableGigs.filter(gig => { 
         //compare gigName to state.filter. only render those which gigName === this.state.filter
