@@ -1,12 +1,16 @@
 .bodyClass {
     font-family: 'Lato', sans-serif;
-    color: #ffffff;
+    color: rgb(255, 238, 226);
     background-image: url("../img/splash-bkg-cc.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    min-height: 100vh;
 }
+
+/*Hunter: "I added in numerous height:100% so that
+          the Venue View will take up the remaining vertical
+          space"*/
 
 #main {
     margin-top: 180px;

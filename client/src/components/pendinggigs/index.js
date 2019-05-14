@@ -1,5 +1,6 @@
 import React from 'react';
 // import {BookGigButton} from "../buttons";
+import ResultBox from "../cards/index.js";
 import "./style.css";
 import moment from "moment";
 
@@ -21,7 +22,6 @@ function BookedGigs(props) {
                 
                 </div>
             </div>
-       
     )
 }
 
