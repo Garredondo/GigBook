@@ -1,6 +1,7 @@
 import React from 'react';
 // import {BookGigButton} from "../buttons";
 import "./style.css";
+import moment from "moment";
 
 
 function BookedGigs(props) {
@@ -16,7 +17,7 @@ function BookedGigs(props) {
                     <p className = "card-genre">{props.genre}</p>
                     {/*===========================================================*/}
 
-                    <p className = "card-date"> {props.date}</p>
+                    <p className = "card-date"> {moment(props.date).format("MM/DD/YYYY")}</p>
                 
                 </div>
             </div>
