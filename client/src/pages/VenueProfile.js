@@ -6,6 +6,8 @@ import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
 import ResultBox2 from "../components/requestedCards";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
@@ -21,6 +23,7 @@ class VenueProfile extends Component {
     bookedGigs: [],
     newBookedGigs: [],
     display: true,
+    startDate: new Date(),
     // This is for the Profile Right Component =======
     editing: false,
     image: "",
@@ -54,6 +57,17 @@ class VenueProfile extends Component {
       [name]: value
     });
   };
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange = date => {
+    this.setState({
+      date: date
+    });
+  }
 
   // Handles form submit and calls "postGig" request function
   handleFormSubmit = event => {
@@ -243,9 +257,12 @@ class VenueProfile extends Component {
                 value={this.state.genre}
               />
               <TextLabel for="gig-date">Date: </TextLabel>
-              <InputBox type="text" id="gig-date" name="date" placeholder="MM/DD/YYYY"
+              <DatePicker selected={this.state.date}
+                onChange={this.handleChange} 
+                placeholderText = "MM/DD/YYYY" />
+              {/* <InputBox type="text" id="gig-date" name="date" placeholder="MM/DD/YYYY"
                 onChange={this.handleInputChange}
-                value={this.state.date}
+                value={this.state.date} */}
               />
               <FormButton id="gig-create"
                 value="Post-Gig"
