@@ -18,7 +18,7 @@ class ArtistProfile extends Component {
     booked:[],
     // This is for the Profile Left Component =/=/=/=/=/=/=/=/=/=/=/
     editing:false,
-    profileImage: "",
+    image: "",
     artistName: "",
     genre: "",
     numberOfMembers: 0,
