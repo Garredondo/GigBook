@@ -8,6 +8,8 @@ import ResultBox from "../components/cards";
 import ResultBox2 from "../components/requestedCards";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../components/buttons/style.css";
+// import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
 
@@ -329,7 +331,7 @@ class VenueProfile extends Component {
                     <div>
                       <h3>{artist.artistName}</h3>
                       <a className = "email" href="mailto:"{...gig.email}>{gig.email}</a>
-                      <button onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
+                      <button className="btn btn-primary btn-lg btn-main book card-button"onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
                     </div>
                   )
                 })}
