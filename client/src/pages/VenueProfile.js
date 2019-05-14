@@ -330,6 +330,8 @@ class VenueProfile extends Component {
                   return (
                     <div>
                       <h3>{artist.artistName}</h3>
+                      <a className = "email" href="mailto:"{...artist.email}>{artist.email}</a>
+
                       <a className = "email" href="mailto:"{...gig.email}>{gig.email}</a>
                       <button className="btn btn-primary btn-lg btn-main book card-button"onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
                     </div>
