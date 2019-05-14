@@ -101,14 +101,16 @@ class VenueProfile extends Component {
           })
           API.Gigs.getBookedGigs(id).then(bookedGigs => {
             var newBookedGigs = [];
-            for(var i = 0; i < bookedGigs.data[0].length; i++) {
-              if(bookedGigs.data[0][i].id) {
-                newBookedGigs.push(bookedGigs.data[0][i])
+            if(bookedGigs.data[0]) {
+              for(var i = 0; i < bookedGigs.data[0].length; i++) {
+                if(bookedGigs.data[0][i].id) {
+                  newBookedGigs.push(bookedGigs.data[0][i])
+                }
               }
+              this.setState({
+                newBookedGigs: newBookedGigs
+              })
             }
-            this.setState({
-              newBookedGigs: newBookedGigs
-            })
           }).catch(err => console.log(err));
         }).catch(err => console.log(err));
       }).catch(err => console.log(err));
@@ -203,7 +205,6 @@ class VenueProfile extends Component {
   //          responsiveness."
   //-------------------------------------------------------------
   toggleSidebar = () => {
-    console.log(this.state.mobile);
     if (this.state.mobile === false){
       this.setState({
         mobile:true
