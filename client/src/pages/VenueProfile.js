@@ -89,7 +89,7 @@ class VenueProfile extends Component {
       date: new Date()
     })
 
-    this.loadVenueInfo();
+    window.location.reload();
 
   };
 
@@ -272,7 +272,7 @@ class VenueProfile extends Component {
               <DatePicker selected={this.state.date}
                 onChange={this.handleChange} 
                 placeholderText = "MM/DD/YYYY" />
-              
+              <br />
               <FormButton id="gig-create"
                 value="Post-Gig"
                 className="btn btn-primary btn-lg btn-main"
@@ -330,9 +330,15 @@ class VenueProfile extends Component {
                 {gig.PotentialArtist.map(artist => {
                   return (
                     <div>
-                      <h3>{artist.artistName}</h3>
+                      <div className="forH3">
+                        <h3>{artist.artistName}</h3>
+                      </div>
+                      <div className="artistEmail">
+                      <a className = "email" href="mailto:"{...artist.email}>{artist.email}</a>
+                      </div>
+
                       <a className = "email" href="mailto:"{...gig.email}>{gig.email}</a>
-                      <button className="btn btn-primary btn-lg btn-main book card-button"onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
+                      <button className="btn btn-primary btn-lg"onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
                     </div>
                   )
                 })}
