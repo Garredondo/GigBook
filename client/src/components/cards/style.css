@@ -1,23 +1,33 @@
 .gig-card {
-    /* flex: 1 0 500px; */
     margin: 1rem .5em;
     width:200px;
-    background: #ffffff;
+    background: rgb(40,43,52);
     border-radius: 10px;
-    color: #000;
+    color: rgb(240,170,120);
     margin-bottom: 20px;
     position: relative;
-    box-shadow: 1px 3px 5px #111;
+    box-shadow: 1px 8px 8px rgb(9, 10, 15);
     height: 350px;
+    display: inline-block;
+}
+
+::-webkit-scrollbar{
+    width:3px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgb(228,93,51);
+}
+
+::-webkit-scrollbar-track{
+    background:rgb(40,43,52);
 }
 
 .result-box {
     margin: 20px auto;
     height: 100%;
     padding-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    overflow: auto;
+    text-align:center;
 }
 
 .result-box::-webkit-scrollbar {
@@ -33,33 +43,48 @@
     border-radius: 10px 10px 0px 0px;
 }
 
+.email {
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    max-width:100%;
+}
+
 .card-text {
-    padding: 20px;
+    padding: 10px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+
 }
 
 .card-title {
     font-size: 24px;
     font-weight: 900;
+    margin-bottom:0;
 }
 
 .card-desc {
     font-size: 16px;
-    margin-bottom: 10px;
+    overflow-y:scroll;
+    height:4.5em;
 }
 
 .card-genre {
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
-    margin-bottom: 95px;
-    position: absolute;
-    bottom: 0;
+    margin:0;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    height:2em;
+    overflow:hidden;
 }
 
 .card-date {
-    left:50%;
-    transform: translateX(-50%);
+    right:0;
+    /* transform: translateX(-50%); */
     color:white;
     background:rgba(0, 0, 0, 0.578);
+    border-top-right-radius:10px;
     font-size: 12px;
     position: absolute;
     top:0;

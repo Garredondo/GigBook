@@ -326,8 +326,8 @@ class VenueProfile extends Component {
                 genre = {gig.genre}
                 date = {gig.date}
               >
-              <h3>{gig.artistName}</h3>
-              <a href="mailto:"{...gig.email}>{gig.email}</a>
+              <h4>{gig.artistName}</h4>
+              <a className = "email" href="mailto:"{...gig.email}>{gig.email}</a>
               </ResultBox>          
             ))}
           </div>
@@ -362,6 +362,8 @@ class VenueProfile extends Component {
           </ProfileLeft>
           :
           <ProfileLeft
+            mobile={this.state.mobile}
+            toggleSidebar={this.toggleSidebar}
             role={this.state.role}
             editing={this.state.editing}
             toggleEdit={this.toggleEdit}

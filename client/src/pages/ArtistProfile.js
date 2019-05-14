@@ -251,7 +251,6 @@ class ArtistProfile extends Component {
         }
 
         <ProfileRightArtist>
-          <div className = "main-title">Booked Gigs</div>
           <GigFilter filter = {this.filterButton} venues = {this.state.venues} />
 
           <div className = "result-box">
@@ -267,7 +266,8 @@ class ArtistProfile extends Component {
             ))
             }
           <hr className = "divider"></hr>
-       
+         
+           <div className = "main-title">Booked Gigs</div>
             { this.state.booked.map( gig => (
               <BookedGigs
                 src = {gig.image}

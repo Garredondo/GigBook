@@ -1,13 +1,13 @@
 .profile-left {
     position: fixed;
-    z-index: 1;
+    z-index: 4;
     top: 0;
     left: 0;
-    background: #333437;
+    background: rgb(40,43,52);
     width: 300px;
     height: 100%;
     font-family: 'Lato', sans-serif;
-    color: #ffffff;
+    color: rgb(240,170,120);
 
     transition: left .25s;
 }
@@ -16,8 +16,8 @@
     border:none;
     width:30px;
     height:100%;
-    background:#47494c;
-    color:white;
+    background: rgb(40,43,52);
+    color: rgb(228,93,51);
     font-size:25px;
     
     position:absolute;
@@ -27,7 +27,7 @@
 }
 
 #collapse-profile:hover {
-    background:#686b6e;
+    background:rgb(147, 103, 83);
 
 }
 
@@ -101,23 +101,23 @@
 
 
 Input[name="numberOfMembers"], Input[name="instrumentation"] {
-    width:45%;
+    /* width:45%; */
 }
 
-Input[name="numberOfMembers"]{
+/* Input[name="numberOfMembers"]{
     float:left;
 }
 
 Input[name="instrumentation"]{
     float:right;
-}
+} */
 
 
-
+/* 
 #members{
     float:left;
 }
 
 #instruments{
     float:right;
-}
+} */

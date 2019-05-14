@@ -1,24 +1,25 @@
 .booked-gig-card {
-    flex: 1 0 500px;
     margin: 1rem .5em;
-    max-width: calc(33% -  1em);
-    background: #ffffff;
+    width:200px;
+    background: rgb(40,43,52);
     border-radius: 10px;
-    color: #000;
+    color: rgb(240,170,120);
     margin-bottom: 20px;
     position: relative;
-    box-shadow: 1px 1px 5px #111;
-    height: 350px;
+    box-shadow: 1px 8px 8px rgb(9, 10, 15);
+    height: 360px;
+    display:inline-block;
 }
 
 .new-result-box {
     margin-top: 20px;
     height: 100%;
     padding-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
     /* justify-content: space-between; */
     overflow: auto;
+    text-align:center;
 }
 
 .new-result-box::-webkit-scrollbar {
@@ -34,9 +35,14 @@
     border-radius: 10px 10px 0px 0px;
 }
 
+/*Hunter: Commented this out
+ because we only need one reference*/
+/* ======================================= 
 .card-text {
     padding: 20px;
-}
+} */
+
+
 
 .card-title {
     font-size: 24px;
@@ -45,14 +51,9 @@
 
 .card-desc {
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
-.card-genre {
-    font-size: 12px;
-    font-style: italic;
-    margin-bottom: 95px;
-    position: absolute;
-    bottom: 0;
+.card-ArtistName {
+    margin-top:0;
 }
-
