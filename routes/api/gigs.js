@@ -46,11 +46,11 @@ router.get("/unbooked/:id", function(req, res) {
 router.get("/booked/:id", function(req, res) {
     var id = req.params.id;
     var query = `
-    SELECT *, gigs.id AS gigsId FROM gigs
-    LEFT JOIN artists ON gigs.ArtistId = artists.id
+    SELECT *, Gigs.id AS gigsId FROM Gigs
+    LEFT JOIN Artists ON Gigs.ArtistId = Artists.id
     UNION
-    SELECT *, gigs.id AS gigsID FROM gigs
-    RIGHT JOIN artists ON gigs.ArtistId = artists.id
+    SELECT *, Gigs.id AS gigsID FROM Gigs
+    RIGHT JOIN Artists ON Gigs.ArtistId = Artists.id
     WHERE VenueId=${id}`;
     db.sequelize.query(query)
     .then(response => {

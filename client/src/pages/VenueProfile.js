@@ -6,6 +6,8 @@ import ProfileRightVenue from "../components/containers/ProfileRightVenue";
 import ProfileLeft from "../components/containers/ProfileLeft";
 import ResultBox from "../components/cards";
 import ResultBox2 from "../components/requestedCards";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
@@ -14,7 +16,7 @@ class VenueProfile extends Component {
     role: "venue",
     description: "",
     genre: "",
-    date: "",
+    date: new Date(),
     venue: {},
     gigs: [],
     requestedGigs: [],
@@ -54,6 +56,17 @@ class VenueProfile extends Component {
       [name]: value
     });
   };
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange = date => {
+    this.setState({
+      date: date
+    });
+  }
 
   // Handles form submit and calls "postGig" request function
   handleFormSubmit = event => {
@@ -101,14 +114,16 @@ class VenueProfile extends Component {
           })
           API.Gigs.getBookedGigs(id).then(bookedGigs => {
             var newBookedGigs = [];
-            for(var i = 0; i < bookedGigs.data[0].length; i++) {
-              if(bookedGigs.data[0][i].id) {
-                newBookedGigs.push(bookedGigs.data[0][i])
+            if(bookedGigs.data[0]) {
+              for(var i = 0; i < bookedGigs.data[0].length; i++) {
+                if(bookedGigs.data[0][i].id) {
+                  newBookedGigs.push(bookedGigs.data[0][i])
+                }
               }
+              this.setState({
+                newBookedGigs: newBookedGigs
+              })
             }
-            this.setState({
-              newBookedGigs: newBookedGigs
-            })
           }).catch(err => console.log(err));
         }).catch(err => console.log(err));
       }).catch(err => console.log(err));
@@ -203,7 +218,6 @@ class VenueProfile extends Component {
   //          responsiveness."
   //-------------------------------------------------------------
   toggleSidebar = () => {
-    console.log(this.state.mobile);
     if (this.state.mobile === false){
       this.setState({
         mobile:true
@@ -242,9 +256,12 @@ class VenueProfile extends Component {
                 value={this.state.genre}
               />
               <TextLabel for="gig-date">Date: </TextLabel>
-              <InputBox type="text" id="gig-date" name="date" placeholder="MM/DD/YYYY"
+              <DatePicker selected={this.state.date}
+                onChange={this.handleChange} 
+                placeholderText = "MM/DD/YYYY" />
+              {/* <InputBox type="text" id="gig-date" name="date" placeholder="MM/DD/YYYY"
                 onChange={this.handleInputChange}
-                value={this.state.date}
+                value={this.state.date} */}
               />
               <FormButton id="gig-create"
                 value="Post-Gig"
