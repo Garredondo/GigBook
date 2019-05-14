@@ -9,6 +9,7 @@ import ResultBox2 from "../components/requestedCards";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../components/buttons/style.css";
+import Placeholder from "../img/Gigbook-Placeholder.jpg";
 // import VenueResultBox from "../components/deletegig";
 
 class VenueProfile extends Component {
@@ -400,7 +401,7 @@ class VenueProfile extends Component {
             role={this.state.role}
             editing={this.state.editing}
             toggleEdit={this.toggleEdit}
-            image={"https://via.placeholder.com/150"}
+            image={Placeholder}
             venueName={this.state.venue.venueName}
             email={this.state.venue.email}
             website={this.state.venue.website}

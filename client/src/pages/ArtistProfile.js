@@ -7,7 +7,7 @@ import ProfileLeft from "../components/containers/ProfileLeft";
 import ProfileRightArtist from "../components/containers/ProfileRightArtist";
 import ResultBox from "../components/cards";
 import BookedGigs from "../components/pendinggigs";
-
+import Placeholder from "../img/Gigbook-Placeholder.jpg";
 
 class ArtistProfile extends Component {
   state = {
@@ -238,7 +238,7 @@ class ArtistProfile extends Component {
               role={this.state.role}
               editing = {this.state.editing}
               toggleEdit = {this.toggleEdit}
-              profileImage={"https://via.placeholder.com/150"}
+              profileImage={Placeholder}
               artistName={this.state.requests.artistName}
               genre={this.state.requests.genre}
               numberOfMembers={this.state.requests.numberOfMembers}
