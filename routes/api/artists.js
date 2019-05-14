@@ -38,14 +38,19 @@ router.route("/", isAuthenticated).get(function (req, res) {
                         },
                         include: [{model: db.Gig, as: "PotentialGig"}]
                     }).then(dbRequest => {
-                        var resultsObj = {
-                            allVenues: dbVenueAll,
-                            availableGigs: dbUnbookedGigs,
-                            artistRequests: dbRequest,
-                            booked: dbRequest.PotentialGig
-                        }
-
-                        res.json(resultsObj);
+                        db.Gig.findAll({
+                            where: {
+                                ArtistId: dbRequest.id
+                            }
+                        }).then(bookedGigs => {
+                            var resultsObj = {
+                                allVenues: dbVenueAll,
+                                availableGigs: dbUnbookedGigs,
+                                artistRequests: dbRequest,
+                                booked: bookedGigs
+                            }
+                            res.json(resultsObj);
+                    }).catch(err => res.json(err));
                     }).catch(err => console.log(err))
                 })
         })
