@@ -2,6 +2,7 @@ import React from 'react';
 import moment from "moment";
 
 
+
 function ResultBox2(props) {
     return (
         <div className = "gig-card col-12">
@@ -9,7 +10,7 @@ function ResultBox2(props) {
 
         <div className = "card-text">
             {/* either the artist's name/description/genre or the venue's */}
-            <h3 className = "card-title">{props.name}</h3>
+            <h3 className = "card-title" >{props.name}</h3>
             <p className = "card-desc">{props.description}</p>
             <p className = "card-genre">{props.genre}</p>
             {/*===========================================================*/}
