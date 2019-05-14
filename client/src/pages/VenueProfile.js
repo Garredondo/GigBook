@@ -81,6 +81,15 @@ class VenueProfile extends Component {
         .then(this.loadVenueInfo)
         .catch(err => console.log(err));
     }
+
+    this.setState({
+      description: "",
+      genre: "",
+      date: new Date()
+    })
+
+    this.loadVenueInfo();
+
   };
 
   // This gets venue, gig, and artist info from DB
@@ -211,6 +220,8 @@ class VenueProfile extends Component {
         })
       })
       .catch(err => console.log(err));
+
+      this.loadVenueInfo();
   };
 
 
@@ -260,10 +271,7 @@ class VenueProfile extends Component {
               <DatePicker selected={this.state.date}
                 onChange={this.handleChange} 
                 placeholderText = "MM/DD/YYYY" />
-              {/* <InputBox type="text" id="gig-date" name="date" placeholder="MM/DD/YYYY"
-                onChange={this.handleInputChange}
-                value={this.state.date} */}
-              />
+              
               <FormButton id="gig-create"
                 value="Post-Gig"
                 className="btn btn-primary btn-lg btn-main"
@@ -322,6 +330,7 @@ class VenueProfile extends Component {
                   return (
                     <div>
                       <h3>{artist.artistName}</h3>
+                      <a className = "email" href="mailto:"{...gig.email}>{gig.email}</a>
                       <button className="btn btn-primary btn-lg btn-main book card-button"onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
                     </div>
                   )
