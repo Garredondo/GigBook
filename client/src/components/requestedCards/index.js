@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from "moment";
 
 
 function ResultBox2(props) {
@@ -12,11 +13,8 @@ function ResultBox2(props) {
             <p className = "card-desc">{props.description}</p>
             <p className = "card-genre">{props.genre}</p>
             {/*===========================================================*/}
-            <p className = "card-date"> {props.date}</p>
-            {/* {props.artists.map(artist => (
-                  <h3>{artist.artistName}</h3>
-                  
-                ))} */}
+            <p className = "card-date"> {moment(props.date).format("MM/DD/YYYY")}</p>
+           
             {props.children}
         </div>
     </div>
