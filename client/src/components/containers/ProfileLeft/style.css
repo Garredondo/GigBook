@@ -19,7 +19,8 @@
     background: rgb(40,43,52);
     color: rgb(228,93,51);
     font-size:25px;
-    
+    box-shadow:5px 0 5px rgb(4, 5, 12);
+
     position:absolute;
     right:-30px;
     top:0;
