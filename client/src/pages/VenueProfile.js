@@ -314,9 +314,9 @@ class VenueProfile extends Component {
 
         {/* Requested Gigs and their Associated Artists */}
         <div className="main-title">Requested Gigs</div>
-        <div className="row">
+        <div className="result-box">
           {this.state.gigsAndTheirArtists.map(gig => (
-            <div>
+             
               <ResultBox2
                 src={this.state.venue.image}
                 name={gig.gigName}
@@ -334,27 +334,26 @@ class VenueProfile extends Component {
                         <h3>{artist.artistName}</h3>
                       </div>
                       <div className="artistEmail">
-                      <a className = "email" href="mailto:"{...artist.email}>{artist.email}</a>
+                      <a className= "email" href="mailto:"{...artist.email}>{artist.email}</a>
                       </div>
 
-                      <a className = "email" href="mailto:"{...gig.email}>{gig.email}</a>
+                      <a className ="email" href="mailto:"{...gig.email}>{gig.email}</a>
                       <button className="btn btn-primary btn-lg"onClick={() => this.handleConfirmRequest(gig.id, this.state.venue.id, artist.id)}>Confirm</button>
                     </div>
                   )
                 })}
               </ResultBox2>
-            </div>
           ))}
 
         </div>
 
           {/* Booked Gigs */}
-          <div className = "main-title">Booked Gigs</div>
-          <hr className = "divider"></hr>
-          <div className = "result-box">
+          <div className= "main-title">Booked Gigs</div>
+          <hr className= "divider"></hr>
+          <div className= "result-box">
             {this.state.newBookedGigs.map(gig => (
               <ResultBox
-                src = {gig.profileImage ? gig.profileImage: "https://via.placeholder.com/150x150"}
+                src = {gig.profileImage ? gig.profileImage: Placeholder}
                 name = {gig.gigName}
                 description = {gig.description}
                 genre = {gig.genre}
